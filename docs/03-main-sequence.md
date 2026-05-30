@@ -9,19 +9,29 @@ order: 3
 
 # 03 - Main Sequence
 
-## Em uma frase
+## In One Sentence
 
-A sequência principal é a ordem segura de trabalho: entender, buscar evidência, agir, validar e registrar o que precisa sobreviver.
+The main sequence is the normal path from request to context, evidence, action, validation and memory.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir explicar o caminho normal de uma sessão Codex sem pular direto para implementação.
+By the end of this page, you should be able to order the workflow before and after a Codex action.
 
-## Resumo
+## Summary
 
-A sequência principal descreve o caminho normal de uma interação: o usuário pede algo, o Codex recebe contexto, escolhe workflow, busca evidência, executa localmente quando seguro, valida e registra memória quando necessário.
+A useful Codex session should not jump directly from request to edit.
 
-## Fluxo principal
+The expected path is:
+
+1. understand the request;
+2. load local rules and project context;
+3. query relevant evidence when needed;
+4. select a skill or agent only when useful;
+5. act locally within boundaries;
+6. validate the result;
+7. save durable learning only when it is worth reusing.
+
+## Diagram
 
 ```plantuml
 @startuml
@@ -30,82 +40,33 @@ skinparam backgroundColor #FEFEFE
 
 actor User
 participant Codex
-participant Hooks
-participant Skills
-participant MCPs
-participant Workspace
-participant "Session-Memory" as Memory
+participant Context
+participant Evidence
+participant Skill
+participant Action
+participant Validation
+participant Memory
 
-User -> Codex: Send request
-Codex -> Hooks: Load session and prompt context
-Hooks --> Codex: Context and guardrails
-Codex -> Skills: Match workflow if needed
-Skills --> Codex: Workflow contract
-Codex -> MCPs: Query vault or external evidence
-MCPs --> Codex: Evidence with source limits
-Codex -> Workspace: Read files and apply safe local changes
-Workspace --> Codex: Command and validation results
-Codex -> Memory: Save durable handoff when useful
-Memory --> Codex: Handoff persisted
-Codex --> User: Summary, validation, residual risk
+User -> Codex: Ask for work
+Codex -> Context: Read local rules and project context
+Codex -> Evidence: Fetch relevant sources
+Codex -> Skill: Match reusable workflow if needed
+Codex -> Action: Execute safe local work
+Action -> Validation: Run focused checks
+Validation --> Codex: Result and limits
+Codex -> Memory: Save durable learning when useful
+Codex --> User: Explain result and next step
 @enduml
 ```
 
-## Etapas
+## Why It Works
 
-1. Entrada do usuário.
-2. Hooks adicionam contexto e bloqueiam caminhos conhecidos como perigosos.
-3. O Codex identifica se uma skill se aplica.
-4. Para trabalho LE, `local-le-vault` ou vault local vem antes de fonte.
-5. Mudanças locais usam edições pequenas e validação focada.
-6. Efeitos externos aguardam aprovação quando exigido.
-7. Achados duráveis entram em Session-Memory.
-
-## Exemplo guiado
-
-Pedido: "revise essa configuração e melhore a documentação".
-
-Fluxo esperado:
-
-1. ler o plano ou handoff existente;
-2. verificar a estrutura real do repo;
-3. identificar quais páginas precisam de melhoria;
-4. editar docs e UI dentro do escopo;
-5. rodar build ou teste visual;
-6. reportar o que mudou e o que ainda precisa de revisão humana.
-
-O ponto importante: a ação vem depois de contexto suficiente, não antes.
-
-## Por que funciona
-
-A sequência evita dois problemas:
-
-- agir sem contexto;
-- acumular conhecimento apenas na conversa temporária.
-
-O resultado de uma sessão pode alimentar a próxima.
-
-## Erros comuns
-
-- Confundir velocidade com pular contexto.
-- Tratar toda pergunta como feature.
-- Registrar memória para ruído temporário.
-- Validar apenas visualmente quando houve mudança de build ou comportamento.
+This sequence prevents premature implementation. The assistant is forced to gather evidence before making claims and to validate before calling work complete.
 
 ## Checkpoint
 
-Antes de seguir, valide apenas o entendimento da sequência.
+Before moving on, confirm that you can explain why context and evidence come before implementation.
 
-Você deve conseguir ordenar:
+## Next Module
 
-1. pedido do usuário;
-2. contexto e regras entram na sessão;
-3. skill ou workflow é escolhido quando necessário;
-4. evidência é buscada antes de conclusão importante;
-5. mudança local é validada quando existir;
-6. efeito externo espera aprovação;
-7. aprendizado durável vira memória ou conhecimento reutilizável.
-
-## Próximo Módulo
-
-Siga para [[04-workflow-boundaries]].
+Go to [[04-workflow-boundaries]].

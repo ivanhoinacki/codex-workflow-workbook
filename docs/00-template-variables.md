@@ -9,48 +9,48 @@ order: 0.5
 
 # 00.5 - Template Variables
 
-## Em uma frase
+## In One Sentence
 
-Esta página prepara os valores locais que serão aplicados nos templates baixados durante a configuração.
+This page prepares the local values that will be applied to downloaded templates during configuration.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir explicar por que os templates públicos usam placeholders e como o playbook gera um arquivo pronto para a sua máquina.
+By the end of this page, you should be able to explain why public templates use placeholders and how the playbook generates a file ready for your machine.
 
-## Resumo
+## Summary
 
-Os arquivos de configuração não devem carregar paths pessoais, tokens ou detalhes privados de uma pessoa.
+Configuration files should not contain personal paths, tokens or private details from one person.
 
-Por isso, o playbook usa duas camadas:
+The playbook therefore uses two layers:
 
-- template público, com placeholders seguros;
-- valores locais, preenchidos no navegador de quem está fazendo o setup.
+- a public template with safe placeholders;
+- local values filled in the browser by the person doing the setup.
 
-Quando você baixa um template, a página substitui os placeholders pelos valores preenchidos neste step. O arquivo salvo no seu computador já fica mais próximo do que precisa ser copiado para `~/.codex`.
+When you download a template, the page replaces placeholders with the values from this step. The saved file is closer to what must be copied into `~/.codex`.
 
-## Como preencher
+## How To Fill It In
 
-Preencha os campos do card acima antes de baixar `config.toml`, `copilot.config.toml`, rules, agents, hooks, MCPs ou skills.
+Fill the card above before downloading `config.toml`, `copilot.config.toml`, rules, agents, hooks, MCPs or skills.
 
-Use valores que existem na sua máquina:
+Use values that exist on your machine:
 
-- `Codex home`: normalmente `~/.codex`;
-- `Workspace`: diretório onde ficam os repositórios de trabalho;
-- `Vault`: diretório do vault Markdown ou Obsidian;
-- `Datadog CLI`, `Vault MCP server` e `Atlassian MCP`: paths dos comandos locais, quando existirem;
-- `PostgreSQL URL`: conexão local usada pelo MCP de knowledge base;
-- `Nome`, `Time`, `Projeto` e `Stack`: valores usados em rules e agentes;
-- comandos de `Install`, `Test`, `Lint`, `Build` e `Validation`: comandos padrão do projeto.
+- `Codex home`: usually `~/.codex`;
+- `Workspace`: directory where work repositories live;
+- `Vault`: Markdown or Obsidian vault directory;
+- `Datadog CLI`, `Vault MCP server` and `Atlassian MCP`: local command paths, when they exist;
+- `PostgreSQL URL`: local connection used by the knowledge base MCP;
+- `Name`, `Team`, `Project` and `Stack`: values used in rules and agents;
+- `Install`, `Test`, `Lint`, `Build` and `Validation` commands: default project commands.
 
-Se algum campo ainda não existe na sua máquina, mantenha um placeholder genérico e volte nele quando chegar na etapa correspondente.
+If a field does not exist on your machine yet, keep a generic placeholder and come back to it when you reach the corresponding step.
 
-## Onde esses valores ficam
+## Where These Values Live
 
-Os valores ficam apenas no `localStorage` do seu navegador.
+The values stay only in your browser `localStorage`.
 
-Eles não são enviados para servidor, não são commitados no repositório e não alteram os templates públicos. Eles só são usados no momento do download.
+They are not sent to a server, not committed to the repository and do not change public templates. They are only used at download time.
 
-## Diagrama
+## Diagram
 
 ```plantuml
 @startuml
@@ -74,22 +74,22 @@ File --> User: Download configured file
 @enduml
 ```
 
-## Por que funciona
+## Why It Works
 
-Funciona porque separa o que é compartilhável do que é local.
+It separates what is shareable from what is local.
 
-O repositório pode publicar modelos úteis sem expor a máquina de ninguém. Ao mesmo tempo, a pessoa que está fazendo o setup não precisa abrir cada template e substituir todos os placeholders manualmente.
+The repository can publish useful models without exposing anyone's machine. At the same time, the learner does not need to manually replace every placeholder in every file.
 
 ## Checkpoint
 
-Antes de seguir, confirme:
+Before moving on, confirm that:
 
-- você entende que o template público continua genérico;
-- você entende que os valores preenchidos ficam apenas no navegador;
-- você sabe que o download aplica esses valores antes de salvar o arquivo;
-- você revisou os paths antes de usar qualquer arquivo baixado;
-- você não colocou tokens reais em campos que serão compartilhados.
+- the public template remains generic;
+- the values you fill in stay only in the browser;
+- the download applies those values before saving the file;
+- you reviewed paths before using any downloaded file;
+- you did not place real tokens in fields that could be shared.
 
-## Próximo Módulo
+## Next Module
 
-Siga para [[05-config-toml]].
+Go to [[05-config-toml]].

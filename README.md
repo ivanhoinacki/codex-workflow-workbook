@@ -4,7 +4,7 @@ Interactive playbook and documentation source for the Luxury Escapes Codex workf
 
 ## Purpose
 
-This repository will host the publishable version of the Codex workflow documentation and the interactive playbook experience.
+This repository hosts the public English version of the Codex workflow documentation and the interactive playbook experience.
 
 The workbook explains:
 
@@ -75,13 +75,10 @@ python3 scripts/validate-docs.py
 python3 scripts/sanitize-docs.py
 ```
 
-This repository is private while the content is still being refined and sanitized.
-
-GitHub Pages is prepared through `.github/workflows/pages.yml`, but the current GitHub plan must support Pages for private repositories. If the plan does not support it, either make the repository public after sanitization or upgrade the plan before running the workflow.
+GitHub Pages is published through `.github/workflows/pages.yml` from the `playbook-en-us` branch.
 
 ## Next Steps
 
-1. Review and sanitize `docs/` and templates.
-2. Enable GitHub Pages with GitHub Actions after the repository can publish Pages.
-3. Merge `playbook-pt-br` into `main` when the content review is complete.
-4. Validate the full guided flow from step 1 to the final checkpoint with a fresh browser profile.
+1. Review the deployed flow from the first page to the final checkpoint.
+2. Keep templates sanitized and placeholder-based.
+3. Expand the playbook as new workflow conventions become stable.

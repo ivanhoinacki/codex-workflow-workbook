@@ -7,54 +7,39 @@ status: draft
 order: 1
 ---
 
-# 01 - Propósito
+# 01 - Purpose
 
-## Em uma frase
+## In One Sentence
 
-Este playbook ensina como transformar o Codex de um chat genérico em um operador local com contexto, regras, validação e memória.
+This playbook teaches how to turn Codex from a generic chat into a local operator with context, rules, validation and memory.
 
-Ele foi escrito para pessoas que estão entrando no workflow de IA aplicada à engenharia na Luxury Escapes.
+## What You Will Understand
 
-## O que você vai entender
+By the end of this page, you should understand what problem the workflow solves and why it has more layers than a normal chat prompt.
 
-Ao final desta página, você deve conseguir responder:
+## Summary
 
-- qual problema o ecossistema resolve;
-- por que apenas conversar com uma IA não basta para trabalho técnico;
-- por que contexto, guardrails, memória e validação ficam separados;
-- por que conhecimento reutilizável reduz retrabalho.
+The goal is not to make Codex answer longer. The goal is to make work predictable.
 
-## Antes de começar
+Without a workflow, a developer might ask: "help me understand why this payment bug happens". A generic assistant can suggest fixes, but it may not know the business rules, previous tradeoffs, owner decisions, service boundaries or known gotchas.
 
-Você não precisa ter Codex instalado para entender esta página. Aqui o foco é o mental model.
+The ecosystem solves that gap by giving Codex:
 
-Pense no Codex como um colega técnico operando dentro da sua máquina. Para esse colega trabalhar bem, ele precisa saber onde estão as regras, quais ferramentas pode usar, quais limites não pode ultrapassar e onde procurar conhecimento já aprendido.
+- the right context before action;
+- guardrails before risky tools;
+- reusable workflows through skills;
+- bounded delegation through agents;
+- indexed evidence through MCPs;
+- durable memory for decisions and learnings;
+- local validation before claiming success.
 
-## Como este playbook foi organizado
+## How This Playbook Is Organized
 
-A estrutura reaproveita uma ideia do workshop anterior de Claude Code, adaptada para o Codex:
+The journey starts with concepts, then moves into local setup, then knowledge reuse.
 
-1. entender o objetivo do ecossistema;
-2. preparar terminal e runtime;
-3. configurar rules, hooks, MCPs, agents e skills;
-4. testar tudo em um hands-on pequeno;
-5. entender como conhecimento vira memória, gotcha e contexto reutilizável.
+You should not install everything at once. Each layer has a role and a checkpoint.
 
-O foco não é decorar nomes de arquivos. O foco é entender a função de cada camada e saber validar quando ela está funcionando.
-
-## Resumo
-
-Este ecossistema existe para transformar o Codex em um operador técnico local previsível, com contexto de trabalho, guardrails, memória e acesso a conhecimento reutilizável.
-
-O objetivo não é apenas "usar uma IA para responder perguntas". O objetivo é criar um workflow onde cada sessão tenha:
-
-- contexto certo antes da ação;
-- evidência antes da conclusão;
-- limites claros para efeitos externos;
-- validação local quando houver mudança;
-- memória durável quando uma decisão ou aprendizado precisa sobreviver.
-
-## Diagrama
+## Diagram
 
 ```plantuml
 @startuml
@@ -63,106 +48,62 @@ skinparam backgroundColor #FEFEFE
 
 actor User
 participant Codex
-participant "Guardrails" as Guardrails
+participant Guardrails
 participant "Reusable Knowledge" as Knowledge
-participant "Validation" as Validation
-participant "Session-Memory" as Memory
+participant Validation
+participant "Session Memory" as Memory
 
 User -> Codex: Ask for work
 Codex -> Guardrails: Apply boundaries
-Guardrails --> Codex: Allowed path
-Codex -> Knowledge: Search reusable context
-Knowledge --> Codex: Return evidence
-Codex -> Validation: Check result when needed
-Validation --> Codex: Validation result
-Validation -> Memory: Save durable learning
-Memory --> Codex: Learning persisted
-Codex --> User: Result with context and limits
+Codex -> Knowledge: Fetch relevant context
+Knowledge --> Codex: Evidence and history
+Codex -> Validation: Run safe checks
+Validation --> Codex: Result and limits
+Codex -> Memory: Save durable learning when useful
+Codex --> User: Answer with evidence and next step
 @enduml
 ```
 
-## Problema Resolvido
+## Why It Works
 
-Sem esse ecossistema, cada interação com Codex tende a redescobrir o mesmo contexto: repos, tickets, regras, pitfalls, comandos, formato de commit, limites de Slack/Jira/GitHub e detalhes do vault.
+The workflow separates responsibilities.
 
-Com o ecossistema:
+- Rules define expected behavior.
+- Hooks enforce local guardrails.
+- Skills encode repeatable workflows.
+- Agents handle bounded delegation.
+- MCPs fetch evidence.
+- Vault and PostgreSQL preserve knowledge.
+- Checkpoints prove understanding or setup.
 
-- regras globais vivem em `~/.codex/config.toml`;
-- instruções do projeto vivem em `AGENTS.md`;
-- hooks injetam contexto e bloqueiam caminhos perigosos;
-- skills tornam workflows repetíveis;
-- agents permitem delegação limitada e barata;
-- Session-Memory preserva continuidade;
-- `local-le-vault` recupera conhecimento indexado no PostgreSQL;
-- `rtk` reduz custo de tokens em comandos ruidosos.
+That separation makes the system easier to inspect and safer to operate.
 
-## Conceitos-chave
+## Example
 
-| Conceito | Explicação simples |
-|---|---|
-| Contexto | Informação que o Codex precisa antes de agir, como regras do projeto, arquivos e histórico relevante. |
-| Guardrails | Limites que evitam ações arriscadas, destrutivas ou externas sem aprovação. |
-| Validação | Evidência de que uma mudança ou entendimento está correto. Pode ser teste, build, lint, leitura de arquivo ou checkpoint. |
-| Memória | Registro durável para que uma decisão, pendência ou aprendizado sobreviva depois da conversa atual. |
-| Conhecimento reutilizável | Conteúdo que pode ser encontrado de novo por skills, MCPs ou vault, como gotchas, runbooks e review learnings. |
+A weak request is:
 
-## Exemplo simples
+```text
+Fix this bug.
+```
 
-Sem workflow, uma pessoa desenvolvedora pode pedir: "me ajude a entender de onde veio este erro" ou "me ajude a melhorar o desempenho desta rotina". O Codex talvez encontre uma solução técnica plausível, mas sem contexto da empresa pode ignorar regras de negócio, histórico da implementação, pessoas envolvidas, tradeoffs anteriores e motivos pelos quais o código foi feito daquele jeito.
+A better request is:
 
-Com workflow, a sessão segue uma ordem melhor:
+```text
+Help me investigate why this bug happens. First identify the relevant service, read local context, check known gotchas, then propose the smallest safe validation.
+```
 
-1. ler regras locais;
-2. decidir qual skill, agent ou ferramenta deve ser usada para aquele tipo de pedido;
-3. buscar no vault o contexto correto da vertical, serviço ou domínio envolvido, como Experiences, Hotéis, Pagamentos ou Ofertas;
-4. editar somente o que faz parte do escopo;
-5. validar;
-6. registrar aprendizado durável se ele será útil depois.
-
-## Por que funciona
-
-Funciona porque separa responsabilidades.
-
-O modelo não precisa lembrar tudo sozinho. Ele recebe uma combinação de:
-
-- política estática;
-- contexto dinâmico;
-- ferramentas de busca;
-- guardrails;
-- memória;
-- workflows nomeados.
-
-Isso reduz improviso e aumenta repetibilidade.
-
-## Limites
-
-O ecossistema não deve:
-
-- publicar conteúdo privado sem sanitização;
-- executar efeitos externos sem aprovação quando exigido;
-- substituir validação real;
-- tratar memória antiga como verdade atual;
-- transformar toda tarefa pequena em processo pesado.
-
-## Erros comuns
-
-- Achar que memória substitui validação. Memória ajuda, mas pode ficar desatualizada.
-- Colar todo contexto no prompt. Isso aumenta ruído e custo. O ideal é buscar o contexto certo sob demanda.
-- Colocar regra específica de um projeto em regra global. Isso espalha comportamento errado para outros repos.
-- Configurar hooks e MCPs antes de entender o papel deles. Primeiro entenda a camada, depois copie o template.
+The second request lets Codex use the environment as a workflow instead of guessing from a vague prompt.
 
 ## Checkpoint
 
-Antes de seguir, valide apenas o entendimento do propósito.
+Before moving on, confirm that you can explain:
 
-Você deve conseguir explicar:
+- why context matters before code changes;
+- why guardrails are separate from skills;
+- why local validation matters;
+- why learnings should become reusable knowledge;
+- why not every task needs an agent.
 
-- por que o objetivo não é apenas "usar uma IA no chat";
-- por que contexto, guardrails, memória e validação ficam separados;
-- por que conhecimento reutilizável melhora sessões futuras;
-- por que efeitos externos precisam de boundaries;
-- por que a configuração prática vem depois do entendimento do sistema.
+## Next Module
 
-## Próximo módulo
-
-Siga para [[02-ecosystem-layers]].
+Go to [[02-ecosystem-layers]].

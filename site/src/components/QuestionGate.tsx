@@ -10,8 +10,8 @@ type QuestionGateProps = {
 export const QuestionGate = ({ page, progress, onAnswer }: QuestionGateProps) => (
   <section className="side-card" aria-labelledby="question-title">
     <div className="side-card__header">
-      <span>Pergunta</span>
-      <strong id="question-title">Revisão de entendimento</strong>
+      <span>Question</span>
+      <strong id="question-title">Understanding review</strong>
     </div>
 
     {page.questions.map((question) => {
@@ -39,14 +39,14 @@ export const QuestionGate = ({ page, progress, onAnswer }: QuestionGateProps) =>
               className="short-answer"
               defaultValue={answer?.value ?? ''}
               onBlur={(event) => onAnswer(question.id, event.target.value)}
-              placeholder="Digite sua resposta"
+              placeholder="Type your answer"
               type="text"
             />
           )}
 
           {answer && (
             <div className={`feedback${answer.correct ? ' feedback--correct' : ' feedback--wrong'}`}>
-              {answer.correct ? question.feedback ?? 'Resposta correta.' : 'Resposta incorreta. Revise o conteúdo desta página e tente novamente.'}
+              {answer.correct ? question.feedback ?? 'Correct answer.' : 'Incorrect answer. Review this page and try again.'}
             </div>
           )}
         </div>

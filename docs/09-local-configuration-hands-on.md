@@ -9,29 +9,29 @@ order: 9.5
 
 # 09.5 - Local Configuration Hands-on
 
-## Em uma frase
+## In One Sentence
 
-O hands-on confirma se a configuração local que você copiou realmente aparece no comportamento do Codex.
+The hands-on step confirms whether the local configuration you copied actually changes Codex behavior.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir testar rules, agents, hooks, MCPs e skills sem depender de uma tarefa real grande.
+By the end of this page, you should be able to test rules, agents, hooks, MCPs and skills without depending on a large real task.
 
-## Resumo
+## Summary
 
-Esta etapa valida se a configuração local deixou de ser apenas arquivo e passou a influenciar o workflow.
+This step validates whether local configuration is more than files on disk.
 
-Ela segue a mesma lógica de workshop: testar em blocos pequenos antes de usar em uma tarefa real. Isso reduz a chance de uma pessoa misturar erro de hook, erro de MCP e erro de skill no mesmo teste.
+Test in small blocks before using the setup on real work. That avoids mixing hook errors, MCP errors and skill errors into the same investigation.
 
-O objetivo é testar cinco coisas:
+The goal is to test five things:
 
-- rules carregadas como comportamento;
-- agents disponíveis como papéis delegáveis;
-- hooks registrados como guardrails locais;
-- MCPs e connectors disponíveis como fontes de evidência;
-- skills acionáveis como workflows reutilizáveis.
+- rules loaded as behavior;
+- agents available as bounded roles;
+- hooks registered as local guardrails;
+- MCPs and connectors available as evidence sources;
+- skills usable as reusable workflows.
 
-## Mapa Do Hands-on
+## Hands-on Map
 
 ```plantuml
 @startuml
@@ -56,7 +56,7 @@ Codex -> Agents: Expose role definitions
 Agents --> Codex: Roles available
 Codex -> Hooks: Register local guardrails
 Hooks --> Codex: Guardrails available
-Codex -> MCPs: Expose external evidence tools
+Codex -> MCPs: Expose evidence tools
 MCPs --> Codex: Tools available
 Codex -> Skills: Match reusable workflow
 Skills --> Codex: Workflow selected
@@ -65,9 +65,9 @@ Validation --> User: Confirm what reflected in practice
 @enduml
 ```
 
-## Antes de começar
+## Before You Start
 
-Confirme que estes arquivos existem:
+Confirm the files exist:
 
 ```bash
 rtk test -f ~/.codex/config.toml
@@ -75,34 +75,30 @@ rtk test -f ~/.codex/AGENTS.md
 rtk test -f ~/.codex/RTK.md
 rtk proxy find ~/.codex/agents -maxdepth 1 -type f -name '*.toml' -print
 rtk proxy find ~/.codex/hooks -maxdepth 1 -type f -print
-rtk rg -n '^\\[mcp_servers\\.|^\\[plugins\\.' ~/.codex/config.toml
+rtk rg -n '^\[mcp_servers\.|^\[plugins\.' ~/.codex/config.toml
 rtk proxy find ~/.codex/skills -maxdepth 2 -name SKILL.md -print
 ```
 
-Se algum comando falhar, volte para a página correspondente antes de seguir.
+If a command fails, return to the corresponding page before continuing.
 
-Se algum item ainda não existe na sua máquina, não force. Volte para a página correspondente, copie o template e valide aquela camada primeiro.
+## Test 1 - Rules
 
-## Teste 1 - Rules
-
-Abra uma nova sessão do Codex dentro de um projeto local e faça um pedido simples:
+Open a new Codex session inside a local project and ask:
 
 ```text
-Mostre o status do repo e explique em uma frase o que você verificou.
+Show the repo status and explain in one sentence what you checked.
 ```
 
-Resultado esperado:
+Expected result:
 
-- resposta em inglês;
-- comandos com output controlado;
-- nenhuma tentativa de mutação;
-- explicação curta do que foi verificado.
+- answer in English;
+- controlled command output;
+- no mutation attempt;
+- short explanation of what was checked.
 
-Rules refletem quando o comportamento aparece sem você repetir a regra no prompt.
+## Test 2 - Agents
 
-## Teste 2 - Agents
-
-Valide os arquivos:
+Validate files:
 
 ```bash
 rtk sed -n '1,80p' ~/.codex/agents/copilot.toml
@@ -111,132 +107,54 @@ rtk sed -n '1,80p' ~/.codex/agents/reviewer.toml
 rtk sed -n '1,80p' ~/.codex/agents/implementer.toml
 ```
 
-Depois, em uma sessão nova, peça um uso conceitual:
+Then ask conceptually:
 
 ```text
-Explique qual agent você usaria para coletar evidência read-only e por que.
+Explain which agent you would use for read-only evidence collection and why.
 ```
 
-Resultado esperado:
-
-- `researcher` para coleta de evidência;
-- `reviewer` para findings e risco;
-- `implementer` apenas para mudança local com escopo claro;
-- parent agent continua responsável pela síntese final.
-
-## Teste 3 - Hooks
-
-Valide registro e permissão:
+## Test 3 - Hooks
 
 ```bash
-rtk rg -n '^\\[\\[hooks\\.' ~/.codex/config.toml
-rtk proxy find ~/.codex/hooks -maxdepth 1 -type f -perm +111 -print
+rtk rg -n '^\[\[hooks\.' ~/.codex/config.toml
+rtk proxy find ~/.codex/hooks -maxdepth 1 -type f -print
 ```
 
-Depois teste um caminho seguro:
+Do not test hooks with destructive commands.
+
+## Test 4 - MCPs And Connectors
 
 ```bash
-rtk git status --short
-```
-
-Resultado esperado:
-
-- hooks registrados no `config.toml`;
-- scripts executáveis;
-- comandos seguros seguem funcionando;
-- comandos destrutivos devem ser bloqueados pelo guardrail antes da execução.
-
-Não rode comandos destrutivos para testar. O teste aqui é confirmar que o hook está registrado e que o script contém a regra de bloqueio.
-
-## Teste 4 - MCPs e Connectors
-
-Valide que as entradas existem sem imprimir segredos:
-
-```bash
-rtk rg -n '^\\[mcp_servers\\.|^\\[plugins\\.' ~/.codex/config.toml
+rtk rg -n '^\[mcp_servers\.|^\[plugins\.' ~/.codex/config.toml
 rtk test -f ~/.codex/.mcp-secrets
 rtk proxy find ~/.codex/hooks -maxdepth 1 -name 'mcp-*.sh' -print
 ```
 
-Depois faça um teste conceitual em uma sessão nova:
+Then ask:
 
 ```text
-Explique quais MCPs você usaria para consultar documentação atual, revisar browser local e buscar conhecimento do vault.
+Explain which MCPs you would use for current documentation, local browser review and vault knowledge.
 ```
 
-Resultado esperado:
-
-- `context7` para documentação atual;
-- `chrome-devtools` para browser e UI;
-- `local-le-vault` para conhecimento indexado;
-- GitHub e Slack tratados como connectors autenticados, não como tokens em arquivo público;
-- nenhum segredo exibido na resposta.
-
-## Teste 5 - Skills
-
-Crie ou valide uma skill simples:
+## Test 5 - Skills
 
 ```bash
 rtk sed -n '1,120p' ~/.codex/skills/example-workflow/SKILL.md
 rtk rg -n '^name:|^description:' ~/.codex/skills -g 'SKILL.md'
 ```
 
-Depois peça algo que combine com a description:
+Then ask a request that matches the description.
 
-```text
-Use o workflow example-workflow para verificar este README e retornar passos, validação e risco restante.
-```
+## How To Know It Reflected
 
-Resultado esperado:
+Configuration reflected when:
 
-- o Codex identifica a skill pelo nome ou pela description;
-- segue os passos definidos no `SKILL.md`;
-- retorna output no formato esperado;
-- não inventa etapas fora do contrato da skill.
+- rules change behavior without repeating instructions;
+- agents appear as roles with clear limits;
+- hooks run or block around tool usage;
+- MCPs and connectors provide evidence without manual context paste;
+- skills load when the request matches the workflow.
 
-## Como Cada Skill Entra No Workflow
+## Next Module
 
-| Tipo de skill | Quando entra | O que deve produzir |
-|---|---|---|
-| `study` | Antes de implementação incerta. | Plano e riscos. |
-| `feature-dev` | Depois de plano claro. | Mudança local validada. |
-| `investigation` | Quando há comportamento incerto. | Evidência e conclusão. |
-| `debug-mode` | Quando precisa provar uma causa. | Hipóteses, logs e fix. |
-| `codereview` | Antes de PR ou quando há review. | Findings por severidade. |
-| `session-memory` | Quando aprendizado precisa sobreviver. | Nota durável de continuidade. |
-
-O ponto não é usar todas sempre. O ponto é saber qual workflow reutilizável reduz improviso naquele momento.
-
-## Como Saber Que Refletiu
-
-Uma configuração refletiu quando você consegue observar efeito prático:
-
-- rules mudam comportamento sem repetir instrução;
-- agents aparecem como papéis com limites claros;
-- hooks rodam ou bloqueiam antes/depois de ferramentas;
-- MCPs e connectors fornecem evidência sem colar contexto manualmente;
-- skills são carregadas quando o pedido combina com o workflow;
-- checkpoints mostram que a pessoa sabe validar o próprio setup.
-
-## Erros comuns
-
-- Testar tudo em uma única tarefa grande. Prefira um teste pequeno por camada.
-- Achar que uma skill falhou porque não apareceu o nome dela na resposta. O importante é o comportamento seguir o contrato.
-- Testar MCP autenticado antes de resolver secrets e wrappers.
-- Marcar a página como concluída sem conseguir explicar qual camada foi validada.
-
-## Checkpoint
-
-Antes de seguir, valide apenas o entendimento operacional:
-
-- qual arquivo muda comportamento global;
-- qual arquivo define rules;
-- onde agents ficam;
-- onde hooks ficam;
-- onde MCPs e connectors são declarados;
-- onde skills ficam;
-- como testar sem executar comando destrutivo.
-
-## Próximo Módulo
-
-Siga para [[10-token-economy]].
+Go to [[10-token-economy]].

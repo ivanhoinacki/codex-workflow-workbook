@@ -7,125 +7,77 @@ status: draft
 order: 5.5
 ---
 
-# 05.5 - Rules and Instructions
+# 05.5 - Rules And Instructions
 
-## Em uma frase
+## In One Sentence
 
-Rules são o contrato escrito que o Codex carrega antes de trabalhar.
+Rules are the written contract Codex loads before doing work.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir separar regra global, regra de projeto e regra operacional de terminal.
+By the end of this page, you should be able to separate global rules, project rules and terminal operating rules.
 
-## Resumo
+## Summary
 
-Rules são arquivos de instrução que definem o comportamento esperado antes de uma tarefa começar.
+Rules are instruction files that define expected behavior before a task starts.
 
-Neste setup, existem dois níveis principais:
+This setup uses two main levels:
 
-- `~/.codex/AGENTS.md`: regras globais do operador local;
-- `~/.codex/RTK.md`: regra operacional para comandos de terminal com output controlado.
+- `~/.codex/AGENTS.md`: global local operator rules;
+- project `AGENTS.md`: project-specific behavior and commands.
 
-Em projetos específicos, também pode existir um `AGENTS.md` no diretório do repo ou vault. Esse arquivo complementa as regras globais com contexto do projeto.
+The shared model must not be a literal copy of one person's private setup. It should preserve principles and replace personal data with placeholders.
 
-O modelo compartilhado não deve ser uma cópia literal da configuração de uma pessoa. Ele deve preservar os princípios e trocar dados pessoais por placeholders.
+## Local Configuration Steps
 
-## Passo a passo de configuração local
-
-1. Crie ou revise `~/.codex/AGENTS.md`.
-2. Crie ou revise `~/.codex/RTK.md`.
-3. Mantenha regras globais pequenas e reutilizáveis.
-4. Coloque regras específicas do projeto no `AGENTS.md` do projeto.
-5. Valide que nenhuma regra pública contém paths privados, tokens ou detalhes sensíveis.
-
-Templates:
+1. Create or review `~/.codex/AGENTS.md`.
+2. Download the templates below.
+3. Keep global rules small and reusable.
+4. Put project-specific rules in the project `AGENTS.md`.
+5. Validate that public rules do not contain private paths, tokens or sensitive details.
 
 - [Download global AGENTS.md template](templates/rules/AGENTS.md)
 - [Download project AGENTS.md template](templates/rules/PROJECT_AGENTS.md)
 - [Download RTK.md template](templates/rules/RTK.md)
 
-Comandos para aplicar:
-
 ```bash
 mkdir -p ~/.codex
 $EDITOR ~/.codex/AGENTS.md
-$EDITOR ~/.codex/RTK.md
-```
-
-Para um projeto específico:
-
-```bash
 cp PROJECT_AGENTS.md /path/to/your/project/AGENTS.md
 $EDITOR /path/to/your/project/AGENTS.md
 ```
 
-## O que personalizar
+## Placeholder Map
 
-| Placeholder | Onde aparece | Exemplo de valor |
+| Placeholder | File | Meaning |
 |---|---|---|
-| `YOUR_NAME` | `~/.codex/AGENTS.md` | Nome da pessoa. |
-| `YOUR_ORG_OR_TEAM` | `~/.codex/AGENTS.md` | Time, tribo ou empresa. |
-| `YOUR_WORKSPACE_PATH` | `~/.codex/AGENTS.md` | Diretório onde ficam os repos. |
-| `YOUR_VAULT_PATH` | `~/.codex/AGENTS.md` | Vault Obsidian ou pasta de docs. |
-| `YOUR_PROJECT_NAME` | `AGENTS.md` do projeto | Nome do repo ou projeto. |
-| `YOUR_VALIDATION_COMMAND` | `AGENTS.md` do projeto | Comando mínimo de validação. |
+| `YOUR_NAME` | `~/.codex/AGENTS.md` | Person name. |
+| `YOUR_ORG_OR_TEAM` | `~/.codex/AGENTS.md` | Team or organization. |
+| `YOUR_WORKSPACE_PATH` | `~/.codex/AGENTS.md` | Repository workspace. |
+| `YOUR_VAULT_PATH` | `~/.codex/AGENTS.md` | Vault or docs folder. |
+| `YOUR_PROJECT_NAME` | project `AGENTS.md` | Repository or project name. |
+| `YOUR_VALIDATION_COMMAND` | project `AGENTS.md` | Minimum validation command. |
 
-## Como Escrever Uma Boa Regra
+## How To Write A Good Rule
 
-Uma boa regra deve ser:
+A good rule is:
 
-- curta o suficiente para ser lida sempre;
-- específica o suficiente para mudar comportamento;
-- verificável quando possível;
-- livre de segredo ou dado privado;
-- colocada na camada correta.
+- short enough to be remembered;
+- specific enough to change behavior;
+- reusable across tasks;
+- verifiable when possible;
+- clear about approval boundaries.
 
-Exemplo ruim: "seja melhor".
+Avoid publishing:
 
-Exemplo melhor: "Antes de editar um projeto Luxury Escapes, consulte o vault ou a Session-Memory quando houver contexto relevante".
+- real tokens;
+- private paths;
+- internal customer or incident data;
+- raw output from `.env`, `config.toml` or `.mcp-secrets`.
 
-Modelo reduzido de `AGENTS.md`:
+## Why It Works
 
-```markdown
-@~/.codex/RTK.md
-
-# Local Codex Rules
-
-## Language
-
-- Conversation: English.
-- Code, commits and PR text: English.
-
-## Operating Rules
-
-- Prefer local files, vault notes and repository state before assumptions.
-- Use focused commands and bounded reads.
-- Do not run destructive git commands unless explicitly requested.
-- Do not send external messages or mutate external systems without approval.
-- Do not publish private config files without sanitizing paths and secrets.
-```
-
-## O que não compartilhar
-
-Não publique:
-
-- tokens;
-- emails pessoais sem necessidade;
-- paths internos de empresa;
-- URLs privadas;
-- regras que mencionam clientes, incidentes ou dados sensíveis;
-- outputs de `env`, `config.toml` real ou `.mcp-secrets`.
-
-## Por que funciona
-
-Rules reduzem repetição. Em vez de explicar estilo, limites e preferências em cada conversa, o runtime carrega esse comportamento como contrato local.
-
-## Erros comuns
-
-- Escrever regras longas demais e pouco acionáveis.
-- Colocar tudo no arquivo global.
-- Misturar preferência pessoal com regra obrigatória do projeto.
-- Compartilhar rules com paths privados ou nomes internos sensíveis.
+Rules reduce repetition. Instead of explaining style, limits and preferences in every conversation, the runtime loads them as a local contract.
 
 ## Checkpoint
 
@@ -136,12 +88,8 @@ rtk rg -n 'token|secret|password|api_key|PRIVATE' ~/.codex/AGENTS.md ~/.codex/RT
 rtk rg -n 'YOUR_|REPLACE_ME|TODO' ~/.codex/AGENTS.md ~/.codex/RTK.md
 ```
 
-Antes de seguir, você deve conseguir explicar:
+Before moving on, you should be able to explain which rules are global, which are project-specific and why private paths do not belong in public templates.
 
-- quais regras são globais;
-- quais regras pertencem ao projeto;
-- por que paths privados e segredos não entram em templates públicos.
+## Next Module
 
-## Próximo Módulo
-
-Siga para [[06-copilot-config]].
+Go to [[06-copilot-config]].

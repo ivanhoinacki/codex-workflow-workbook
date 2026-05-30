@@ -1,6 +1,9 @@
 name: Deploy GitHub Pages
 
 on:
+  push:
+    branches:
+      - playbook-en-us
   workflow_dispatch:
 
 permissions:

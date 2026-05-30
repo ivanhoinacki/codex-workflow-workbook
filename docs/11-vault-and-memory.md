@@ -7,103 +7,65 @@ status: draft
 order: 11
 ---
 
-# 11 - Vault and Memory
+# 11 - Vault And Memory
 
-## Em uma frase
+## In One Sentence
 
-Vault guarda conhecimento durável, Session-Memory guarda continuidade operacional entre sessões.
+The vault stores durable operational context, while session memory preserves continuity between Codex sessions.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve saber quando escrever uma nota permanente e quando salvar apenas um handoff de sessão.
+By the end of this page, you should know when information belongs in Session-Memory and when it should become a more durable document.
 
-## Resumo
+## Summary
 
-O Obsidian vault é a base operacional do trabalho. Session-Memory é o mecanismo append-only para continuidade entre sessões.
+Not every useful fact belongs in the prompt. Durable information should live where future sessions can find it.
 
-## Papel do vault
+Use Session-Memory for:
 
-O vault guarda:
+- current task status;
+- decisions taken today;
+- changed files;
+- pending actions;
+- short handoff context.
 
-- planos;
-- investigações;
+Use durable vault docs for:
+
 - runbooks;
-- business rules;
+- architecture decisions;
+- gotchas;
 - review learnings;
-- dailies;
-- prompts;
-- conhecimento consolidado;
-- Session-Memory.
+- reusable setup guides.
 
-## Papel da Session-Memory
-
-Session-Memory registra o que precisa sobreviver:
-
-- o que foi feito;
-- decisões;
-- pendências;
-- arquivos modificados;
-- validações;
-- links de PR/ticket quando relevantes;
-- blockers.
-
-Não deve guardar:
-
-- ruído;
-- segredos;
-- logs enormes;
-- conversa casual;
-- output bruto de comando.
-
-## Por que funciona
-
-O modelo perde contexto entre sessões ou compaction. Session-Memory cria continuidade operacional sem manter tudo no prompt.
-
-## Como Decidir Onde Salvar
-
-| Informação | Melhor lugar |
-|---|---|
-| Decisão temporária, arquivos modificados, próximo passo | Session-Memory. |
-| Runbook que será usado por várias pessoas | Vault em `Runbooks/`. |
-| Regra de negócio durável | Knowledge-Base. |
-| Gotcha encontrado em review | Review-Learnings ou Knowledge-Base. |
-| Log bruto grande | Não salvar bruto, resumir ou linkar fonte segura. |
-
-## Erros comuns
-
-- Salvar segredo em memória.
-- Salvar tudo que aconteceu, inclusive ruído.
-- Tratar Session-Memory como documentação final.
-- Esquecer de atualizar handoff quando uma tarefa longa mudou de estado.
-
-## Fluxo
+## Diagram
 
 ```plantuml
 @startuml
 !theme plain
 skinparam backgroundColor #FEFEFE
 
+actor User
 participant Codex
-participant "Session-Memory skill" as Skill
-participant "Obsidian Vault" as Vault
-participant "Future Session" as Future
+participant "Session Memory" as Session
+participant Vault
+participant Skill
 
-Codex -> Skill: Append durable handoff
-Skill -> Vault: Write YYYY-MM-DD.md
-Vault --> Skill: Note saved
-Skill --> Codex: Handoff persisted
-Future -> Vault: Read recent entries
-Vault --> Future: Decisions, pending items, files
+User -> Codex: Work creates learning
+Codex -> Session: Save short continuity when useful
+Codex -> Vault: Save durable docs when reusable
+Skill -> Vault: Read relevant context later
+Vault --> Codex: Evidence for future sessions
 @enduml
 ```
 
+## Why It Works
+
+Memory makes future sessions less dependent on human recall. The key is to save only what will help later and avoid secrets or noise.
+
 ## Checkpoint
 
-```bash
-rtk python3 ~/.codex/skills/session-memory/scripts/session_memory.py read --days 3
-rtk proxy find 'Luxury-Escapes/Knowledge-Base/Session-Memory' -maxdepth 1 -name '2026-*.md' -print
-```
+You should be able to classify an item as temporary, Session-Memory or durable documentation.
 
-## Próximo Módulo
+## Next Module
 
-Siga para [[12-local-knowledge-base]].
+Go to [[12-local-knowledge-base]].

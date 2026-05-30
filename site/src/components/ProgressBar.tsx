@@ -7,11 +7,11 @@ export const ProgressBar = ({ completed, total }: ProgressBarProps) => {
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
-    <div className="progress" aria-label={`Progresso ${percentage}%`}>
+    <div className="progress" aria-label={`Progress ${percentage}%`}>
       <div className="progress__meta">
-        <span>{percentage}% completo</span>
+        <span>{percentage}% complete</span>
         <span>
-          {completed}/{total} páginas
+          {completed}/{total} pages
         </span>
       </div>
       <div className="progress__track">

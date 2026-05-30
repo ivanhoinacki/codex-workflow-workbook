@@ -6,22 +6,22 @@ type TemplateConfigPanelProps = {
 };
 
 const fields: Array<{ key: keyof TemplateConfig; label: string; hint: string }> = [
-  { key: 'codexHome', label: 'Codex home', hint: 'Onde os arquivos serão copiados.' },
-  { key: 'workspacePath', label: 'Workspace', hint: 'Diretório raiz dos repos Luxury Escapes.' },
-  { key: 'vaultPath', label: 'Vault', hint: 'Diretório raiz do Obsidian vault.' },
-  { key: 'datadogMcpCliPath', label: 'Datadog CLI', hint: 'Binário usado pelo datadog-mcp.' },
-  { key: 'localLeVaultServerPath', label: 'Vault MCP server', hint: 'Script Python do local-le-vault.' },
-  { key: 'mcpAtlassianBinPath', label: 'Atlassian MCP', hint: 'Binário ou comando do mcp-atlassian.' },
-  { key: 'databaseUrl', label: 'PostgreSQL URL', hint: 'Valor local para .mcp-secrets, não compartilhe.' },
-  { key: 'userName', label: 'Nome', hint: 'Usado nos templates de rules.' },
-  { key: 'teamName', label: 'Time', hint: 'Organização ou time.' },
-  { key: 'projectName', label: 'Projeto padrão', hint: 'Nome usado no PROJECT_AGENTS.md.' },
-  { key: 'projectStack', label: 'Stack', hint: 'Stack principal do projeto.' },
-  { key: 'installCommand', label: 'Install', hint: 'Comando padrão de instalação.' },
-  { key: 'testCommand', label: 'Test', hint: 'Comando padrão de teste.' },
-  { key: 'lintCommand', label: 'Lint', hint: 'Comando padrão de lint.' },
-  { key: 'buildCommand', label: 'Build', hint: 'Comando padrão de build.' },
-  { key: 'validationCommand', label: 'Validation', hint: 'Comando mínimo antes de concluir.' },
+  { key: 'codexHome', label: 'Codex home', hint: 'Where files will be copied.' },
+  { key: 'workspacePath', label: 'Workspace', hint: 'Root directory for Luxury Escapes repositories.' },
+  { key: 'vaultPath', label: 'Vault', hint: 'Root directory of the Obsidian vault.' },
+  { key: 'datadogMcpCliPath', label: 'Datadog CLI', hint: 'Binary used by datadog-mcp.' },
+  { key: 'localLeVaultServerPath', label: 'Vault MCP server', hint: 'Python script for local-le-vault.' },
+  { key: 'mcpAtlassianBinPath', label: 'Atlassian MCP', hint: 'Binary or command for mcp-atlassian.' },
+  { key: 'databaseUrl', label: 'PostgreSQL URL', hint: 'Local value for .mcp-secrets, do not share it.' },
+  { key: 'userName', label: 'Name', hint: 'Used in rules templates.' },
+  { key: 'teamName', label: 'Team', hint: 'Organization or team.' },
+  { key: 'projectName', label: 'Default project', hint: 'Name usado no PROJECT_AGENTS.md.' },
+  { key: 'projectStack', label: 'Stack', hint: 'Primary project stack.' },
+  { key: 'installCommand', label: 'Install', hint: 'Default install command.' },
+  { key: 'testCommand', label: 'Test', hint: 'Default test command.' },
+  { key: 'lintCommand', label: 'Lint', hint: 'Default lint command.' },
+  { key: 'buildCommand', label: 'Build', hint: 'Default build command.' },
+  { key: 'validationCommand', label: 'Validation', hint: 'Minimum command before completion.' },
 ];
 
 export const TemplateConfigPanel = ({ config, onChange }: TemplateConfigPanelProps) => {
@@ -30,13 +30,13 @@ export const TemplateConfigPanel = ({ config, onChange }: TemplateConfigPanelPro
   };
 
   return (
-    <section className="template-config" aria-label="Configuração dos templates">
+    <section className="template-config" aria-label="Template configuration">
       <div className="template-config__header">
-        <span>Step de configuração</span>
-        <strong>Preencha uma vez para baixar templates prontos</strong>
+        <span>Configuration step</span>
+        <strong>Fill this once to download ready-to-use templates</strong>
         <p>
-          Estes valores ficam apenas no seu navegador. Os downloads substituem placeholders dos templates antes de
-          salvar o arquivo.
+          These values stay only in your browser. Downloads replace template placeholders before
+          saving the file.
         </p>
       </div>
 

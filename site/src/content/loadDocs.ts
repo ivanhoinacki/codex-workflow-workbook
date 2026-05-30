@@ -57,7 +57,7 @@ const renderPlantUml = (source: string) => {
   return `
     <figure class="plantuml-diagram">
       <img alt="PlantUML diagram" loading="lazy" src="${imageUrl}" />
-      <button class="plantuml-diagram__fullscreen" data-plantuml-fullscreen="${imageUrl}" type="button">Tela cheia</button>
+      <button class="plantuml-diagram__fullscreen" data-plantuml-fullscreen="${imageUrl}" type="button">Fullscreen</button>
     </figure>
   `;
 };
@@ -70,7 +70,7 @@ const renderCodeBlock = (source: string, language?: string) => {
     <figure class="code-block">
       <figcaption>
         <span>${escapeHtml(languageLabel)}</span>
-        <button class="code-block__copy" data-copy-code type="button">Copiar</button>
+        <button class="code-block__copy" data-copy-code type="button">Copy</button>
       </figcaption>
       <pre><code${languageClass}>${escapeHtml(source)}</code></pre>
     </figure>

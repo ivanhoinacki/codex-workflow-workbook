@@ -9,88 +9,86 @@ order: 0
 
 # 00 - Environment Prerequisites
 
-## Em uma frase
+## In One Sentence
 
-Esta página separa o que a pessoa precisa ter agora do que será configurado passo a passo depois.
+This page separates what learners need now from what will be configured step by step later.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir dizer: "posso iniciar o workbook com a base mínima e instalar o restante quando chegar na etapa correta".
+By the end of this page, you should be able to say: "I can start the workbook with the minimum local base and install the rest when I reach the correct step."
 
-## Resumo
+## Summary
 
-Antes de configurar o ambiente, a pessoa precisa entender quais requisitos são necessários e quais são opcionais.
+Before configuring the environment, learners need to understand which requirements are needed immediately and which ones are optional until later.
 
-Esta etapa vem depois do setup de terminal e Codex CLI. O objetivo é deixar claro o que será necessário agora e o que será montado depois.
+This step comes after terminal and Codex CLI setup. Its goal is to make the boundary clear: what is needed now, what will be copied later, and what should not be forced too early.
 
-## Requisitos mínimos para começar
+## Minimum Requirements To Start
 
-Para acompanhar a parte conceitual do workbook:
+To follow the conceptual part of the workbook:
 
-- navegador web;
-- acesso ao repositório ou página do workbook;
-- entendimento básico do que são terminal, arquivos e Git;
-- disponibilidade para copiar arquivos de configuração nas etapas seguintes.
+- a web browser;
+- access to the workbook repository or site;
+- basic understanding of terminal, files and Git;
+- willingness to copy configuration files in later steps.
 
-Depois da etapa de terminal, a base mínima esperada é:
+After the terminal step, the expected minimum local base is:
 
-- uma máquina local com terminal;
-- Codex CLI instalado;
-- Git instalado;
-- Node.js e npm disponíveis apenas se a pessoa for rodar validações JavaScript ou o site localmente;
-- um editor de texto;
-- diretório `~/.codex` criado;
-- acesso ao GitHub, caso a pessoa queira versionar a própria configuração depois;
-- permissão para criar pastas e arquivos no diretório do usuário.
+- a local machine with a terminal;
+- Codex CLI installed;
+- Git installed;
+- Node.js and npm only if the person will run JavaScript validations or the site locally;
+- a text editor;
+- the `~/.codex` directory created;
+- GitHub access, if the person wants to version their own configuration later;
+- permission to create folders and files in the user directory.
 
-Nesta fase, a pessoa ainda não precisa ter hooks, PostgreSQL, Obsidian ou MCPs configurados.
+At this stage, the person does not need hooks, PostgreSQL, Obsidian or MCPs configured yet.
 
-Essas camadas serão montadas durante o workbook. Na fase `Local Configuration`, a pessoa vai copiar modelos de configuração, revisar os arquivos e validar cada parte em sequência.
+Those layers are built during the workbook. In `Local Configuration`, the person copies configuration models, reviews the files and validates each layer in sequence.
 
-## O que será instalado ou configurado depois
+## What Will Be Installed Or Configured Later
 
-Ao longo do workbook, o ambiente completo passa a incluir:
-
-| Item | Quando entra | Por que importa |
+| Item | When it appears | Why it matters |
 |---|---|---|
-| Codex CLI | Antes de `config.toml` | Runtime principal onde configurações, skills, hooks e MCPs serão carregados. |
-| Node.js e npm | Quando for rodar projetos JavaScript ou o site localmente | Permite executar comandos como `npm install`, `npm run build` e validações de frontend. Quem só está lendo o playbook publicado no navegador não precisa disso no começo. |
-| Python 3 | Antes dos hooks | Scripts locais, hooks e automações auxiliares. |
-| Obsidian ou vault Markdown | Na etapa de vault | Base local de documentos, memória e runbooks. |
-| Hooks | Em `Local Configuration` | Guardrails e automações copiadas a partir dos modelos do workbook. |
-| Skills | Em `Local Configuration` | Workflows reutilizáveis copiados ou instalados a partir dos modelos. |
-| PostgreSQL | Na etapa de knowledge base | Base local para conhecimento indexado usada pelo MCP `local-le-vault`. |
-| MCPs autenticados | Depois da base local | Conexão com vault, GitHub, Slack, Datadog ou outras fontes, conforme necessidade. |
+| Codex CLI | Before `config.toml` | Main runtime where configuration, skills, hooks and MCPs are loaded. |
+| Node.js and npm | When running JavaScript projects or the site locally | Enables commands like `npm install`, `npm run build` and frontend validation. People only reading the published playbook do not need this at the beginning. |
+| Python 3 | Before hooks | Local scripts, hooks and helper automations. |
+| Obsidian or Markdown vault | In the vault step | Local base for documents, memory and runbooks. |
+| Hooks | In `Local Configuration` | Guardrails and automations copied from workbook templates. |
+| Skills | In `Local Configuration` | Reusable workflows copied or installed from templates. |
+| PostgreSQL | In the knowledge base step | Local indexed knowledge base used by `local-le-vault`. |
+| Authenticated MCPs | After the local base | Connections to vault, GitHub, Slack, Datadog or other sources, as needed. |
 
-## Ordem de aprendizagem
+## Learning Order
 
-Esta jornada segue uma ordem parecida com um onboarding técnico:
+This journey follows a technical onboarding sequence:
 
-| Bloco | O que a pessoa aprende | Resultado esperado |
+| Block | What the learner learns | Expected result |
 |---|---|---|
-| Fundamentos | Propósito, camadas e boundaries. | Sabe explicar o sistema antes de instalar tudo. |
-| Setup | Terminal, Codex CLI e diretório local. | Consegue abrir o Codex e criar `~/.codex`. |
-| Variáveis dos templates | Paths e comandos locais que serão aplicados nos downloads. | Consegue baixar templates já adaptados para a própria máquina. |
-| Configuração | Rules, config, hooks, MCPs, agents e skills. | Consegue copiar templates e validar cada camada. |
-| Hands-on | Testes pequenos por camada. | Sabe observar se a configuração refletiu no workflow. |
-| Conhecimento | Vault, memória, PostgreSQL KB e reuso. | Entende como aprendizados viram gotchas e contexto futuro. |
-| Playbook interativo | Site e checkpoints. | Entende que o site é a camada de leitura da jornada. |
+| Foundations | Purpose, layers and boundaries. | Can explain the system before installing everything. |
+| Setup | Terminal, Codex CLI and local directory. | Can open Codex and create `~/.codex`. |
+| Template variables | Local paths and commands applied to downloads. | Can download templates adapted to their machine. |
+| Configuration | Rules, config, hooks, MCPs, agents and skills. | Can copy templates and validate each layer. |
+| Hands-on | Small tests per layer. | Can observe whether configuration affected the workflow. |
+| Knowledge | Vault, memory, PostgreSQL KB and reuse. | Understands how learnings become gotchas and future context. |
+| Guided first task | A safe first workflow. | Can observe the environment on real but low-risk work. |
 
-## O que não deve ser feito ainda
+## What Not To Do Yet
 
-Nesta etapa, evite:
+At this stage, avoid:
 
-- copiar hooks sem entender onde eles são registrados;
-- criar arquivos de MCP com tokens reais;
-- instalar PostgreSQL se você ainda está apenas estudando os conceitos;
-- compartilhar qualquer template sem revisar dados privados;
-- tentar validar skills antes de criar a estrutura `~/.codex/skills`.
+- copying hooks before understanding where they are registered;
+- creating MCP files with real tokens;
+- installing PostgreSQL if you are still only learning the concepts;
+- sharing templates without reviewing private data;
+- validating skills before creating the `~/.codex/skills` structure.
 
-Essas partes aparecem em páginas próprias para reduzir erro de ordem.
+These parts have their own pages to reduce ordering mistakes.
 
-## Diagrama
+## Diagram
 
-Este diagrama representa o fluxo desta etapa: entender o mínimo necessário, preparar a base local e seguir para a fase onde os modelos serão copiados.
+This diagram shows this step: understand the minimum requirements, prepare the local base and continue to the phase where configuration models are copied.
 
 ```plantuml
 @startuml
@@ -116,28 +114,28 @@ LocalConfig --> Learner: Validate each configured layer later
 @enduml
 ```
 
-## Por que funciona
+## Why It Works
 
-Separar requisitos de configuração evita fricção.
+Separating prerequisites from configuration reduces friction.
 
-A pessoa entende primeiro:
+The learner first understands:
 
-- o que será instalado;
-- por que cada dependência existe;
-- qual base mínima é necessária para iniciar;
-- quais partes serão copiadas ou configuradas depois;
-- onde a configuração começa de fato.
+- what will be installed;
+- why each dependency exists;
+- what minimum base is needed to start;
+- which parts will be copied or configured later;
+- where configuration actually begins.
 
 ## Checkpoint
 
-Antes de seguir, confirme seu entendimento:
+Before moving on, confirm that:
 
-- você sabe quais requisitos são necessários apenas para ler o workbook;
-- você sabe qual base mínima é necessária para iniciar a configuração local;
-- você sabe que hooks, skills, MCPs, vault e PostgreSQL serão montados nas etapas seguintes;
-- você sabe que os capítulos iniciais validam entendimento, não instalação;
-- você sabe que validações de comandos aparecem apenas depois da etapa de configuração.
+- you know which requirements are needed only to read the workbook;
+- you know the minimum base needed to start local configuration;
+- you know hooks, skills, MCPs, vault and PostgreSQL are built in later steps;
+- you know the initial chapters validate understanding, not installation;
+- you know command validation appears only after the configuration steps.
 
-## Próximo Módulo
+## Next Module
 
-Siga para [[00-template-variables]].
+Go to [[00-template-variables]].

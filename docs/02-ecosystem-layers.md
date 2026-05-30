@@ -9,43 +9,33 @@ order: 2
 
 # 02 - Ecosystem Layers
 
-## Em uma frase
+## In One Sentence
 
-O ecossistema funciona porque cada camada tem uma responsabilidade pequena e clara.
+The ecosystem is a set of layers that separate instructions, tools, memory, workflows and validation.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir olhar para um comportamento do Codex e dizer onde ele deveria ser configurado: rules, hooks, skills, agents, MCPs, vault ou knowledge base.
+By the end of this page, you should know which layer owns instructions, tools, memory and reusable knowledge.
 
-## Resumo
+## Summary
 
-O ecossistema é composto por camadas. Cada camada resolve uma parte do workflow e evita que tudo vire uma única instrução gigante.
+A reliable Codex setup is not one large prompt. It is a layered system.
 
-Para iniciantes, a analogia é simples:
+Each layer has a job:
 
-- rules dizem como o Codex deve se comportar;
-- hooks automatizam avisos, bloqueios e registros;
-- skills ensinam procedimentos repetíveis;
-- agents ajudam a dividir trabalho quando existe paralelismo;
-- MCPs conectam o Codex a fontes de dados;
-- vault e PostgreSQL guardam conhecimento que pode voltar depois.
+| Layer | Main role |
+|---|---|
+| `config.toml` | Runtime settings, MCPs, hooks, plugins and trusted projects. |
+| Rules | Human instructions and operating boundaries. |
+| Hooks | Local guardrails and automatic context injection. |
+| Skills | Repeatable workflows. |
+| Agents | Bounded delegation for specific roles. |
+| MCPs | Access to external or indexed evidence. |
+| Vault | Durable Markdown knowledge. |
+| PostgreSQL KB | Indexed search base for reusable knowledge. |
+| Playbook site | Guided reading and progress tracking. |
 
-## Camadas
-
-| Camada | Fonte | Papel |
-|---|---|---|
-| Global rules | `~/.codex/config.toml` | Define idioma, políticas, modelos, hooks, MCPs, plugins, sandbox e memória. |
-| Project rules | `AGENTS.md` | Define regras do vault Obsidian e do trabalho Luxury Escapes. |
-| RTK | `~/.codex/RTK.md` e binário `rtk` | Reduz output ruidoso e registra economia de tokens. |
-| Hooks | `~/.codex/hooks/` | Injetam contexto, bloqueiam comandos perigosos e registram eventos. |
-| Skills | `~/.codex/skills/*/SKILL.md` | Encapsulam workflows reutilizáveis. |
-| Agents | `~/.codex/agents/*.toml` | Definem papéis delegáveis com custo e permissão controlados. |
-| MCPs | `~/.codex/config.toml` | Conectam Codex a fontes externas ou indexadas. |
-| Vault | `Luxury-Escapes/` | Fonte operacional de docs, dailies, runbooks e memória. |
-| PostgreSQL KB | backend do `local-le-vault` | Armazena e recupera conhecimento reutilizável. |
-| Playbook site | GitHub Pages | Interface interativa para ler a jornada, responder checkpoints e acompanhar progresso local. |
-
-## Relação Entre Camadas
+## Diagram
 
 ```plantuml
 @startuml
@@ -55,7 +45,7 @@ skinparam backgroundColor #FEFEFE
 actor User
 participant Codex
 participant "config.toml" as Config
-participant AGENTS
+participant Rules
 participant Hooks
 participant Skills
 participant Agents
@@ -64,71 +54,42 @@ participant Vault
 database "PostgreSQL KB" as DB
 
 User -> Codex: Request
-Codex -> Config: Load global behavior
-Config --> Codex: Runtime settings
-Codex -> AGENTS: Load project behavior
-AGENTS --> Codex: Project rules
-Codex -> Hooks: Run session and prompt hooks
-Hooks --> Codex: Context and guardrails
-Codex -> Skills: Use workflow when matched
-Skills --> Codex: Workflow steps and limits
+Codex -> Config: Load runtime behavior
+Codex -> Rules: Load instruction contract
+Hooks -> Codex: Inject context and guardrails
+Codex -> Skills: Select workflow when matched
 Codex -> Agents: Delegate bounded work when useful
-Agents --> Codex: Findings or patch summary
 Codex -> MCPs: Fetch indexed evidence
-MCPs -> DB: Query knowledge
-DB --> MCPs: Ranked chunks
 MCPs -> Vault: Read operational context
-Vault --> MCPs: Notes and docs
-MCPs --> Codex: Evidence
+MCPs -> DB: Query reusable knowledge
 Codex --> User: Result with validation and limits
 @enduml
 ```
 
-## Por que funciona
+## Why It Works
 
-As camadas reduzem acoplamento.
+Layers reduce coupling. When behavior changes, usually only one layer needs to change.
 
-Quando um comportamento muda, normalmente só uma camada precisa ser alterada:
+Examples:
 
-- idioma e política: `config.toml`;
-- contexto de projeto: `AGENTS.md`;
-- bloqueio de comando: hook;
-- workflow: skill;
-- delegação: agent;
-- conhecimento: vault ou PostgreSQL.
-
-## Como decidir a camada correta
-
-| Pergunta | Camada provável |
-|---|---|
-| É uma regra de comportamento que vale para toda conversa? | Global rules ou `config.toml`. |
-| É uma regra específica de um repo ou vault? | `AGENTS.md` do projeto. |
-| É uma proteção automática antes ou depois de comandos? | Hook. |
-| É um passo a passo recorrente? | Skill. |
-| É trabalho paralelo com escopo limitado? | Agent. |
-| É uma fonte externa ou base indexada? | MCP. |
-| É conhecimento escrito para ser lido e reutilizado? | Vault ou PostgreSQL KB. |
-
-## Erros comuns
-
-- Colocar tudo em `config.toml`. Esse arquivo deve configurar o runtime, não explicar todo processo.
-- Criar skill para qualquer tarefa pequena. Skill vale quando o workflow se repete.
-- Usar agent sem escopo claro. Delegação só ajuda quando a tarefa é limitada.
-- Guardar segredo em template. Templates públicos mostram formato, não valores reais.
+- language and policy live in rules;
+- hooks block or track tool use;
+- skills define procedures;
+- agents define roles;
+- MCPs retrieve evidence;
+- vault and PostgreSQL preserve knowledge.
 
 ## Checkpoint
 
-Antes de seguir, valide apenas o entendimento das camadas.
+You should be able to identify which layer owns:
 
-Você deve conseguir explicar:
+- global behavior;
+- project behavior;
+- command guardrails;
+- reusable workflows;
+- delegated roles;
+- indexed knowledge.
 
-- qual camada define regras globais;
-- qual camada adiciona regras do projeto;
-- qual camada bloqueia ou registra ações automaticamente;
-- qual camada representa workflows reutilizáveis;
-- qual camada guarda conhecimento durável;
-- qual camada permite recuperar conhecimento indexado.
+## Next Module
 
-## Próximo Módulo
-
-Siga para [[03-main-sequence]].
+Go to [[03-main-sequence]].

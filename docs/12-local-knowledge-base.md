@@ -9,94 +9,59 @@ order: 12
 
 # 12 - Local Knowledge Base
 
-## Em uma frase
+## In One Sentence
 
-`local-le-vault` permite que o Codex pesquise conhecimento do vault sem colar documentos inteiros no prompt.
+The local knowledge base indexes durable documents so Codex can search evidence instead of relying on memory alone.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir explicar a relação entre Obsidian, PostgreSQL e o MCP local.
+By the end of this page, you should understand how vault content becomes searchable through PostgreSQL and MCP tooling.
 
-## Resumo
+## Summary
 
-`local-le-vault` é o MCP que consulta a base de conhecimento Luxury Escapes local.
+The vault is the source of curated Markdown knowledge. PostgreSQL can store indexed chunks, metadata and search structures. The MCP layer exposes that knowledge to Codex.
 
-Ele usa um backend PostgreSQL com conhecimento indexado para responder perguntas com contexto de business rules, runbooks, pitfalls, review learnings, Confluence e Session-Memory.
+This turns past work into searchable evidence.
 
-## Papel no Ecossistema
-
-O MCP existe para evitar busca manual ampla.
-
-Antes de editar código ou tomar decisão LE, o Codex consulta conhecimento já aprendido:
-
-- regras de negócio;
-- incidentes;
-- gotchas;
-- reviews anteriores;
-- runbooks;
-- docs sincronizadas.
-
-## Como Funciona
+## Flow
 
 ```plantuml
 @startuml
 !theme plain
 skinparam backgroundColor #FEFEFE
 
-participant Codex
-participant "local-le-vault MCP" as MCP
-database PostgreSQL
 participant Vault
+participant Sync
+participant "PostgreSQL KB" as DB
+participant "local-le-vault MCP" as MCP
+participant Codex
 
-Codex -> MCP: query_vault(query, filters)
-MCP -> PostgreSQL: Search indexed chunks
-PostgreSQL --> MCP: Ranked chunks
-MCP --> Codex: Relevant evidence
-Vault -> PostgreSQL: Source documents are indexed by sync jobs
-PostgreSQL --> Vault: Index status
+Vault -> Sync: Read Markdown docs
+Sync -> DB: Store indexed chunks and metadata
+Codex -> MCP: Query relevant context
+MCP -> DB: Search knowledge base
+DB --> MCP: Matching evidence
+MCP --> Codex: Bounded context
 @enduml
 ```
 
-## Arquivos Envolvidos
+## Why It Works
 
-| Item | Papel |
-|---|---|
-| `~/.codex/config.toml` | Registra o MCP server. |
-| `~/.codex/hooks/mcp-local-le-vault-wrapper.sh` | Inicializa o servidor MCP local. |
-| `svc-radar-dashboard/automations/vault/vault_mcp_server.py` | Implementa o MCP. |
-| PostgreSQL local | Guarda a base indexada. |
-| Obsidian vault | Fonte primária de documentos. |
+Codex does not need every document in the prompt. It needs the right document at the right time.
 
-## Nota de Segurança
+## Safety
 
-Não publique connection strings, usuário, senha, host interno ou paths privados do wrapper. Para o workbook público, use placeholders.
-
-## O que pode gerar dúvida
-
-| Dúvida | Resposta curta |
-|---|---|
-| O vault substitui o banco? | Não. O vault é fonte humana. PostgreSQL é o índice pesquisável. |
-| O banco substitui os docs? | Não. Ele ajuda a recuperar trechos relevantes. |
-| Preciso de PostgreSQL para estudar conceitos? | Não. Ele entra quando a pessoa montar a knowledge base local. |
-| A resposta do MCP é sempre verdade atual? | Não. Precisa considerar data, fonte e possível desatualização. |
-
-## Erros comuns
-
-- Indexar conteúdo privado e depois publicar exemplos sem sanitizar.
-- Consultar a base com query vaga demais.
-- Aceitar resultado antigo sem verificar se o contexto mudou.
-- Confundir falha vazia com erro. Resultado vazio pode apenas indicar que não há chunk relevante.
+Do not publish connection strings, usernames, passwords, internal hosts or private wrapper paths. Public templates should use placeholders.
 
 ## Checkpoint
 
-No runtime Codex, valide com uma query simples:
+You should be able to explain:
 
-```text
-query_vault: "pitfalls codex workflow local-le-vault"
-```
+- what the vault stores;
+- why PostgreSQL is used;
+- what the MCP exposes;
+- why secrets stay outside public templates.
 
-O resultado esperado é uma resposta vazia ou chunks relevantes. Ambos são válidos. Falha de conexão indica problema no MCP ou PostgreSQL local.
+## Next Module
 
-## Próximo Módulo
-
-Siga para [[13-knowledge-reuse-loop]].
+Go to [[13-knowledge-reuse-loop]].

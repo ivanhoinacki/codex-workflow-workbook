@@ -9,110 +9,71 @@ order: 14
 
 # 14 - Automation Sync
 
-## Em uma frase
+## In One Sentence
 
-Automações mantêm o conhecimento atualizado para que skills e MCPs encontrem o que foi aprendido.
+Automations keep knowledge current so skills and MCPs can find what has been learned.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir explicar quais informações podem ser sincronizadas e por que nem tudo deve virar automação.
+By the end of this page, you should understand which information can be synchronized and why not everything should become automation.
 
-## Resumo
+## Summary
 
-Automações mantêm o conhecimento vivo.
+Automations keep knowledge alive.
 
-Elas reduzem trabalho manual para sincronizar, resumir, indexar e recuperar informações usadas depois pelo Codex, por skills e por MCPs.
+They reduce manual work for syncing, summarizing, indexing and retrieving information used later by Codex, skills and MCPs.
 
-## Diagrama
+## Flow
 
 ```plantuml
 @startuml
 !theme plain
 skinparam backgroundColor #FEFEFE
 
-participant Confluence
-participant "Code Review" as Review
-participant "Session-Memory" as Memory
-participant "Obsidian Vault" as Vault
-database "PostgreSQL KB" as DB
-participant Skills
-participant Codex
+participant Source
+participant Automation
+participant Vault
+participant Index
+participant Skill
 
-Confluence -> Vault: Sync durable docs
-Review -> Vault: Save gotchas
-Memory -> Vault: Save handoff
-Vault -> DB: Index reusable knowledge
-DB --> Vault: Index complete
-Codex -> Skills: Start workflow
-Skills -> DB: Ask for relevant chunks
-DB --> Skills: Prior learnings
-Skills --> Codex: Inject prior learning
-Codex -> Review: Apply known gotchas
-Review --> Codex: Avoid repeated mistakes
+Source -> Automation: Durable update
+Automation -> Vault: Save sanitized content
+Vault -> Index: Re-index knowledge
+Skill -> Index: Query when needed
+Index --> Skill: Relevant context
 @enduml
 ```
 
-## Tipos de Automação
+## Automation Types
 
-| Tipo | Papel |
+| Automation | Purpose |
 |---|---|
-| Session autosave | Salva resumo de sessão quando possível. |
-| Confluence sync | Traz docs duráveis para o vault. |
-| Vault indexing | Atualiza PostgreSQL usado pelo `local-le-vault`. |
-| MCP output analytics | Mede custo de chamadas MCP. |
-| Domain context | Injeta contexto por workspace e prompt. |
-| Radar/local automations | Podem gerar digests, knowledge packs e reports. |
+| Session autosave | Saves session summaries when useful. |
+| Confluence sync | Brings durable docs into the vault. |
+| Review export | Turns reviews into learnings and gotchas. |
+| Index refresh | Keeps the local knowledge base searchable. |
 
-## Por que funciona
+## Why It Works
 
-O conhecimento só é reutilizável se estiver atualizado e encontrável.
+Knowledge is reusable only when it is current and findable.
 
-Automação fecha a distância entre:
+Automation closes the gap between information being created, saved, indexed and retrieved by a skill.
 
-- informação criada;
-- informação salva;
-- informação indexada;
-- informação recuperada por uma skill.
+## When To Automate
 
-## O que automatizar primeiro
+Prioritize automations that:
 
-Priorize automações que:
+- reduce clear manual repetition;
+- create durable knowledge;
+- do not depend on published secrets;
+- fail in a diagnosable way.
 
-- reduzem repetição manual clara;
-- geram conhecimento durável;
-- não dependem de segredo publicado;
-- podem ser validadas com output pequeno;
-- falham de forma diagnosticável.
-
-Não automatize processo que ainda muda todos os dias. Primeiro estabilize o workflow.
-
-## Relação Com Hooks
-
-Algumas automações entram via hooks:
-
-- `SessionStart` verifica ambiente;
-- `SessionEnd` tenta salvar handoff;
-- `PostToolUse` registra uso;
-- `mcp-output-analytics` registra custo.
-
-Outras entram via scripts externos ou projetos auxiliares, como automações do Radar.
-
-## Erros comuns
-
-- Automatizar antes de entender o fluxo manual.
-- Sincronizar conteúdo privado sem sanitização.
-- Indexar documento sem metadado ou título claro.
-- Criar automação que falha silenciosamente.
+Do not automate a process that still changes every day. Stabilize the workflow first.
 
 ## Checkpoint
 
-Verifique:
+You should be able to name one source that can feed reusable knowledge and explain how it becomes searchable.
 
-```bash
-rtk proxy find ~/.codex/hooks -maxdepth 1 -type f -print
-rtk rg -n 'Session-Memory|local-le-vault|knowledge|Confluence|sync' Luxury-Escapes/Knowledge-Base ~/.codex/hooks ~/.codex/skills -g '*.md' -g '*.py' -g '*.sh'
-```
+## Next Module
 
-## Próximo Módulo
-
-Siga para [[15-checkpoints]].
+Go to [[15-checkpoints]].

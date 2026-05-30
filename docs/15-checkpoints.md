@@ -7,41 +7,37 @@ status: draft
 order: 15
 ---
 
-# 15 - Primeira Tarefa Guiada
+# 15 - Guided First Task
 
-## Em uma frase
+## In One Sentence
 
-A primeira tarefa guiada transforma o setup em evidência prática: você observa o Codex usando contexto, regras, skills, agents, hooks e MCPs em um pedido pequeno.
+The guided first task turns setup into practical evidence: you observe Codex using context, rules, skills, agents, hooks and MCPs on a small request.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir sair do modo "instalei arquivos" e entrar no modo "sei observar se o ambiente refletiu no workflow".
+By the end of this page, you should move from "I installed files" to "I know how to observe whether the environment changed the workflow".
 
-## Resumo
+## Summary
 
-O objetivo desta etapa não é fazer uma entrega grande.
+The goal is not a large delivery. The goal is to execute a small, safe and verifiable task.
 
-O objetivo é executar uma tarefa pequena, segura e verificável. Ela deve ser simples o suficiente para não depender de deploy, PR, Slack, Jira, produção ou dado sensível.
+It should not require deploys, PRs, Slack, Jira, production or sensitive data.
 
-Use esta página como um ensaio antes de depender do ambiente em trabalho real.
+## Before You Start
 
-## Antes de começar
+Choose a repository or study folder where read-only inspection is safe.
 
-Escolha um repositório ou pasta de estudo onde você pode ler arquivos sem risco.
+Do not use a task that requires:
 
-Não use uma tarefa que precise:
+- production changes;
+- push;
+- PR creation;
+- external messages;
+- secrets;
+- migrations;
+- publishing the playbook.
 
-- modificar produção;
-- fazer push;
-- abrir PR;
-- enviar mensagem externa;
-- acessar segredo;
-- rodar migração;
-- publicar o playbook.
-
-O primeiro teste deve ser read-only ou, no máximo, uma alteração local descartável.
-
-## Diagrama
+## Diagram
 
 ```plantuml
 @startuml
@@ -70,115 +66,66 @@ Validation --> User: Explain result and limits
 @enduml
 ```
 
-## Tarefa 1 - Orientação Read-only
+## Task 1 - Read-only Orientation
 
-Abra o Codex dentro de um repositório local e peça:
-
-```text
-Me ajude a entender este projeto. Primeiro leia apenas arquivos de orientação, scripts e estrutura de pastas. Depois explique qual stack parece ser usada, quais comandos de validação existem e quais arquivos eu deveria ler antes de mudar código.
-```
-
-Resultado esperado:
-
-- o Codex começa por leitura local, não por suposição;
-- usa comandos com saída controlada;
-- identifica scripts de install, lint, test ou build quando existirem;
-- aponta limites do que ainda não foi verificado;
-- não altera arquivos.
-
-Camadas observadas:
-
-| Camada | O que observar |
-|---|---|
-| Rules | Resposta direta, escopo claro e sem mutação externa. |
-| Hooks | Comandos ruidosos ou perigosos devem ser orientados ou bloqueados. |
-| Token Economy | Leitura focada, sem dump recursivo do repo. |
-| Agents | Não devem ser usados se a tarefa for simples. |
-
-## Tarefa 2 - Investigação Pequena
-
-Depois peça:
+Ask Codex inside a local project:
 
 ```text
-Me ajude a investigar onde este projeto define os comandos de validação local. Traga evidência dos arquivos lidos e diga qual comando eu deveria rodar primeiro.
+Help me understand this project. First read only orientation files, scripts and folder structure. Then explain what stack seems to be used, which validation commands exist and which files I should read before changing code.
 ```
 
-Resultado esperado:
+Expected result:
 
-- resposta com evidência de arquivos;
-- recomendação de um primeiro comando seguro;
-- explicação do motivo;
-- nenhum comando destrutivo.
+- Codex starts with local reads, not assumptions;
+- commands have controlled output;
+- install, lint, test or build scripts are identified when present;
+- limits are stated;
+- no files are changed.
 
-Camadas observadas:
+## Task 2 - Small Investigation
 
-| Camada | O que observar |
-|---|---|
-| Skills | Se existir uma skill de investigação, o Codex deve reconhecer quando ela se aplica. |
-| MCPs | Se documentação atual for necessária, o Codex pode buscar via MCP adequado. |
-| Hooks | O guardrail deve preservar comandos focados. |
+Ask:
 
-## Tarefa 3 - Validação Local
+```text
+Help me investigate where this project defines local validation commands. Bring evidence from the files read and say which command I should run first.
+```
 
-Se o projeto tiver scripts claros, rode um comando pequeno:
+## Task 3 - Local Validation
+
+If the project has clear scripts, run one small command:
 
 ```bash
 rtk npm run lint
 ```
 
-ou:
+or:
 
 ```bash
 rtk npm test
 ```
 
-Use o comando real que o projeto indicar. Se não for Node.js, adapte para a stack local.
+Use the real command indicated by the project. If it is not Node.js, adapt to the local stack.
 
-Resultado esperado:
+## Task 4 - Memory Or Knowledge
 
-- o comando é coerente com o projeto;
-- a saída é resumida;
-- falhas são explicadas com próximo passo;
-- o Codex não tenta mascarar erro de build, lint ou teste.
-
-## Tarefa 4 - Memória ou Conhecimento
-
-Se a investigação revelar uma decisão útil, peça:
+If the investigation reveals a useful decision, ask:
 
 ```text
-Isso cria algum aprendizado reutilizável? Se sim, diga onde ele deveria ser salvo: Session-Memory, gotcha, runbook, skill ou documentação do projeto.
+Does this create reusable learning? If yes, say where it should be saved: Session-Memory, gotcha, runbook, skill or project documentation.
 ```
 
-Resultado esperado:
+## Final Checklist
 
-- ruído temporário não vira memória;
-- decisões, comandos úteis, gotchas e limites podem virar conhecimento durável;
-- segredos nunca são salvos;
-- o Codex explica a diferença entre memória de sessão e documentação durável.
+You completed the journey when you can answer:
 
-## Checklist Final
+- which files in `~/.codex` control local behavior;
+- which skill or agent fits each type of request;
+- which hook protects commands before execution;
+- when to use MCP or vault for evidence;
+- how to validate setup without publishing anything;
+- where to save reusable learning;
+- when to ask for approval before an external action.
 
-Você concluiu a jornada quando consegue responder:
+## Closing
 
-- quais arquivos em `~/.codex` controlam o comportamento local;
-- qual skill ou agent seria usado para cada tipo de pedido;
-- qual hook protege comandos antes da execução;
-- quando usar MCP ou vault para buscar evidência;
-- como validar o setup sem publicar nada;
-- onde salvar aprendizado reutilizável;
-- quando pedir aprovação antes de uma ação externa.
-
-## Erros Comuns No Primeiro Uso
-
-- Pedir uma tarefa grande demais logo depois do setup.
-- Não preencher as variáveis dos templates antes de baixar arquivos.
-- Rodar comando de validação sem entender qual stack o projeto usa.
-- Confundir falha de dependência local com falha do Codex.
-- Salvar segredo em memória, docs ou template.
-- Esperar que agents sejam usados em toda pergunta simples.
-
-## Encerramento
-
-Depois desta etapa, o ambiente já pode ser usado em uma tarefa real pequena.
-
-O melhor próximo passo é escolher uma investigação read-only ou uma melhoria local de baixo risco e observar quais camadas entram no workflow.
+After this step, the environment can be used on a small real task. Pick a read-only investigation or a low-risk local improvement and observe which layers enter the workflow.

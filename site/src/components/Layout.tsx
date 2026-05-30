@@ -48,7 +48,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <div className="topbar__meta" aria-label="Playbook context">
           <span>Playbook</span>
           <button
-            aria-label={`Ativar tema ${nextTheme === 'dark' ? 'escuro' : 'claro'}`}
+            aria-label={`Switch to ${nextTheme} theme`}
             className="theme-toggle"
             onClick={() => setTheme(nextTheme)}
             type="button"

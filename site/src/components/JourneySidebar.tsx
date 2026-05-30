@@ -11,7 +11,7 @@ type JourneySidebarProps = {
 };
 
 export const JourneySidebar = ({ journeys, activePageId, progress, canOpenPage, onNavigate }: JourneySidebarProps) => (
-  <aside className="sidebar" aria-label="Jornadas do workbook">
+  <aside className="sidebar" aria-label="Workbook journeys">
     <nav className="journeys">
       {journeys.map((journey) => {
         const pages = journey.chapters.flatMap((chapter) => chapter.pages);

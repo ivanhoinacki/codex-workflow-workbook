@@ -11,16 +11,16 @@ type ChapterNavProps = {
 export const ChapterNav = ({ currentPage, previousPage, nextPage, canAdvance, onNavigate }: ChapterNavProps) => (
   <div className="chapter-nav">
     <button disabled={!previousPage} onClick={() => previousPage && onNavigate(previousPage)} type="button">
-      Anterior
+      Previous
     </button>
 
     <div className="chapter-nav__meta">
-      <span>Página {currentPage.order}</span>
+      <span>Page {currentPage.order}</span>
       <strong>{currentPage.title}</strong>
     </div>
 
     <button disabled={!nextPage || !canAdvance} onClick={() => nextPage && onNavigate(nextPage)} type="button">
-      Próxima
+      Next
     </button>
   </div>
 );

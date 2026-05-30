@@ -199,7 +199,7 @@ export const App = () => {
               />
             </div>
 
-            <aside className="task-panel" aria-label="Tarefas da página">
+            <aside className="task-panel" aria-label="Page tasks">
               <CheckpointPanel
                 page={currentPage}
                 progress={progress}
@@ -233,17 +233,17 @@ export const App = () => {
               />
 
               <div className={`completion-card${currentComplete ? ' completion-card--done' : ''}`}>
-                <span>{currentComplete ? 'Pronto' : 'Bloqueado'}</span>
+                <span>{currentComplete ? 'Ready' : 'Locked'}</span>
                 <strong>
                   {currentComplete
                     ? nextPage
-                      ? 'A próxima página está disponível'
-                      : 'Workbook completo'
-                    : 'Complete o checkpoint e a pergunta'}
+                      ? 'The next page is available'
+                      : 'Workbook complete'
+                    : 'Complete the checkpoint and question'}
                 </strong>
                 {currentComplete && nextPage && (
                   <button className="completion-card__next" onClick={() => handleNavigate(nextPage)} type="button">
-                    Próxima
+                    Next
                   </button>
                 )}
               </div>

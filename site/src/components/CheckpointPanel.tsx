@@ -12,7 +12,7 @@ export const CheckpointPanel = ({ page, progress, onToggle }: CheckpointPanelPro
   <section className="side-card" aria-labelledby="checkpoint-title">
     <div className="side-card__header">
       <span>Checkpoint</span>
-      <strong id="checkpoint-title">Validação da etapa</strong>
+      <strong id="checkpoint-title">Step validation</strong>
     </div>
 
     <div className="checklist">

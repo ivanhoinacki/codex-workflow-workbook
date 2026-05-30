@@ -9,21 +9,28 @@ order: 9
 
 # 09 - Skills
 
-## Em uma frase
+## In One Sentence
 
-Skills transformam um jeito recorrente de trabalhar em um procedimento reutilizável.
+Skills turn a recurring way of working into a reusable procedure.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir criar uma skill simples, instalar uma skill compartilhada e explicar como ela entra no workflow.
+By the end of this page, you should be able to create a simple skill, install a shared skill and explain how it enters the workflow.
 
-## Resumo
+## Summary
 
-Skills são workflows reutilizáveis guardados em `~/.codex/skills/<name>/SKILL.md`.
+Skills are reusable workflows stored at `~/.codex/skills/<name>/SKILL.md`.
 
-Uma skill ensina Codex como executar um tipo recorrente de trabalho.
+A skill should explain:
 
-## Diagrama
+- when to use it;
+- what steps to follow;
+- what evidence to gather;
+- when to stop;
+- what output is expected;
+- what references help.
+
+## Flow
 
 ```plantuml
 @startuml
@@ -32,61 +39,41 @@ skinparam backgroundColor #FEFEFE
 
 actor User
 participant Codex
-participant "Skill Match" as Match
+participant "Skill Registry" as Registry
 participant "SKILL.md" as Skill
-participant "Workflow Steps" as Steps
+participant Scripts
 participant Validation
-participant "Reusable Knowledge" as Knowledge
 
-User -> Codex: Request recurring task
-Codex -> Match: Identify applicable skill
-Match --> Codex: Skill selected
-Match -> Skill: Load workflow contract
-Skill --> Match: Contract loaded
-Skill -> Steps: Execute ordered steps
-Steps --> Skill: Step outputs
-Steps -> Validation: Check completion criteria
-Validation --> Steps: Pass or fix needed
-Validation -> Knowledge: Save reusable learning
-Knowledge --> Codex: Improve future runs
+User -> Codex: Ask for recurring workflow
+Codex -> Registry: Match skill by name or description
+Registry -> Skill: Load instructions
+Skill -> Scripts: Use helper scripts when useful
+Skill -> Validation: Run expected checks
+Validation --> Codex: Result and limits
+Codex --> User: Structured outcome
 @enduml
 ```
 
-## Papel no Ecossistema
+## How To Think About A Skill
 
-Skills evitam que todo workflow seja reexplicado em cada conversa.
+Ask:
 
-Elas podem definir:
+1. When should this workflow be used?
+2. What steps are repeated?
+3. Which files, scripts or references help?
+4. How do we know it finished correctly?
+5. What should the final output contain?
 
-- quando usar;
-- ordem de passos;
-- ferramentas preferidas;
-- critérios de parada;
-- templates;
-- scripts auxiliares;
-- referências.
+If you cannot answer these questions, it may be too early to create a skill.
 
-## Como Pensar Em Uma Skill
+## Local Configuration Steps
 
-Uma skill deve responder quatro perguntas:
-
-1. Quando ela deve ser usada?
-2. Quais passos precisam acontecer sempre?
-3. Quais arquivos, scripts ou referências ajudam?
-4. Como saber que o trabalho terminou bem?
-
-Se você não consegue responder essas perguntas, talvez ainda seja cedo para transformar o processo em skill.
-
-## Passo a passo de configuração local
-
-Nesta etapa a pessoa cria o primeiro workflow reutilizável.
-
-1. Crie `~/.codex/skills/<skill-name>/`.
-2. Adicione um `SKILL.md`.
-3. Defina `name` e `description` no frontmatter.
-4. Escreva quando usar, passos, regras e output esperado.
-5. Coloque scripts em `scripts/` apenas quando a repetição for mecânica.
-6. Teste a skill em um pedido simples antes de depender dela no dia a dia.
+1. Create `~/.codex/skills/<skill-name>`.
+2. Add a `SKILL.md`.
+3. Define `name` and `description` in frontmatter.
+4. Write when to use it, steps, rules and expected output.
+5. Put scripts in `scripts/` only when repetition is mechanical.
+6. Test the skill with a small request before relying on it daily.
 
 Templates:
 
@@ -97,91 +84,24 @@ Templates:
 - [Download codereview-SKILL.md](templates/skills-downloads/codereview-SKILL.md)
 - [Download session-memory-SKILL.md](templates/skills-downloads/session-memory-SKILL.md)
 
-Comandos para aplicar:
-
 ```bash
 mkdir -p ~/.codex/skills/example-workflow
 $EDITOR ~/.codex/skills/example-workflow/SKILL.md
 ```
 
-Para instalar o starter pack:
+## Shared Starter Pack
 
-```bash
-mkdir -p ~/.codex/skills/study ~/.codex/skills/feature-dev ~/.codex/skills/investigation
-mkdir -p ~/.codex/skills/codereview ~/.codex/skills/session-memory
-cp study-SKILL.md ~/.codex/skills/study/SKILL.md
-cp feature-dev-SKILL.md ~/.codex/skills/feature-dev/SKILL.md
-cp investigation-SKILL.md ~/.codex/skills/investigation/SKILL.md
-cp codereview-SKILL.md ~/.codex/skills/codereview/SKILL.md
-cp session-memory-SKILL.md ~/.codex/skills/session-memory/SKILL.md
-```
-
-Modelo mínimo:
-
-```markdown
----
-name: example-workflow
-description: Use this skill when a recurring local workflow needs the same steps and checks every time.
----
-
-# Example Workflow
-
-## When To Use
-
-Use this skill for a repeated workflow with stable steps.
-
-## Steps
-
-1. Gather focused context.
-2. Execute the local workflow.
-3. Validate the result.
-4. Return changed files, checks and remaining risk.
-```
-
-## Skills Compartilhadas
-
-O starter pack compartilhado inclui apenas skills genéricas o suficiente para qualquer pessoa adaptar:
-
-| Skill | Papel | O que personalizar |
+| Skill | Purpose | Needs adaptation |
 |---|---|---|
-| `study` | Pesquisa e plano antes de implementar. | Fontes locais de docs e formato do plano. |
-| `feature-dev` | Implementação a partir de plano claro. | Comandos de validação do projeto. |
-| `investigation` | Investigação baseada em evidência. | Fontes aprovadas, logs e MCPs disponíveis. |
-| `codereview` | Revisão focada em riscos e regressão. | Checklist do time e severidades. |
-| `session-memory` | Memória durável e handoff. | Caminho do vault ou pasta de notas. |
+| `study` | Research before uncertain implementation. | Sources and planning format. |
+| `feature-dev` | Implementation from a clear plan. | Project validation commands. |
+| `investigation` | Evidence-based investigation. | Approved sources, logs and MCPs. |
+| `codereview` | Risk and regression review. | Team checklist and severities. |
+| `session-memory` | Durable memory and handoff. | Vault or notes path. |
 
-Outras skills podem existir no dia a dia, como `commit`, `create-pr`, `deslop` e `daily`, mas elas devem entrar depois que a pessoa entender o fluxo base.
+## Why It Works
 
-Cada skill compartilhada deve preservar o mecanismo:
-
-- uma skill encapsula um workflow;
-- a skill pode consultar o vault;
-- a skill pode gerar conhecimento reutilizável;
-- a skill pode exigir validação antes de terminar.
-
-## Por que funciona
-
-Funciona porque transforma prática operacional em procedimento.
-
-Sem skill, o modelo improvisa. Com skill, ele segue um contrato conhecido.
-
-## Erros comuns
-
-- Criar skill para uma tarefa que aconteceu uma única vez.
-- Escrever `description` vaga. A description é importante porque ajuda o Codex a saber quando carregar a skill.
-- Colocar documentação enorme no `SKILL.md` principal. Referências longas devem ficar em arquivos auxiliares.
-- Esquecer de testar a skill com um pedido pequeno antes de usar em trabalho real.
-
-## Knowledge Reuse
-
-Skills são grandes consumidoras do ciclo de conhecimento:
-
-- leem gotchas;
-- consultam Review-Learnings;
-- usam Business-Rules;
-- recuperam Session-Memory;
-- aplicam runbooks;
-- geram novos achados que podem voltar para o vault.
+Skills transform operational practice into procedure. They reduce improvisation and make recurring work easier to inspect.
 
 ## Checkpoint
 
@@ -192,12 +112,8 @@ rtk rg -n '^name:|^description:' ~/.codex/skills -g 'SKILL.md'
 rtk rg -n 'YOUR_|REPLACE_ME|TODO' ~/.codex/skills -g 'SKILL.md'
 ```
 
-Valide:
+You should be able to explain why a skill exists and what signal proves it was used.
 
-- cada skill tem `name` e `description`;
-- referências profundas ficam fora do `SKILL.md` principal quando possível;
-- scripts existem quando repetição mecânica é melhor que texto.
+## Next Module
 
-## Próximo Módulo
-
-Siga para [[09-local-configuration-hands-on]].
+Go to [[09-local-configuration-hands-on]].

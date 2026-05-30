@@ -41,17 +41,17 @@ export const PageReader = ({ page }: PageReaderProps) => {
         </div>
       </header>
 
-      <section className="learning-guide" aria-label="Como estudar esta etapa">
+      <section className="learning-guide" aria-label="How to study this step">
         <div>
-          <span>Como estudar</span>
-          <strong>Leia primeiro o conceito, depois valide o entendimento.</strong>
+          <span>How to study</span>
+          <strong>Read the concept first, then validate your understanding.</strong>
         </div>
         <ol>
-          <li>Comece pela seção "Em uma frase" para entender a ideia central da etapa.</li>
-          <li>Depois leia o resumo para conectar a ideia ao workflow completo.</li>
-          <li>Use o diagrama para enxergar quem conversa com quem.</li>
-          <li>Leia os exemplos e comandos sem copiar nada antes de entender o papel deles.</li>
-          <li>Marque o checkpoint apenas quando conseguir explicar com suas palavras.</li>
+          <li>Start with the "In one sentence" section to understand the core idea of the step.</li>
+          <li>Then read the summary to connect the idea to the full workflow.</li>
+          <li>Use the diagram to see who talks to whom.</li>
+          <li>Read the examples and commands without copying anything before you understand their role.</li>
+          <li>Check the checkpoint only when you can explain it in your own words.</li>
         </ol>
       </section>
 
@@ -74,7 +74,7 @@ export const PageReader = ({ page }: PageReaderProps) => {
             const writePromise = navigator.clipboard?.writeText(code);
 
             if (!writePromise) {
-              copyButton.textContent = 'Indisponível';
+              copyButton.textContent = 'Unavailable';
               window.setTimeout(() => {
                 copyButton.textContent = originalLabel;
               }, 1800);
@@ -83,13 +83,13 @@ export const PageReader = ({ page }: PageReaderProps) => {
 
             writePromise
               .then(() => {
-                copyButton.textContent = 'Copiado';
+                copyButton.textContent = 'Copied';
                 window.setTimeout(() => {
                   copyButton.textContent = originalLabel;
                 }, 1400);
               })
               .catch(() => {
-                copyButton.textContent = 'Falhou';
+                copyButton.textContent = 'Failed';
                 window.setTimeout(() => {
                   copyButton.textContent = originalLabel;
                 }, 1800);
@@ -99,13 +99,13 @@ export const PageReader = ({ page }: PageReaderProps) => {
       />
 
       {fullscreenDiagram && (
-        <div className="diagram-modal" role="dialog" aria-label="Diagrama PlantUML em tela cheia" aria-modal="true">
-          <button className="diagram-modal__backdrop" onClick={() => setFullscreenDiagram(null)} type="button" aria-label="Fechar diagrama" />
+        <div className="diagram-modal" role="dialog" aria-label="PlantUML diagram in fullscreen" aria-modal="true">
+          <button className="diagram-modal__backdrop" onClick={() => setFullscreenDiagram(null)} type="button" aria-label="Close diagram" />
           <div className="diagram-modal__content">
             <button className="diagram-modal__close" onClick={() => setFullscreenDiagram(null)} type="button">
-              Fechar
+              Close
             </button>
-            <img alt="Diagrama PlantUML em tela cheia" src={fullscreenDiagram} />
+            <img alt="PlantUML diagram in fullscreen" src={fullscreenDiagram} />
           </div>
         </div>
       )}

@@ -9,104 +9,71 @@ order: 13
 
 # 13 - Knowledge Reuse Loop
 
-## Em uma frase
+## In One Sentence
 
-O reuso acontece quando um aprendizado de hoje vira evidência encontrável para uma sessão futura.
+Reuse happens when today's learning becomes findable evidence for a future session.
 
-## O que você vai entender
+## What You Will Understand
 
-Ao final desta página, você deve conseguir transformar um review, gotcha ou decisão em conhecimento reutilizável.
+By the end of this page, you should be able to turn a review, gotcha or decision into reusable knowledge.
 
-## Resumo
+## Summary
 
-O ponto central do ecossistema é transformar trabalho real em conhecimento reutilizável.
+The point of the ecosystem is to turn real work into reusable knowledge.
 
-Informação gerada por investigações, sincronizações, Confluence, codereviews, gotchas, runbooks e Session-Memory volta para a base. Depois, as skills usam esse conhecimento em novas sessões.
+Information created by investigations, Confluence sync, code reviews, gotchas, runbooks and Session-Memory returns to the knowledge base. Later, skills and MCPs can use it before acting.
 
-Essa é a diferença entre treinamento pontual e onboarding vivo. O material não termina quando a pessoa leu a página. Cada review, investigação e aprendizado pode alimentar a próxima execução do workflow.
+This is the difference between one-time training and living onboarding.
 
-## Fluxo
+## Flow
 
 ```plantuml
 @startuml
 !theme plain
 skinparam backgroundColor #FEFEFE
 
-participant "Work Session" as Work
-participant "Code Review" as Review
-participant Confluence
-participant "Obsidian Vault" as Vault
-database "PostgreSQL KB" as DB
-participant "local-le-vault" as MCP
-participant Skills
+participant Work
+participant Review
+participant Gotcha
+participant Vault
+participant "PostgreSQL KB" as DB
+participant Skill
+participant Codex
 
-Work -> Vault: Save findings, plans, handoff
-Review -> Vault: Save gotchas and review learnings
-Confluence -> Vault: Sync durable docs
-Vault -> DB: Index reusable content
-DB --> Vault: Index complete
-Skills -> MCP: Query prior context
-MCP -> DB: Search relevant chunks
-DB --> MCP: Ranked evidence
-MCP --> Skills: Context before action
-Skills -> Work: Better execution
-Work -> Vault: Save new learning
+Work -> Review: Produce learning
+Review -> Gotcha: Extract reusable warning
+Gotcha -> Vault: Save sanitized note
+Vault -> DB: Index knowledge
+Skill -> DB: Search before action
+DB --> Codex: Relevant evidence
+Codex --> Work: Avoid repeated mistake
 @enduml
 ```
 
-## Fontes de Conhecimento
+## Reusable Sources
 
-| Fonte | Tipo de reuso |
+| Source | Reusable value |
 |---|---|
-| Session-Memory | Continuidade, pendências, decisões. |
-| Codereviews | Gotchas, regressions, test gaps, quality patterns. |
-| Confluence | Docs de equipe e decisões duráveis. |
-| Runbooks | Procedimentos operacionais. |
-| Business-Rules | Regras que impedem implementações erradas. |
-| Pitfalls | Erros conhecidos e prevenção. |
-| Investigações | Causa raiz, evidência e diagnóstico. |
+| Session-Memory | Continuity, pending actions and decisions. |
+| Code reviews | Regressions, risk patterns and missed tests. |
+| Confluence | Team docs and durable decisions. |
+| Business rules | Rules that prevent wrong implementation. |
+| Pitfalls | Known mistakes and prevention. |
+| Investigations | Root cause, evidence and diagnosis. |
 
-## Por que funciona
+## Why It Works
 
-Cada sessão melhora a próxima. O ganho não vem de uma resposta isolada, mas da acumulação controlada de conhecimento.
-
-O ciclo evita:
-
-- redescobrir pitfalls;
-- repetir bugs já encontrados em review;
-- ignorar regras de negócio conhecidas;
-- perder decisões em conversas antigas;
-- depender de memória humana para tudo.
-
-## Exemplo de gotcha reutilizável
-
-Aprendizado bruto: "O build quebrou porque alguém usou API antiga".
-
-Conhecimento reutilizável:
-
-- qual API antiga causou o problema;
-- onde a API nova está documentada;
-- como detectar o padrão com `rg`;
-- qual teste ou build confirma a correção;
-- qual skill deve consultar esse gotcha antes de editar area parecida.
-
-## Erros comuns
-
-- Salvar conclusão sem evidência.
-- Salvar gotcha sem indicar como encontrar o problema de novo.
-- Escrever conhecimento tão específico que não ajuda outra sessão.
-- Deixar o aprendizado apenas na conversa temporária.
+Each session improves the next one. The value does not come from one answer, but from controlled accumulation of knowledge.
 
 ## Checkpoint
 
-Uma informação virou conhecimento reutilizável quando:
+A piece of information became reusable knowledge when it:
 
-- foi escrita em local durável;
-- está sanitizada;
-- possui contexto suficiente para ser entendida depois;
-- pode ser encontrada por busca vault ou `local-le-vault`;
-- uma skill consegue usar a informação antes de agir.
+- was written in a durable place;
+- was sanitized;
+- has enough context to be found later;
+- can be used by a skill before action.
 
-## Próximo Módulo
+## Next Module
 
-Siga para [[14-automation-sync]].
+Go to [[14-automation-sync]].
