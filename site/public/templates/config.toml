@@ -1,0 +1,169 @@
+# Codex local runtime template.
+# Copy to: ~/.codex/config.toml
+# Replace ABSOLUTE/PATH/TO, YOUR_WORKSPACE_PATH, YOUR_VAULT_PATH and optional binary paths before using.
+# Keep secrets in ~/.codex/.mcp-secrets, never in this file.
+
+model = "gpt-5.5"
+model_reasoning_effort = "low"
+approval_policy = "on-request"
+approvals_reviewer = "guardian_subagent"
+sandbox_mode = "workspace-write"
+service_tier = "standard"
+
+[features]
+external_migration = true
+goals = false
+memories = true
+prevent_idle_sleep = false
+terminal_resize_reflow = true
+
+[tui]
+status_line = true
+
+[memories]
+generate_memories = false
+use_memories = true
+
+[shell_environment_policy]
+inherit = "core"
+
+[shell_environment_policy.set]
+PAGER = "cat"
+
+[projects."YOUR_WORKSPACE_PATH"]
+trust_level = "trusted"
+
+[projects."YOUR_VAULT_PATH"]
+trust_level = "trusted"
+
+[mcp_servers.chrome-devtools]
+command = "npx"
+args = ["chrome-devtools-mcp@1.0.1"]
+
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp@2.3.0"]
+
+[mcp_servers.datadog-mcp]
+command = "DATADOG_MCP_CLI_PATH"
+args = ["--site", "ap2", "--force-oauth"]
+
+[mcp_servers.local-le-vault]
+command = "ABSOLUTE/PATH/TO/.codex/hooks/mcp-local-le-vault-wrapper.sh"
+args = []
+
+[mcp_servers.mcp-atlassian]
+command = "ABSOLUTE/PATH/TO/.codex/hooks/mcp-atlassian-wrapper.sh"
+args = []
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@0.0.75", "--viewport-size", "1440x900"]
+
+[mcp_servers.probe]
+command = "ABSOLUTE/PATH/TO/.codex/hooks/mcp-probe-wrapper.sh"
+args = ["mcp"]
+
+# Optional, macOS Codex app only. Remove if the binary does not exist.
+[mcp_servers.node_repl]
+command = "/Applications/Codex.app/Contents/Resources/node_repl"
+args = []
+
+[plugins."build-web-apps@openai-curated"]
+enabled = true
+
+[plugins."circleci@openai-curated"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."openai-developers@openai-curated"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."slack@openai-curated"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."frontend-design@claude-plugins-official"]
+enabled = true
+
+[plugins."codex@openai-codex"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."outlook-email@openai-curated"]
+enabled = true
+
+[plugins."linear@openai-curated"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."chrome@openai-bundled"]
+enabled = true
+
+[[hooks.PermissionRequest]]
+matcher = ".*"
+
+[[hooks.PermissionRequest.hooks]]
+command = "python3 ABSOLUTE/PATH/TO/.codex/hooks/permission_request_log.py"
+
+[[hooks.PostCompact]]
+matcher = ".*"
+
+[[hooks.PostCompact.hooks]]
+command = "python3 ABSOLUTE/PATH/TO/.codex/hooks/postcompact_log.py"
+
+[[hooks.PostToolUse]]
+matcher = ".*"
+
+[[hooks.PostToolUse.hooks]]
+command = "python3 ABSOLUTE/PATH/TO/.codex/hooks/post_tool_use_tracker.py"
+
+[[hooks.PostToolUse]]
+matcher = "mcp__.*"
+
+[[hooks.PostToolUse.hooks]]
+command = "ABSOLUTE/PATH/TO/.codex/hooks/mcp-output-analytics.sh"
+
+[[hooks.PreCompact]]
+matcher = ".*"
+
+[[hooks.PreCompact.hooks]]
+command = "python3 ABSOLUTE/PATH/TO/.codex/hooks/precompact_backup.py"
+
+[[hooks.PreToolUse]]
+matcher = ".*"
+
+[[hooks.PreToolUse.hooks]]
+command = "python3 ABSOLUTE/PATH/TO/.codex/hooks/pre_tool_use_guard.py"
+
+[[hooks.SessionStart]]
+matcher = "startup|resume|clear"
+
+[[hooks.SessionStart.hooks]]
+command = "python3 ABSOLUTE/PATH/TO/.codex/hooks/session_start_context.py"
+
+[[hooks.SessionEnd]]
+matcher = ".*"
+
+[[hooks.SessionEnd.hooks]]
+command = "python3 ABSOLUTE/PATH/TO/.codex/hooks/session_end_save.py"
+
+[[hooks.UserPromptSubmit]]
+matcher = ".*"
+
+[[hooks.UserPromptSubmit.hooks]]
+command = "python3 ABSOLUTE/PATH/TO/.codex/hooks/user_prompt_context.py"

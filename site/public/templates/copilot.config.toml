@@ -1,0 +1,23 @@
+# Codex copilot profile template.
+# Copy to: ~/.codex/copilot.config.toml
+# This mirrors the operational profile used in the reference environment.
+
+approval_policy = "on-request"
+approvals_reviewer = "guardian_subagent"
+model = "gpt-5.5"
+model_reasoning_effort = "low"
+personality = "pragmatic"
+plan_mode_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+service_tier = "standard"
+
+[features]
+external_migration = true
+goals = false
+memories = true
+prevent_idle_sleep = false
+terminal_resize_reflow = true
+
+[memories]
+generate_memories = false
+use_memories = true

@@ -1,0 +1,37 @@
+# MCP and connector template for ~/.codex/config.toml.
+# Copy only the sections you need when extending an existing config.toml.
+# Keep secrets out of this file.
+
+[mcp_servers.chrome-devtools]
+command = "npx"
+args = ["chrome-devtools-mcp@1.0.1"]
+
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp@2.3.0"]
+
+[mcp_servers.datadog-mcp]
+command = "DATADOG_MCP_CLI_PATH"
+args = ["--site", "ap2", "--force-oauth"]
+
+[mcp_servers.local-le-vault]
+command = "ABSOLUTE/PATH/TO/.codex/hooks/mcp-local-le-vault-wrapper.sh"
+args = []
+
+[mcp_servers.mcp-atlassian]
+command = "ABSOLUTE/PATH/TO/.codex/hooks/mcp-atlassian-wrapper.sh"
+args = []
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@0.0.75", "--viewport-size", "1440x900"]
+
+[mcp_servers.probe]
+command = "ABSOLUTE/PATH/TO/.codex/hooks/mcp-probe-wrapper.sh"
+args = ["mcp"]
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."slack@openai-curated"]
+enabled = true

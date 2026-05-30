@@ -1,0 +1,23 @@
+# Codex terminal helpers.
+# Copy the parts you want into ~/.zshrc, then run: source ~/.zshrc
+
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+
+# NVM, when installed.
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+# Useful CLI aliases.
+command -v eza >/dev/null 2>&1 && alias ls="eza --icons --group-directories-first"
+command -v eza >/dev/null 2>&1 && alias ll="eza -la --icons --group-directories-first --git"
+command -v bat >/dev/null 2>&1 && alias cat="bat --paging=never"
+command -v rg >/dev/null 2>&1 && alias search="rg -n"
+
+# Codex shortcuts.
+alias cx="codex"
+alias cxv="codex --version"
+
+# fzf and zoxide, when installed.
+command -v fzf >/dev/null 2>&1 && source <(fzf --zsh) 2>/dev/null || true
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
