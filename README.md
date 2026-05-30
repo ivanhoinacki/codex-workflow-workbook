@@ -75,11 +75,13 @@ python3 scripts/validate-docs.py
 python3 scripts/sanitize-docs.py
 ```
 
-This repository is private while the content is still being refined and sanitized for GitHub Pages.
+This repository is private while the content is still being refined and sanitized.
+
+GitHub Pages is prepared through `.github/workflows/pages.yml`, but the current GitHub plan must support Pages for private repositories. If the plan does not support it, either make the repository public after sanitization or upgrade the plan before running the workflow.
 
 ## Next Steps
 
 1. Review and sanitize `docs/` and templates.
-2. Configure GitHub Pages in the repository settings to use GitHub Actions.
+2. Enable GitHub Pages with GitHub Actions after the repository can publish Pages.
 3. Merge `playbook-pt-br` into `main` when the content review is complete.
 4. Validate the full guided flow from step 1 to the final checkpoint with a fresh browser profile.
