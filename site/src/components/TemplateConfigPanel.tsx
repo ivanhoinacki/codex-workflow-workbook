@@ -12,6 +12,7 @@ const fields: Array<{
   help: string;
   section: 'required' | 'defaults';
   reviewDefault?: boolean;
+  reviewValues?: string[];
 }> = [
   {
     key: 'codexHome',
@@ -70,6 +71,7 @@ const fields: Array<{
     help: 'Example: Jane Developer. This value identifies who owns or maintains the generated local rules.',
     section: 'required',
     reviewDefault: true,
+    reviewValues: ['YOUR_NAME'],
   },
   {
     key: 'teamName',
@@ -85,6 +87,7 @@ const fields: Array<{
     help: 'Examples: www-le-customer, svc-experiences, svc-payments. This should match the local project being configured.',
     section: 'required',
     reviewDefault: true,
+    reviewValues: ['YOUR_PROJECT_NAME'],
   },
   {
     key: 'projectStack',
@@ -171,7 +174,9 @@ export const TemplateConfigPanel = ({ config, onChange }: TemplateConfigPanelPro
               .filter((field) => field.section === section.key)
               .map((field) => {
                 const shouldReview =
-                  Boolean(field.reviewDefault) && config[field.key] === defaultTemplateConfig[field.key];
+                  Boolean(field.reviewDefault) &&
+                  (config[field.key] === defaultTemplateConfig[field.key] ||
+                    Boolean(field.reviewValues?.includes(config[field.key])));
 
                 return (
                   <label
