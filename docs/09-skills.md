@@ -89,6 +89,48 @@ mkdir -p ~/.codex/skills/example-workflow
 $EDITOR ~/.codex/skills/example-workflow/SKILL.md
 ```
 
+## When To Use
+
+Use a skill when the same workflow repeats often enough that the steps, evidence and output format should be predictable.
+
+Do not create a skill for a one-off task.
+
+## Steps
+
+A minimal skill usually contains:
+
+```markdown
+---
+name: example-workflow
+description: Use this skill when a recurring local workflow needs the same steps and checks every time.
+---
+
+# Example Workflow
+
+## When To Use
+
+Use this skill for a repeated workflow with stable steps.
+
+## Steps
+
+1. Gather focused context.
+2. Execute the local workflow.
+3. Validate the result.
+4. Return changed files, checks and remaining risk.
+```
+
+To install the starter pack after downloading templates:
+
+```bash
+mkdir -p ~/.codex/skills/study ~/.codex/skills/feature-dev ~/.codex/skills/investigation
+mkdir -p ~/.codex/skills/codereview ~/.codex/skills/session-memory
+cp study-SKILL.md ~/.codex/skills/study/SKILL.md
+cp feature-dev-SKILL.md ~/.codex/skills/feature-dev/SKILL.md
+cp investigation-SKILL.md ~/.codex/skills/investigation/SKILL.md
+cp codereview-SKILL.md ~/.codex/skills/codereview/SKILL.md
+cp session-memory-SKILL.md ~/.codex/skills/session-memory/SKILL.md
+```
+
 ## Shared Starter Pack
 
 | Skill | Purpose | Needs adaptation |
@@ -102,6 +144,24 @@ $EDITOR ~/.codex/skills/example-workflow/SKILL.md
 ## Why It Works
 
 Skills transform operational practice into procedure. They reduce improvisation and make recurring work easier to inspect.
+
+## Common Mistakes
+
+- Creating a skill for a task that happened once.
+- Writing a vague `description`. The description helps Codex know when to load the skill.
+- Putting huge documentation into the main `SKILL.md`; long references should live in auxiliary files.
+- Forgetting to test the skill with a small request before using it in real work.
+
+## Knowledge Reuse
+
+Skills are major consumers of the knowledge loop:
+
+- they read gotchas;
+- consult review learnings;
+- use business rules;
+- recover Session-Memory;
+- apply runbooks;
+- generate findings that can go back into the vault.
 
 ## Checkpoint
 

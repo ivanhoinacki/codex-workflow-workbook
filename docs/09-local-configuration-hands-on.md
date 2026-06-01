@@ -155,6 +155,23 @@ Configuration reflected when:
 - MCPs and connectors provide evidence without manual context paste;
 - skills load when the request matches the workflow.
 
+## How Each Skill Enters The Workflow
+
+| Skill | Example trigger | What to observe |
+|---|---|---|
+| `study` | "Analyze before coding" | It gathers context and creates a plan. |
+| `feature-dev` | "Implement from this plan" | It follows the plan and validates locally. |
+| `investigation` | "Find why this happens" | It gathers evidence before proposing changes. |
+| `codereview` | "Review this PR" | It leads with findings and risk. |
+| `session-memory` | "Save everything" | It appends durable handoff context. |
+
+## Common Mistakes
+
+- Expecting every skill to trigger automatically.
+- Testing skills with vague prompts.
+- Forgetting to verify that downloaded templates were copied to the right directory.
+- Treating a successful download as proof that Codex loaded the skill.
+
 ## Next Module
 
 Go to [[10-token-economy]].

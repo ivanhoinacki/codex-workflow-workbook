@@ -84,6 +84,61 @@ Copy only the MCP entries you need into `~/.codex/config.toml`.
 
 The runtime knows which tools exist, while secrets remain outside public files. Wrappers keep credentials local and make failures easier to diagnose.
 
+## Local MCP vs Connector
+
+| Type | Runs where | Example |
+|---|---|---|
+| Local MCP | On the developer machine. | `local-le-vault`, local scripts. |
+| Connector | Authenticated external integration. | GitHub, Slack, Datadog, Atlassian. |
+
+## Simple Analogy
+
+Rules tell Codex how to behave. MCPs and connectors tell Codex where to look when the answer requires external or indexed evidence.
+
+## Templates
+
+Use the provided MCP templates as shape, not as private configuration:
+
+- `codex-mcp-config.toml`;
+- `mcp-credentials.sh`;
+- wrapper scripts for local vault, Probe, Atlassian and Datadog;
+- `verify-mcp-setup.sh`.
+
+## Recommended Order
+
+1. Configure local rules first.
+2. Add local MCP wrappers with placeholders.
+3. Put secrets in a local ignored file.
+4. Verify each MCP independently.
+5. Add authenticated connectors only when the learner needs them.
+
+## Role Of Each MCP
+
+| MCP / Connector | Role |
+|---|---|
+| `local-le-vault` | Search local reusable knowledge. |
+| `context7` | Fetch current library documentation. |
+| GitHub | Read PRs, issues, branches and repo metadata. |
+| Slack | Read relevant team context and draft messages. |
+| Atlassian | Read Jira and Confluence context. |
+| Datadog | Read logs, traces, metrics and monitors. |
+| Probe | Semantic code search and codebase orientation. |
+
+## Security
+
+Secrets should live outside public templates, usually in a local ignored file such as `.mcp-secrets`. Public docs should show placeholders only.
+
+## Common Mistakes
+
+- Putting real tokens in templates.
+- Enabling every connector before there is a use case.
+- Treating external search results as final truth.
+- Forgetting that write actions still need approval.
+
+## Knowledge Produced
+
+MCP usage can produce new gotchas, runbook updates, review learnings or Session-Memory entries when the result should be reusable.
+
 ## Checkpoint
 
 ```bash

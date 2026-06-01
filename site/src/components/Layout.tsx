@@ -21,7 +21,7 @@ const getInitialTheme = (): Theme => {
     return savedTheme;
   }
 
-  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return 'light';
 };
 
 export const Layout = ({ children }: LayoutProps) => {
@@ -53,7 +53,16 @@ export const Layout = ({ children }: LayoutProps) => {
             onClick={() => setTheme(nextTheme)}
             type="button"
           >
-            <span aria-hidden="true">{theme === 'dark' ? '☀' : '☾'}</span>
+            {theme === 'dark' ? (
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1" />
+              </svg>
+            ) : (
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M20 15.5A8.6 8.6 0 0 1 8.5 4a8.7 8.7 0 1 0 11.5 11.5Z" />
+              </svg>
+            )}
           </button>
         </div>
       </header>

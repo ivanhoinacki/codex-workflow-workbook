@@ -94,6 +94,39 @@ $EDITOR ~/.codex/config.toml
 
 Hooks run close to the tool boundary. That makes them useful for token economy, command safety, context injection and durable session tracking.
 
+## Main Hooks
+
+| Hook | Purpose |
+|---|---|
+| `SessionStart` | Load startup context. |
+| `UserPromptSubmit` | Add prompt-time context and routing hints. |
+| `PreToolUse` | Block or warn before risky tool usage. |
+| `PostToolUse` | Track command/tool output and useful metadata. |
+| `PreCompact` | Save context before compaction. |
+| `PostCompact` | Register compaction events. |
+| `SessionEnd` | Save final handoff or memory. |
+
+## When A Hook Makes Sense
+
+A hook makes sense when the behavior must happen automatically and consistently. If the action is optional or requires judgment, a skill or rule may be better.
+
+## Common Mistakes
+
+- Putting too much logic into hooks.
+- Letting hooks mutate external systems.
+- Assuming hooks replace human approval.
+- Forgetting to make hook output short and useful.
+
+## Knowledge Produced
+
+Hooks can produce reusable signals:
+
+- command tracking;
+- permission requests;
+- session start/end context;
+- MCP output analytics;
+- compaction handoff metadata.
+
 ## Checkpoint
 
 ```bash

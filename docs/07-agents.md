@@ -78,6 +78,44 @@ mkdir -p ~/.codex/agents
 
 Delegation works when the task has clear ownership and a small surface area. It fails when agents are asked to make broad decisions without enough context.
 
+## Role In The Ecosystem
+
+Agents are useful when the work can be split into bounded tasks with clear ownership. They are not a replacement for the main plan.
+
+## How They Work
+
+A parent session owns the goal. An agent receives a specific job, gathers or changes only the scoped area, and reports back. The parent session decides what to trust and how to synthesize it.
+
+## When To Use And When To Avoid
+
+Use agents for:
+
+- parallel evidence collection;
+- focused review slices;
+- bounded implementation with clear files;
+- independent checks that do not need shared mutable state.
+
+Avoid agents for:
+
+- simple questions;
+- tiny local reads;
+- unclear requirements;
+- work where two agents might edit the same files.
+
+## Practical Rules
+
+- Give each agent a concrete scope.
+- Prefer read-only agents for investigation.
+- Keep final synthesis in the parent session.
+- Do not use agents to bypass approval boundaries.
+
+## Common Mistakes
+
+- Delegating before understanding the problem.
+- Asking multiple agents to touch the same files.
+- Trusting agent output without parent verification.
+- Using expensive agents for cheap context reads.
+
 ## Checkpoint
 
 ```bash

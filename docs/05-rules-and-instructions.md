@@ -58,6 +58,28 @@ $EDITOR /path/to/your/project/AGENTS.md
 | `YOUR_PROJECT_NAME` | project `AGENTS.md` | Repository or project name. |
 | `YOUR_VALIDATION_COMMAND` | project `AGENTS.md` | Minimum validation command. |
 
+## Flow
+
+```plantuml
+@startuml
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+actor Learner
+participant "~/.codex/AGENTS.md" as GlobalRules
+participant "Project AGENTS.md" as ProjectRules
+participant Codex
+participant "Local Task" as Task
+
+Learner -> GlobalRules: Write global behavior
+Learner -> ProjectRules: Write project-specific rules
+Codex -> GlobalRules: Load operator contract
+Codex -> ProjectRules: Load repo context
+Codex -> Task: Apply the right scope
+Task --> Learner: Predictable behavior and clear limits
+@enduml
+```
+
 ## How To Write A Good Rule
 
 A good rule is:
@@ -74,6 +96,54 @@ Avoid publishing:
 - private paths;
 - internal customer or incident data;
 - raw output from `.env`, `config.toml` or `.mcp-secrets`.
+
+## What To Customize
+
+Customize only values that belong to the learner's environment:
+
+- name and team;
+- workspace path;
+- vault or docs path;
+- project name;
+- default validation command;
+- project-specific boundaries.
+
+Do not copy one person's private paths or internal machine details into public rules.
+
+## Language
+
+Recommended defaults for this playbook:
+
+- Conversation: English.
+- Code, commits and PR text: English.
+- Keep project/domain names in their natural spelling.
+
+## Operating Rules
+
+Good operating rules should tell Codex:
+
+- where to start reading;
+- when to use vault or MCPs;
+- when to ask for approval;
+- how to validate work;
+- how to report limits and remaining risk.
+
+## What Not To Share
+
+Do not publish:
+
+- tokens;
+- private paths;
+- internal customer data;
+- incident details that were not approved for sharing;
+- raw `.env`, `.mcp-secrets` or private `config.toml` content.
+
+## Common Mistakes
+
+- Writing vague rules that do not change behavior.
+- Mixing global and project-specific rules.
+- Adding secrets to rules because they are convenient.
+- Forgetting that public templates must use placeholders.
 
 ## Why It Works
 

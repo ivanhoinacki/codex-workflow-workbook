@@ -79,6 +79,40 @@ Examples:
 - MCPs retrieve evidence;
 - vault and PostgreSQL preserve knowledge.
 
+## Layers
+
+| Layer | Owns | Example |
+|---|---|---|
+| Runtime | Model, sandbox, approvals, hooks, MCP registration. | `config.toml` |
+| Global rules | Personal operating rules and defaults. | `~/.codex/AGENTS.md` |
+| Project rules | Repo-specific commands and boundaries. | project `AGENTS.md` |
+| Hooks | Automatic context, tracking and guardrails. | `PreToolUse`, `SessionStart` |
+| Skills | Repeatable workflows. | `study`, `feature-dev`, `investigation` |
+| Agents | Bounded delegation. | researcher, reviewer, implementer |
+| MCPs | External or indexed evidence. | vault, GitHub, Slack, Datadog |
+| Vault / KB | Durable knowledge. | gotchas, runbooks, Session-Memory |
+
+## Relationship Between Layers
+
+A request does not hit every layer every time. A simple question might only use rules and local reads. A complex feature may use rules, hooks, a skill, MCP evidence, validation and memory.
+
+## How To Choose The Right Layer
+
+- If it is behavior that should always apply, use rules.
+- If it protects tool execution, use a hook.
+- If it repeats a workflow, use a skill.
+- If it needs parallel bounded work, use an agent.
+- If it needs external or indexed evidence, use an MCP.
+- If it should survive the session, save it as memory or durable docs.
+
+## Common Mistakes
+
+- Putting everything into `config.toml`.
+- Turning project-specific behavior into global behavior.
+- Creating a skill for one-off work.
+- Using agents for simple local reads.
+- Treating MCP output as verified truth without checking context.
+
 ## Checkpoint
 
 You should be able to identify which layer owns:

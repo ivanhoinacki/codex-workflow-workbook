@@ -73,6 +73,17 @@ $EDITOR ~/.codex/copilot.config.toml
 
 Not every question needs the same reasoning effort. The profile keeps `model_reasoning_effort = "low"` for daily support and uses `plan_mode_reasoning_effort = "high"` when planning is needed.
 
+## Role In The Ecosystem
+
+`copilot.config.toml` is auxiliary configuration. It can define cheaper read-only behavior, context collection or helper defaults without replacing the main runtime contract.
+
+## Common Mistakes
+
+- Treating `copilot.config.toml` as the source of all behavior.
+- Duplicating secrets from `config.toml`.
+- Forgetting to keep model and reasoning defaults cost-aware.
+- Publishing private paths in a template.
+
 ## Checkpoint
 
 ```bash

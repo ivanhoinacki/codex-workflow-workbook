@@ -60,6 +60,28 @@ Codex --> User: Answer with less noise
 
 The session context is a limited resource. Useful evidence should stay visible; noisy output should stay out.
 
+## Mechanisms
+
+- Use `rg` and bounded reads instead of dumping large files.
+- Fetch context on demand from MCPs and vault.
+- Save durable learning instead of repeating it in every prompt.
+- Keep skills concise and move long references into separate files.
+
+## Simple Example
+
+Instead of pasting a whole repository into the prompt, ask Codex to find the relevant files:
+
+```text
+Find where this workflow is implemented. Use rg first, read only the smallest relevant files, then explain what evidence you found.
+```
+
+## Common Mistakes
+
+- Pasting huge files before knowing whether they matter.
+- Running broad recursive reads.
+- Keeping outdated memory in the active prompt.
+- Using agents when a focused local read is enough.
+
 ## Checkpoint
 
 You should be able to explain why `rg`, bounded file reads and vault search are better defaults than dumping entire directories into the session.

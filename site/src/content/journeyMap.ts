@@ -140,24 +140,6 @@ export const journeyDefinitions: JourneyDefinition[] = [
         description: 'Terminal, Codex CLI and minimum base before copying templates.',
         pages: [
           page(
-            'terminal-codex-cli',
-            'Terminal And Codex CLI',
-            '00-terminal-and-codex-cli.md',
-            'I can validate that terminal, Codex CLI and the local config directory are ready.',
-            choice(
-              'terminal-cli-ready',
-              'What is the goal of this initial step?',
-              [
-                'Install all MCPs before opening Codex',
-                'Configure all hooks immediately',
-                'Prepare terminal, Codex CLI and ~/.codex directory',
-              ],
-              'Prepare terminal, Codex CLI and ~/.codex directory',
-              'Before advanced templates, the learner must be able to open Codex and validate the local base.',
-            ),
-            ['Setup', 'CLI'],
-          ),
-          page(
             'environment-prerequisites',
             'Environment Prerequisites',
             '00-environment-prerequisites.md',
@@ -174,6 +156,24 @@ export const journeyDefinitions: JourneyDefinition[] = [
               'Hooks, skills, MCPs, vault and PostgreSQL are built in later steps from workbook templates.',
             ),
             ['Setup', 'Concepts'],
+          ),
+          page(
+            'terminal-codex-cli',
+            'Terminal And Codex CLI',
+            '00-terminal-and-codex-cli.md',
+            'I can validate that terminal, Codex CLI and the local config directory are ready.',
+            choice(
+              'terminal-cli-ready',
+              'What is the goal of this initial step?',
+              [
+                'Install all MCPs before opening Codex',
+                'Configure all hooks immediately',
+                'Prepare terminal, Codex CLI and ~/.codex directory',
+              ],
+              'Prepare terminal, Codex CLI and ~/.codex directory',
+              'Before advanced templates, the learner must be able to open Codex and validate the local base.',
+            ),
+            ['Setup', 'CLI'],
           ),
           page(
             'template-variables',

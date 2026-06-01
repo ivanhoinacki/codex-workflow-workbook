@@ -63,6 +63,41 @@ Codex --> User: Explain result and next step
 
 This sequence prevents premature implementation. The assistant is forced to gather evidence before making claims and to validate before calling work complete.
 
+## Steps
+
+1. The user asks for work.
+2. Codex loads the runtime and rules.
+3. Hooks inject context or block risky paths.
+4. Codex decides whether a skill applies.
+5. Codex fetches evidence if local or indexed context is needed.
+6. Codex changes only scoped files when implementation is required.
+7. Codex validates locally.
+8. Codex reports result, limits and next action.
+9. Useful learning is saved when it should be reused.
+
+## Guided Example
+
+A good request is:
+
+```text
+Help me investigate why this checkout validation is failing. Start with local project rules, search known gotchas, identify the smallest relevant files, then propose the first safe validation command.
+```
+
+Expected behavior:
+
+- Codex should not jump straight to editing code.
+- It should identify the domain and local rules first.
+- It should search reusable knowledge if available.
+- It should state evidence and uncertainty separately.
+- It should only propose or run safe local validation.
+
+## Common Mistakes
+
+- Asking for implementation before asking for context.
+- Treating the first answer as final evidence.
+- Skipping validation because the explanation sounds plausible.
+- Saving every transient note as memory.
+
 ## Checkpoint
 
 Before moving on, confirm that you can explain why context and evidence come before implementation.

@@ -194,7 +194,7 @@ Summarize this Codex conversation into a Session-Memory entry.
 
 Rules:
 - Output ONLY markdown
-- Use PT-BR for descriptions, technical terms in English inline
+- Use English for all descriptions
 - Be concise: max 3-5 bullets per section
 - Include file paths, PR numbers, ticket numbers when mentioned
 - Capture why decisions were made
@@ -203,16 +203,16 @@ Format:
 
 ## Session (brief 3-5 word topic)
 
-### O que foi feito
+### What Was Done
 - bullet points
 
-### Decisoes
+### Decisions
 - decisions taken, omit if none
 
-### Pendente
+### Pending
 - pending items, omit if none
 
-### Arquivos modificados
+### Modified Files
 - file paths changed, omit if none
 
 Conversation:

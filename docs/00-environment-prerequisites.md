@@ -21,7 +21,7 @@ By the end of this page, you should be able to say: "I can start the workbook wi
 
 Before configuring the environment, learners need to understand which requirements are needed immediately and which ones are optional until later.
 
-This step comes after terminal and Codex CLI setup. Its goal is to make the boundary clear: what is needed now, what will be copied later, and what should not be forced too early.
+This step comes before local installation work. Its goal is to make the boundary clear: what is needed now, what will be copied later, and what should not be forced too early.
 
 ## Minimum Requirements To Start
 
@@ -32,7 +32,7 @@ To follow the conceptual part of the workbook:
 - basic understanding of terminal, files and Git;
 - willingness to copy configuration files in later steps.
 
-After the terminal step, the expected minimum local base is:
+When the next terminal step is complete, the expected minimum local base is:
 
 - a local machine with a terminal;
 - Codex CLI installed;
@@ -138,4 +138,4 @@ Before moving on, confirm that:
 
 ## Next Module
 
-Go to [[00-template-variables]].
+Go to [[00-terminal-and-codex-cli]].

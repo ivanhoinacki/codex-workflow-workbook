@@ -109,6 +109,26 @@ It runs before the conversation. Codex receives rules and tools without requirin
 - Putting tokens in `config.toml` instead of local secrets.
 - Publishing the real local file without sanitizing it.
 
+## Knowledge Produced
+
+`config.toml` does not produce knowledge by itself. It enables mechanisms that produce knowledge:
+
+- tracking hooks;
+- Session-Memory;
+- MCP output analytics;
+- vault reads;
+- plugin routing.
+
+## Knowledge Consumed
+
+It consumes local configuration and human instructions:
+
+- converted rules;
+- hook paths;
+- MCP wrapper paths;
+- trusted project paths;
+- plugin and runtime settings.
+
 ## Checkpoints
 
 ```bash

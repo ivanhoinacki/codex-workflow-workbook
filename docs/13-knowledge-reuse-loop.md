@@ -65,6 +65,23 @@ Codex --> Work: Avoid repeated mistake
 
 Each session improves the next one. The value does not come from one answer, but from controlled accumulation of knowledge.
 
+## Reusable Gotcha Example
+
+A code review finds this issue:
+
+```text
+When changing a filter flow, validate both directions: applying the filter before selecting an item, and selecting the item before applying the filter.
+```
+
+That should become reusable knowledge because the next similar task can find it before repeating the mistake.
+
+## Common Mistakes
+
+- Leaving review learnings only inside a closed PR.
+- Saving every comment instead of extracting the reusable lesson.
+- Writing gotchas without domain, symptom or validation signal.
+- Forgetting to update stale gotchas when behavior changes.
+
 ## Checkpoint
 
 A piece of information became reusable knowledge when it:

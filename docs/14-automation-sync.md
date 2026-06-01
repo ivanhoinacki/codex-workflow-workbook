@@ -70,6 +70,27 @@ Prioritize automations that:
 
 Do not automate a process that still changes every day. Stabilize the workflow first.
 
+## What To Automate First
+
+Automate the boring and repeatable parts first:
+
+- syncing durable Confluence pages;
+- exporting review learnings;
+- indexing vault content;
+- saving session handoffs;
+- validating docs and template safety.
+
+## Relationship With Hooks
+
+Hooks are runtime automation inside Codex sessions. Sync jobs are broader automation that keep external sources and local knowledge aligned.
+
+## Common Mistakes
+
+- Automating before the manual process is understood.
+- Syncing noisy or low-quality content.
+- Copying private data into public docs.
+- Assuming automation removes the need for review.
+
 ## Checkpoint
 
 You should be able to name one source that can feed reusable knowledge and explain how it becomes searchable.

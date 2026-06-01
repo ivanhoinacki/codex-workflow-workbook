@@ -94,6 +94,67 @@ Help me investigate why this bug happens. First identify the relevant service, r
 
 The second request lets Codex use the environment as a workflow instead of guessing from a vague prompt.
 
+## Before You Start
+
+You do not need Codex installed to understand this page. The goal here is the mental model.
+
+Think of Codex as a technical colleague operating inside your machine. For that colleague to work well, it needs to know where the rules live, which tools are allowed, which limits cannot be crossed and where existing knowledge should be searched.
+
+## Problem Solved
+
+Without this ecosystem, every Codex conversation tends to rediscover the same context: repositories, tickets, rules, pitfalls, commands, commit format, Slack/Jira/GitHub boundaries and vault details.
+
+With the ecosystem:
+
+- global rules live in `~/.codex/AGENTS.md` and runtime config;
+- project instructions live in project `AGENTS.md`;
+- hooks inject context and block dangerous paths;
+- skills make workflows repeatable;
+- agents allow bounded delegation;
+- Session-Memory preserves continuity;
+- `local-le-vault` retrieves indexed knowledge from PostgreSQL;
+- `rtk` reduces token cost for noisy commands.
+
+## Key Concepts
+
+| Concept | Simple explanation |
+|---|---|
+| Context | Information Codex needs before acting, such as project rules, files and relevant history. |
+| Guardrails | Limits that prevent risky, destructive or external actions without approval. |
+| Validation | Evidence that a change or understanding is correct. It can be a test, build, lint, file read or checkpoint. |
+| Memory | Durable record so a decision, pending item or learning survives the current conversation. |
+| Reusable knowledge | Content that can be found again by skills, MCPs or the vault, such as gotchas, runbooks and review learnings. |
+
+## Simple Example
+
+Without workflow, a developer might ask: "help me understand where this error came from" or "help me improve the performance of this routine". Codex may find a plausible technical solution, but without company context it can miss business rules, implementation history, previous tradeoffs and why the code was written that way.
+
+With workflow, the session follows a better order:
+
+1. read local rules;
+2. decide which skill, agent or tool applies to the request;
+3. search the vault for the right vertical, service or domain context, such as Experiences, Hotels, Payments or Offers;
+4. edit only what belongs to the scope;
+5. validate;
+6. save durable learning if it will be useful later.
+
+## Limits
+
+The ecosystem should not:
+
+- publish private content without sanitization;
+- execute external effects without approval when approval is required;
+- replace real validation;
+- treat old memory as current truth;
+- turn every small task into a heavy process.
+
+## Common Mistakes
+
+- Thinking memory replaces validation. Memory helps, but it can become stale.
+- Pasting all context into the prompt. That increases noise and cost. Search for the right context on demand.
+- Putting project-specific rules into global rules. That spreads the wrong behavior to other repositories.
+- Configuring hooks and MCPs before understanding their role. Understand the layer first, then copy the template.
+
 ## Checkpoint
 
 Before moving on, confirm that you can explain:

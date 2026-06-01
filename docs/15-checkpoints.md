@@ -126,6 +126,15 @@ You completed the journey when you can answer:
 - where to save reusable learning;
 - when to ask for approval before an external action.
 
+## Common Mistakes In The First Use
+
+- Asking for a task that is too large right after setup.
+- Not filling template variables before downloading files.
+- Running validation without knowing the project stack.
+- Confusing a local dependency failure with a Codex failure.
+- Saving secrets in memory, docs or templates.
+- Expecting agents to be used for every simple question.
+
 ## Closing
 
 After this step, the environment can be used on a small real task. Pick a read-only investigation or a low-risk local improvement and observe which layers enter the workflow.
