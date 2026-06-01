@@ -66,8 +66,8 @@ const fields: Array<{
   {
     key: 'userName',
     label: 'Name',
-    hint: 'Used in generated rules templates.',
-    help: 'Use your name or preferred owner label for generated local rules.',
+    hint: 'Use your full name or the owner label that should appear in generated rules.',
+    help: 'Example: Jane Developer. This value identifies who owns or maintains the generated local rules.',
     section: 'required',
     reviewDefault: true,
   },
@@ -81,8 +81,8 @@ const fields: Array<{
   {
     key: 'projectName',
     label: 'Default project',
-    hint: 'Used in PROJECT_AGENTS.md.',
-    help: 'Use the project or repository name the generated project rules should describe.',
+    hint: 'Use the repository or project name that will receive PROJECT_AGENTS.md.',
+    help: 'Examples: www-le-customer, svc-experiences, svc-payments. This should match the local project being configured.',
     section: 'required',
     reviewDefault: true,
   },
