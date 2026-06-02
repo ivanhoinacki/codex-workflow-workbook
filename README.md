@@ -12,6 +12,7 @@ The workbook explains:
 - how the layers connect;
 - how local Codex configuration works;
 - how hooks, skills, agents, MCPs, Obsidian, Session-Memory, PostgreSQL and `local-le-vault` fit together;
+- how to prepare the local vault backend before enabling `local-le-vault`;
 - how operational work becomes reusable knowledge;
 - which checkpoints prove the setup is working.
 
@@ -36,6 +37,7 @@ The first interactive workbook is implemented under `site/` and uses `docs/` as 
 - code blocks include copy buttons;
 - template links download starter files for config, agents, rules, hooks, MCPs and skills;
 - downloads for skill templates use explicit filenames such as `study-SKILL.md`.
+- the learner journey includes environment preparation before local configuration.
 
 Current handoff:
 

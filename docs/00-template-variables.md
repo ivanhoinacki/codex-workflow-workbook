@@ -30,7 +30,7 @@ When you download a template, the page replaces placeholders with the values fro
 
 ## How To Fill It In
 
-Fill the card above before downloading `config.toml`, `copilot.config.toml`, rules, agents, hooks, MCPs or skills.
+Fill the card above after preparing the local vault environment and before downloading `config.toml`, `copilot.config.toml`, rules, agents, hooks, MCPs or skills.
 
 Use values that exist on your machine:
 
@@ -42,7 +42,9 @@ Use values that exist on your machine:
 - `Name`, `Team`, `Project` and `Stack`: values used in rules and agents;
 - `Install`, `Test`, `Lint`, `Build` and `Validation` commands: default project commands.
 
-If a field does not exist on your machine yet, keep a generic placeholder and come back to it when you reach the corresponding step.
+If a field does not exist on your machine yet, keep a generic placeholder and come back before downloading the template that depends on it.
+
+For Windows users running WSL2, fill Linux paths from inside WSL. For example, use `/home/you/workspace/luxury-escapes` or `~/workspace/luxury-escapes`, not `C:\Users\you\...`.
 
 ## Where These Values Live
 

@@ -107,6 +107,8 @@ CodexHome --> Learner: Ready for configuration templates
 
 This playbook assumes a developer machine with terminal access. On macOS, use Terminal, iTerm2 or another shell you already trust.
 
+On Windows, use WSL2 with Ubuntu or another supported Linux distribution. Run the commands inside the WSL shell and use Linux paths. Do not mix Windows paths into `~/.codex` templates.
+
 ## Step 2 - Package Manager
 
 Use the package manager that matches the machine. For macOS, Homebrew is usually the simplest path:
@@ -116,6 +118,13 @@ brew --version
 ```
 
 If Homebrew is not installed, install it before continuing or use the package manager your team already supports.
+
+For WSL2 or Linux, use `apt` when using Ubuntu:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y git curl python3 python3-venv python3-pip ripgrep jq
+```
 
 ## Step 3 - Node.js
 
@@ -190,6 +199,7 @@ bash verify-codex-setup.sh
 | `node: command not found` | Node.js is missing. | Install Node or load `nvm`. |
 | `rg: command not found` | ripgrep is missing. | Install `ripgrep`. |
 | `~/.codex` missing | Local config directory was not created. | Run `mkdir -p ~/.codex`. |
+| Windows path appears in config | WSL2 setup mixed Windows and Linux paths. | Replace with Linux paths from inside WSL. |
 
 ## Common Mistakes
 
@@ -209,4 +219,4 @@ Before moving on, confirm that:
 
 ## Next Module
 
-Go to [[00-template-variables]].
+Go to [[00-apps-environment-setup]].

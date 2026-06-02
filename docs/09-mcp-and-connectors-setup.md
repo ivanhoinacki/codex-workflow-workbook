@@ -23,6 +23,8 @@ MCPs expose tools to Codex. Connectors expose authenticated app capabilities.
 
 They should be configured with a clear boundary: public templates describe shape, while real credentials stay local.
 
+This page assumes you already understand the external apps from [[09-external-apps-and-services]]. Here the goal is to connect those apps to Codex safely.
+
 ## Types
 
 | Type | Examples | Credential location |
@@ -80,6 +82,13 @@ chmod +x ~/.codex/hooks/mcp-*.sh
 
 Copy only the MCP entries you need into `~/.codex/config.toml`.
 
+Do not enable a wrapper until the app behind it is ready. For example:
+
+- `local-le-vault` needs the PostgreSQL knowledge database, Ollama and the vault MCP server script;
+- `mcp-atlassian` needs an Atlassian MCP command and local credentials;
+- `datadog-mcp` needs its local auth flow or CLI path;
+- GitHub and Slack connectors need app authorization, not a public template token.
+
 ## Why It Works
 
 The runtime knows which tools exist, while secrets remain outside public files. Wrappers keep credentials local and make failures easier to diagnose.
@@ -107,10 +116,11 @@ Use the provided MCP templates as shape, not as private configuration:
 ## Recommended Order
 
 1. Configure local rules first.
-2. Add local MCP wrappers with placeholders.
-3. Put secrets in a local ignored file.
-4. Verify each MCP independently.
-5. Add authenticated connectors only when the learner needs them.
+2. Prepare the external app or local service behind the integration.
+3. Add local MCP wrappers with placeholders.
+4. Put secrets in a local ignored file.
+5. Verify each MCP independently.
+6. Add authenticated connectors only when the learner needs them.
 
 ## Role Of Each MCP
 
@@ -123,6 +133,21 @@ Use the provided MCP templates as shape, not as private configuration:
 | Atlassian | Read Jira and Confluence context. |
 | Datadog | Read logs, traces, metrics and monitors. |
 | Probe | Semantic code search and codebase orientation. |
+
+## Readiness Checklist
+
+Before expecting a tool to work, validate the dependency behind it:
+
+| Integration | Ready when |
+|---|---|
+| `local-le-vault` | PostgreSQL is reachable, Ollama has the embedding model and the wrapper can start the MCP server. |
+| `context7` | The MCP or connector is installed and can fetch current docs. |
+| GitHub | The connector or CLI can read repositories and PR metadata. |
+| Slack | The connector can read the intended workspace and channel. |
+| Atlassian | Jira and Confluence authentication works through the wrapper or connector. |
+| Datadog | OAuth or local CLI auth works and read-only observability tools are available. |
+| Browser tooling | The browser tool can open a local app and inspect console/runtime state. |
+| Probe | The local command can search the target repository. |
 
 ## Security
 

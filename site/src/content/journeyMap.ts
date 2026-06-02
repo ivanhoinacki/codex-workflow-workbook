@@ -129,15 +129,15 @@ export const journeyDefinitions: JourneyDefinition[] = [
     ],
   },
   {
-    id: 'local-configuration',
-    title: 'Local Configuration',
-    description: 'Runtime configuration, rules, agents, hooks, MCPs and skills.',
-    track: ['Config', 'Automation'],
+    id: 'environment-preparation',
+    title: 'Environment Preparation',
+    description: 'Prepare terminal, Codex CLI and the local-le-vault knowledge environment.',
+    track: ['Setup', 'Vault'],
     chapters: [
       {
-        id: 'environment-setup',
-        title: 'Environment Setup',
-        description: 'Terminal, Codex CLI and minimum base before copying templates.',
+        id: 'machine-and-apps',
+        title: 'Machine And Local Vault',
+        description: 'Base machine, Codex runtime and local knowledge backend.',
         pages: [
           page(
             'environment-prerequisites',
@@ -175,6 +175,39 @@ export const journeyDefinitions: JourneyDefinition[] = [
             ),
             ['Setup', 'CLI'],
           ),
+          page(
+            'apps-environment-setup',
+            'Local Vault Environment Setup',
+            '00-apps-environment-setup.md',
+            'I can prepare the local services required before enabling local-le-vault.',
+            choice(
+              'apps-setup-purpose',
+              'Why prepare PostgreSQL, Ollama and the vault MCP server before enabling local-le-vault?',
+              [
+                'So the wrapper can start a real server and query indexed knowledge',
+                'So every learner must publish GitHub Pages',
+                'So secrets can be stored in public templates',
+              ],
+              'So the wrapper can start a real server and query indexed knowledge',
+              'local-le-vault depends on the local database, embedding model, server script and wrapper environment.',
+            ),
+            ['Setup', 'Vault'],
+          ),
+        ],
+      },
+    ],
+  },
+  {
+    id: 'local-configuration',
+    title: 'Local Configuration',
+    description: 'Runtime configuration, rules, agents, hooks, MCPs and skills.',
+    track: ['Config', 'Automation'],
+    chapters: [
+      {
+        id: 'template-preparation',
+        title: 'Template Preparation',
+        description: 'Fill local values once before downloading configuration files.',
+        pages: [
           page(
             'template-variables',
             'Template Variables',
@@ -276,6 +309,24 @@ export const journeyDefinitions: JourneyDefinition[] = [
               'PreToolUse runs before the tool and can block commands outside policy.',
             ),
             ['Automation', 'Safety'],
+          ),
+          page(
+            'external-apps-services',
+            'External Apps And Services',
+            '09-external-apps-and-services.md',
+            'I can identify which external apps are required for the full workflow and which ones are optional evidence sources.',
+            choice(
+              'external-apps-purpose',
+              'Why are external apps part of the Codex workflow?',
+              [
+                'They provide context, evidence, authentication, publishing or synchronization',
+                'They replace local Codex configuration',
+                'They are all required before opening Codex',
+              ],
+              'They provide context, evidence, authentication, publishing or synchronization',
+              'Codex remains the local operator, but external apps provide the evidence and synchronization layers used by the full workflow.',
+            ),
+            ['Integrations', 'MCP'],
           ),
           page(
             'mcp-connectors-setup',

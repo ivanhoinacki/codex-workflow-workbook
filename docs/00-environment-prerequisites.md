@@ -57,7 +57,7 @@ Those layers are built during the workbook. In `Local Configuration`, the person
 | Obsidian or Markdown vault | In the vault step | Local base for documents, memory and runbooks. |
 | Hooks | In `Local Configuration` | Guardrails and automations copied from workbook templates. |
 | Skills | In `Local Configuration` | Reusable workflows copied or installed from templates. |
-| PostgreSQL | In the knowledge base step | Local indexed knowledge base used by `local-le-vault`. |
+| PostgreSQL | In the local vault environment step | Local indexed knowledge base used by `local-le-vault`. |
 | Authenticated MCPs | After the local base | Connections to vault, GitHub, Slack, Datadog or other sources, as needed. |
 
 ## Learning Order
@@ -67,7 +67,7 @@ This journey follows a technical onboarding sequence:
 | Block | What the learner learns | Expected result |
 |---|---|---|
 | Foundations | Purpose, layers and boundaries. | Can explain the system before installing everything. |
-| Setup | Terminal, Codex CLI and local directory. | Can open Codex and create `~/.codex`. |
+| Environment preparation | Terminal, Codex CLI, local directory and local vault backend. | Can open Codex and prepare the `local-le-vault` prerequisites. |
 | Template variables | Local paths and commands applied to downloads. | Can download templates adapted to their machine. |
 | Configuration | Rules, config, hooks, MCPs, agents and skills. | Can copy templates and validate each layer. |
 | Hands-on | Small tests per layer. | Can observe whether configuration affected the workflow. |
@@ -80,7 +80,7 @@ At this stage, avoid:
 
 - copying hooks before understanding where they are registered;
 - creating MCP files with real tokens;
-- installing PostgreSQL if you are still only learning the concepts;
+- installing PostgreSQL before reaching the local vault environment step;
 - sharing templates without reviewing private data;
 - validating skills before creating the `~/.codex/skills` structure.
 

@@ -35,14 +35,23 @@ Turns the concepts into a local Codex setup.
 
 Pages:
 
-- Terminal and Codex CLI
 - Environment Prerequisites
+- Terminal and Codex CLI
+- Local Vault Environment Setup
+
+### Local Configuration
+
+Turns prepared local tools into Codex runtime configuration.
+
+Pages:
+
 - Template Variables
 - config.toml
 - Rules and Instructions
 - copilot.config.toml
 - Agents
 - Hooks
+- External Apps and Services
 - MCPs and Connectors
 - Skills
 - Configuration Hands-on
