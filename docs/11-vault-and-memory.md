@@ -7,7 +7,7 @@ status: draft
 order: 11
 ---
 
-# 11 - Vault And Memory
+# 11 - Vault and Memory
 
 ## In One Sentence
 
@@ -62,15 +62,15 @@ Vault --> Codex: Evidence for future sessions
 
 Memory makes future sessions less dependent on human recall. The key is to save only what will help later and avoid secrets or noise.
 
-## Role Of The Vault
+## Role of the Vault
 
 The vault is durable documentation. It holds runbooks, architecture notes, feature plans, review learnings, gotchas and operational context.
 
-## Role Of Session-Memory
+## Role of Session-Memory
 
 Session-Memory is continuity. It captures what changed, what was decided, what remains pending and where to resume.
 
-## How To Decide Where To Save
+## How to Decide Where to Save
 
 | Information | Best place |
 |---|---|

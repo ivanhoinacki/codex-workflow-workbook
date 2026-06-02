@@ -59,7 +59,7 @@ Knowledge is reusable only when it is current and findable.
 
 Automation closes the gap between information being created, saved, indexed and retrieved by a skill.
 
-## When To Automate
+## When to Automate
 
 Prioritize automations that:
 
@@ -70,7 +70,7 @@ Prioritize automations that:
 
 Do not automate a process that still changes every day. Stabilize the workflow first.
 
-## What To Automate First
+## What to Automate First
 
 Automate the boring and repeatable parts first:
 

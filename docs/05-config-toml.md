@@ -91,7 +91,7 @@ MCPs --> Codex: External and indexed evidence
 
 It runs before the conversation. Codex receives rules and tools without requiring the user to repeat the same context in every prompt.
 
-## How To Read The File
+## How to Read the File
 
 | Section | How to think about it |
 |---|---|

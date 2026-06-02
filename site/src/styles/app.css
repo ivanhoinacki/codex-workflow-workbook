@@ -320,11 +320,16 @@ button:disabled {
   background: var(--accent-soft);
   border-color: var(--accent-border);
   color: var(--text);
-  font-weight: 700;
 }
 
 .page-link--complete {
   color: var(--accent);
+}
+
+.page-link--active.page-link--complete {
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+  color: var(--text);
 }
 
 .page-link:disabled {
@@ -1269,6 +1274,12 @@ button:disabled {
 
 [data-theme='dark'] .page-link--complete {
   color: var(--brand);
+}
+
+[data-theme='dark'] .page-link--active.page-link--complete {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--text);
 }
 
 [data-theme='dark'] .answer--selected {

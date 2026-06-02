@@ -23,7 +23,7 @@ Before configuring the environment, learners need to understand which requiremen
 
 This step comes before local installation work. Its goal is to make the boundary clear: what is needed now, what will be copied later, and what should not be forced too early.
 
-## Minimum Requirements To Start
+## Minimum Requirements to Start
 
 To follow the conceptual part of the workbook:
 
@@ -57,7 +57,7 @@ Those layers are built during the workbook. In `Local Configuration`, the person
 | Obsidian or Markdown vault | In the vault step | Local base for documents, memory and runbooks. |
 | Hooks | In `Local Configuration` | Guardrails and automations copied from workbook templates. |
 | Skills | In `Local Configuration` | Reusable workflows copied or installed from templates. |
-| PostgreSQL | In the local vault environment step | Local indexed knowledge base used by `local-le-vault`. |
+| PostgreSQL | Optional local vault environment step | Local indexed knowledge base used only when `local-le-vault` is enabled. |
 | Authenticated MCPs | After the local base | Connections to vault, GitHub, Slack, Datadog or other sources, as needed. |
 
 ## Learning Order
@@ -74,13 +74,13 @@ This journey follows a technical onboarding sequence:
 | Knowledge | Vault, memory, PostgreSQL KB and reuse. | Understands how learnings become gotchas and future context. |
 | Guided first task | A safe first workflow. | Can observe the environment on real but low-risk work. |
 
-## What Not To Do Yet
+## What Not to Do Yet
 
 At this stage, avoid:
 
 - copying hooks before understanding where they are registered;
 - creating MCP files with real tokens;
-- installing PostgreSQL before reaching the local vault environment step;
+- installing PostgreSQL before deciding whether local indexed knowledge is needed;
 - sharing templates without reviewing private data;
 - validating skills before creating the `~/.codex/skills` structure.
 
@@ -132,7 +132,7 @@ Before moving on, confirm that:
 
 - you know which requirements are needed only to read the workbook;
 - you know the minimum base needed to start local configuration;
-- you know hooks, skills, MCPs, vault and PostgreSQL are built in later steps;
+- you know hooks, skills, MCPs and optional knowledge services are built in later steps;
 - you know the initial chapters validate understanding, not installation;
 - you know command validation appears only after the configuration steps.
 

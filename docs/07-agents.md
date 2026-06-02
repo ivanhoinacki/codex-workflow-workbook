@@ -86,7 +86,7 @@ Agents are useful when the work can be split into bounded tasks with clear owner
 
 A parent session owns the goal. An agent receives a specific job, gathers or changes only the scoped area, and reports back. The parent session decides what to trust and how to synthesize it.
 
-## When To Use And When To Avoid
+## When to Use and When to Avoid
 
 Use agents for:
 

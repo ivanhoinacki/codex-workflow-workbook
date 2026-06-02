@@ -7,7 +7,7 @@ status: draft
 order: 8.5
 ---
 
-# 08.5 - External Apps And Services
+# 08.5 - External Apps and Services
 
 ## In One Sentence
 
@@ -24,8 +24,8 @@ Codex is the local operator, but it is not the whole system.
 Some parts of the workflow live outside Codex:
 
 - Obsidian stores authored knowledge and Session-Memory.
-- PostgreSQL stores indexed knowledge for retrieval.
-- Ollama generates local embeddings for semantic search.
+- PostgreSQL can store indexed knowledge for retrieval when `local-le-vault` is enabled.
+- Ollama can generate local embeddings for semantic search when `local-le-vault` is enabled.
 - GitHub stores repositories, PRs and the published playbook.
 - Slack, Atlassian and Datadog provide team, planning and production evidence.
 - Browser tooling validates rendered UI and local apps.
@@ -35,13 +35,13 @@ These tools do not all need to be ready on the first page. They become necessary
 
 ## Required vs Optional
 
-| Layer | Required for first setup? | Required for full workflow? | Why |
+| Layer | Required for first setup? | Required for local knowledge search? | Why |
 |---|---:|---:|---|
 | Terminal | Yes | Yes | Runs Codex, setup commands and validation checks. |
 | WSL2 on Windows | Windows users only | Yes for Windows users | Provides the Linux environment where Codex, paths, wrappers and MCP servers run consistently. |
 | Codex CLI | Yes | Yes | Loads local configuration, hooks, skills, agents and MCPs. |
-| Git | Yes | Yes | Lets the learner version local configuration and inspect repos. |
-| GitHub account | Recommended | Yes | Needed for repositories, PR context and GitHub Pages publishing. |
+| Git | Yes | No | Lets the learner version local configuration and inspect repos. |
+| GitHub account | Recommended | No | Needed for repositories, PR context and GitHub Pages publishing. |
 | Obsidian or Markdown vault | No | Yes | Stores durable notes, handoffs, runbooks and Session-Memory. |
 | PostgreSQL + pgvector | No | Yes | Stores indexed reusable knowledge for `local-le-vault`. |
 | Ollama | No | Yes | Generates local embeddings used by semantic search. |
@@ -64,7 +64,7 @@ Use this order:
 3. Create `~/.codex` and fill template variables.
 4. Copy rules, config, agents, hooks and skills.
 5. Prepare the vault path and Session-Memory location.
-6. Prepare PostgreSQL + pgvector and Ollama for `local-le-vault`.
+6. If using local indexed knowledge, prepare PostgreSQL + pgvector and Ollama for `local-le-vault`.
 7. Configure MCP wrappers and local secrets.
 8. Authenticate external connectors only when the learner needs that evidence source.
 9. Validate each integration independently before using it on real work.
@@ -115,9 +115,11 @@ Use a local vault for durable context:
 
 The workbook should never ship a private vault path. The learner fills their own `Vault` value in the template variables step.
 
-### PostgreSQL And Ollama
+### PostgreSQL and Ollama
 
-The full knowledge workflow needs:
+PostgreSQL and Ollama are optional. They are needed only when the learner wants `local-le-vault` to query indexed local knowledge.
+
+That local knowledge path needs:
 
 - PostgreSQL running locally;
 - `pgvector` available;
@@ -138,7 +140,7 @@ GitHub is used for:
 
 For learners, publishing the playbook is optional. Reading repo and PR context is what matters for day-to-day engineering.
 
-### Slack, Atlassian And Datadog
+### Slack, Atlassian and Datadog
 
 These integrations are evidence sources:
 
@@ -160,12 +162,12 @@ It helps validate:
 - the UI responds after interaction;
 - desktop and mobile layouts remain usable.
 
-## How To Validate
+## How to Validate
 
 Before moving to real work, each person should be able to answer:
 
 - Which tools are required now?
-- Which tools are only needed for the full workflow?
+- Which tools are only needed for local indexed knowledge?
 - Where do real tokens and connection strings live?
 - Which integrations are read-only evidence sources?
 - Which actions still require explicit approval?
@@ -177,7 +179,7 @@ Before moving to real work, each person should be able to answer:
 - Putting private paths or tokens in public templates.
 - Assuming GitHub Pages publishing is required for every learner.
 - Treating Slack, Jira or Datadog output as final truth without current validation.
-- Configuring `local-le-vault` before PostgreSQL, Ollama and the MCP wrapper can run.
+- Configuring `local-le-vault` before PostgreSQL, Ollama and the MCP wrapper can run, when using the local indexed knowledge path.
 - Forgetting that external writes still need explicit approval.
 
 ## Checkpoint
@@ -185,7 +187,7 @@ Before moving to real work, each person should be able to answer:
 You should be able to classify each dependency as:
 
 - required for first setup;
-- required for the full workflow;
+- required for local indexed knowledge;
 - optional evidence source;
 - publishing or collaboration layer.
 

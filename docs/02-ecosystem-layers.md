@@ -96,7 +96,7 @@ Examples:
 
 A request does not hit every layer every time. A simple question might only use rules and local reads. A complex feature may use rules, hooks, a skill, MCP evidence, validation and memory.
 
-## How To Choose The Right Layer
+## How to Choose the Right Layer
 
 - If it is behavior that should always apply, use rules.
 - If it protects tool execution, use a hook.

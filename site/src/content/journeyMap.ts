@@ -65,7 +65,7 @@ export const journeyDefinitions: JourneyDefinition[] = [
     chapters: [
       {
         id: 'purpose-system-shape',
-        title: 'Purpose And System Shape',
+        title: 'Purpose and System Shape',
         description: 'Understand the problem before configuring the local machine.',
         pages: [
           page(
@@ -131,12 +131,12 @@ export const journeyDefinitions: JourneyDefinition[] = [
   {
     id: 'environment-preparation',
     title: 'Environment Preparation',
-    description: 'Prepare terminal, Codex CLI and the local-le-vault knowledge environment.',
+    description: 'Prepare terminal, Codex CLI and optional local knowledge services.',
     track: ['Setup', 'Vault'],
     chapters: [
       {
         id: 'machine-and-apps',
-        title: 'Machine And Local Vault',
+        title: 'Machine and Local Vault',
         description: 'Base machine, Codex runtime and local knowledge backend.',
         pages: [
           page(
@@ -153,13 +153,13 @@ export const journeyDefinitions: JourneyDefinition[] = [
                 'PostgreSQL and MCPs already running',
               ],
               'Minimum local base, workbook access and clear next steps',
-              'Hooks, skills, MCPs, vault and PostgreSQL are built in later steps from workbook templates.',
+              'Hooks, skills, MCPs and optional knowledge services are built in later steps from workbook templates.',
             ),
             ['Setup', 'Concepts'],
           ),
           page(
             'terminal-codex-cli',
-            'Terminal And Codex CLI',
+            'Terminal and Codex CLI',
             '00-terminal-and-codex-cli.md',
             'I can validate that terminal, Codex CLI and the local config directory are ready.',
             choice(
@@ -179,17 +179,17 @@ export const journeyDefinitions: JourneyDefinition[] = [
             'apps-environment-setup',
             'Local Vault Environment Setup',
             '00-apps-environment-setup.md',
-            'I can prepare the local services required before enabling local-le-vault.',
+            'I can decide whether I need the optional local knowledge services before enabling local-le-vault.',
             choice(
               'apps-setup-purpose',
-              'Why prepare PostgreSQL, Ollama and the vault MCP server before enabling local-le-vault?',
+              'When do you need PostgreSQL, Ollama and the vault MCP server?',
               [
-                'So the wrapper can start a real server and query indexed knowledge',
+                'When enabling local-le-vault with indexed local knowledge',
                 'So every learner must publish GitHub Pages',
                 'So secrets can be stored in public templates',
               ],
-              'So the wrapper can start a real server and query indexed knowledge',
-              'local-le-vault depends on the local database, embedding model, server script and wrapper environment.',
+              'When enabling local-le-vault with indexed local knowledge',
+              'PostgreSQL, Ollama and the MCP server are optional until the learner wants local indexed knowledge retrieval.',
             ),
             ['Setup', 'Vault'],
           ),
@@ -249,7 +249,7 @@ export const journeyDefinitions: JourneyDefinition[] = [
           ),
           page(
             'rules-and-instructions',
-            'Rules And Instructions',
+            'Rules and Instructions',
             '05-rules-and-instructions.md',
             'I can create global rules and separate what belongs to the project.',
             choice(
@@ -279,7 +279,7 @@ export const journeyDefinitions: JourneyDefinition[] = [
       },
       {
         id: 'execution-roles-guardrails',
-        title: 'Execution Roles And Guardrails',
+        title: 'Execution Roles and Guardrails',
         description: 'How reusable workflows and local protections guide execution.',
         pages: [
           page(
@@ -312,16 +312,16 @@ export const journeyDefinitions: JourneyDefinition[] = [
           ),
           page(
             'external-apps-services',
-            'External Apps And Services',
+            'External Apps and Services',
             '09-external-apps-and-services.md',
-            'I can identify which external apps are required for the full workflow and which ones are optional evidence sources.',
+            'I can identify which external apps are required now and which ones are optional evidence sources.',
             choice(
               'external-apps-purpose',
               'Why are external apps part of the Codex workflow?',
               [
                 'They provide context, evidence, authentication, publishing or synchronization',
                 'They replace local Codex configuration',
-                'They are all required before opening Codex',
+                'They replace the need for local setup',
               ],
               'They provide context, evidence, authentication, publishing or synchronization',
               'Codex remains the local operator, but external apps provide the evidence and synchronization layers used by the full workflow.',
@@ -330,7 +330,7 @@ export const journeyDefinitions: JourneyDefinition[] = [
           ),
           page(
             'mcp-connectors-setup',
-            'MCPs And Connectors',
+            'MCPs and Connectors',
             '09-mcp-and-connectors-setup.md',
             'I can separate local MCPs from authenticated connectors and keep secrets out of public templates.',
             choice(
@@ -381,12 +381,12 @@ export const journeyDefinitions: JourneyDefinition[] = [
   {
     id: 'knowledge-system',
     title: 'Knowledge System',
-    description: 'Token economy, vault, PostgreSQL knowledge base and reuse loop.',
+    description: 'Token economy, vault, optional PostgreSQL knowledge base and reuse loop.',
     track: ['Knowledge', 'Memory'],
     chapters: [
       {
         id: 'cost-memory',
-        title: 'Cost And Memory',
+        title: 'Cost and Memory',
         description: 'How to keep useful context without inflating the whole session.',
         pages: [
           page(
@@ -405,7 +405,7 @@ export const journeyDefinitions: JourneyDefinition[] = [
           ),
           page(
             'vault-memory',
-            'Vault And Memory',
+            'Vault and Memory',
             '11-vault-and-memory.md',
             'I can decide whether information belongs in Session-Memory or a durable document.',
             choice(

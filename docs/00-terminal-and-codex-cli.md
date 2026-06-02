@@ -7,7 +7,7 @@ status: draft
 order: 0
 ---
 
-# 00 - Terminal And Codex CLI
+# 00 - Terminal and Codex CLI
 
 ## In One Sentence
 

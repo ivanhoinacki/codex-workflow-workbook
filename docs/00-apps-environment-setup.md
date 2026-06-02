@@ -11,17 +11,21 @@ order: 0.3
 
 ## In One Sentence
 
-This step prepares everything required for `local-le-vault` to work reliably with Codex.
+This step explains the optional local knowledge environment used by `local-le-vault`.
 
 ## What You Will Understand
 
-By the end of this page, you should know which local services, files, paths and checks are required before enabling the `local-le-vault` MCP wrapper.
+By the end of this page, you should know when this setup is needed, which local services it uses, and which checks must pass before enabling the `local-le-vault` MCP wrapper.
 
 ## Summary
 
 `local-le-vault` is the bridge between Codex and reusable Luxury Escapes knowledge.
 
-It only works when this chain is complete:
+This setup is optional. A learner can use Codex, rules, hooks, agents and skills without PostgreSQL.
+
+Use this step only when the learner wants Codex to search a local indexed knowledge base.
+
+That optional knowledge path works when this chain is complete:
 
 1. A local vault stores durable Markdown knowledge.
 2. Sync or ingest jobs index that knowledge.
@@ -32,28 +36,30 @@ It only works when this chain is complete:
 7. The Codex wrapper starts that server with the correct local environment.
 8. Codex can call `query_vault` before broad source reads.
 
-This page prepares that chain before the learner downloads config files that reference it.
+This page prepares that chain before the learner downloads config files that reference it. If the learner does not need local indexed knowledge yet, they can read this page for context and skip the PostgreSQL/Ollama setup.
 
 ## Required Pieces
 
-| Piece | Purpose | Required for `local-le-vault` |
-|---|---|---:|
-| Terminal | Runs checks and local setup commands. | Yes |
-| Codex CLI | Loads MCP registration and calls the tool. | Yes |
-| Python 3 | Runs the MCP server script. | Yes |
-| Python dependencies | Provide MCP, HTTP and PostgreSQL access. | Yes |
-| Markdown or Obsidian vault | Stores source knowledge and Session-Memory. | Yes |
-| PostgreSQL | Stores indexed knowledge rows. | Yes |
-| pgvector | Stores and searches embeddings. | Yes |
-| Ollama | Runs the local embedding model. | Yes |
-| `nomic-embed-text` | Embedding model used by the search flow. | Yes |
-| `vault_mcp_server.py` | Exposes `query_vault` and source discovery. | Yes |
-| Python executable | Runs the MCP server with the correct dependencies. | Yes |
-| MCP wrapper | Starts the server from `~/.codex/hooks`. | Yes |
-| `.mcp-secrets` | Holds local database URL and server path. | Yes |
-| Sync or ingest job | Keeps vault content indexed in PostgreSQL. | Yes for fresh results |
+| Piece | Purpose | Required for base Codex setup | Required for `local-le-vault` |
+|---|---|---:|---:|
+| Terminal | Runs checks and local setup commands. | Yes | Yes |
+| Codex CLI | Loads configuration and calls tools. | Yes | Yes |
+| Python 3 | Runs local MCP server scripts. | No | Yes |
+| Python dependencies | Provide MCP, HTTP and PostgreSQL access. | No | Yes |
+| Markdown or Obsidian vault | Stores source knowledge and Session-Memory. | No | Yes |
+| PostgreSQL | Stores indexed knowledge rows. | No | Yes |
+| pgvector | Stores and searches embeddings. | No | Yes |
+| Ollama | Runs the local embedding model. | No | Yes |
+| `nomic-embed-text` | Embedding model used by the search flow. | No | Yes |
+| `vault_mcp_server.py` | Exposes `query_vault` and source discovery. | No | Yes |
+| Python executable | Runs the MCP server with the correct dependencies. | No | Yes |
+| MCP wrapper | Starts the server from `~/.codex/hooks`. | No | Yes |
+| `.mcp-secrets` | Holds local database URL and server path. | No | Yes |
+| Sync or ingest job | Keeps vault content indexed in PostgreSQL. | No | Yes for fresh results |
 
 ## Recommended Install Order
+
+If the learner is not enabling `local-le-vault`, they can stop after step 2 and continue to [[00-template-variables]].
 
 1. Confirm Codex CLI and Python 3 work.
 2. Create `~/.codex/hooks`.
@@ -145,9 +151,11 @@ sudo apt-get install -y xclip
 
 This is only needed if shell helpers depend on clipboard commands.
 
-## PostgreSQL And pgvector
+## PostgreSQL and pgvector
 
-The exact install command depends on the machine and team standard. The important requirement is that the local database is reachable and can store vector embeddings.
+PostgreSQL is optional. Install it only when enabling `local-le-vault` with indexed local knowledge.
+
+The exact install command depends on the machine and team standard. The important requirement for this optional path is that the local database is reachable and can store vector embeddings.
 
 Minimum expected shape:
 
@@ -173,7 +181,7 @@ The database URL should be stored in `~/.codex/.mcp-secrets`:
 DATABASE_URL="postgresql://USER:PASSWORD@localhost:PORT/DATABASE"
 ```
 
-## Ollama And Embeddings
+## Ollama and Embeddings
 
 `local-le-vault` needs embeddings to search by meaning, not only exact keywords.
 
@@ -229,7 +237,7 @@ python3 -m venv ~/.local/share/le-vault/venv
 
 For WSL2, keep the venv inside the Linux filesystem, for example under `~/.local/share`, not under `/mnt/c`.
 
-## Wrapper And Secrets
+## Wrapper and Secrets
 
 The wrapper belongs in `~/.codex/hooks`:
 
@@ -374,7 +382,7 @@ Before moving on, confirm that:
 - Codex CLI opens from the terminal;
 - `~/.codex/hooks` exists;
 - the vault path is known;
-- PostgreSQL is reachable;
+- PostgreSQL is reachable, if the learner is enabling indexed local knowledge;
 - pgvector is available;
 - Ollama has `nomic-embed-text`;
 - the MCP server script path is known;

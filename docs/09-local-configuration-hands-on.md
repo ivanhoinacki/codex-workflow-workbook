@@ -122,7 +122,7 @@ rtk proxy find ~/.codex/hooks -maxdepth 1 -type f -print
 
 Do not test hooks with destructive commands.
 
-## Test 4 - MCPs And Connectors
+## Test 4 - MCPs and Connectors
 
 ```bash
 rtk rg -n '^\[mcp_servers\.|^\[plugins\.' ~/.codex/config.toml
@@ -145,7 +145,7 @@ rtk rg -n '^name:|^description:' ~/.codex/skills -g 'SKILL.md'
 
 Then ask a request that matches the description.
 
-## How To Know It Reflected
+## How to Know It Reflected
 
 Configuration reflected when:
 

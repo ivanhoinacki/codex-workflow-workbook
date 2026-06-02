@@ -28,7 +28,7 @@ The playbook therefore uses two layers:
 
 When you download a template, the page replaces placeholders with the values from this step. The saved file is closer to what must be copied into `~/.codex`.
 
-## How To Fill It In
+## How to Fill It In
 
 Fill the card above after preparing the local vault environment and before downloading `config.toml`, `copilot.config.toml`, rules, agents, hooks, MCPs or skills.
 
@@ -38,7 +38,7 @@ Use values that exist on your machine:
 - `Workspace`: directory where work repositories live;
 - `Vault`: Markdown or Obsidian vault directory;
 - `Datadog CLI`, `Vault MCP server` and `Atlassian MCP`: local command paths, when they exist;
-- `PostgreSQL URL`: local connection used by the knowledge base MCP;
+- `PostgreSQL URL`: optional local connection used only by the `local-le-vault` knowledge base MCP;
 - `Name`, `Team`, `Project` and `Stack`: values used in rules and agents;
 - `Install`, `Test`, `Lint`, `Build` and `Validation` commands: default project commands.
 

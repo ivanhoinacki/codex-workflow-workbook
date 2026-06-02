@@ -7,7 +7,7 @@ status: draft
 order: 5.5
 ---
 
-# 05.5 - Rules And Instructions
+# 05.5 - Rules and Instructions
 
 ## In One Sentence
 
@@ -80,7 +80,7 @@ Task --> Learner: Predictable behavior and clear limits
 @enduml
 ```
 
-## How To Write A Good Rule
+## How to Write a Good Rule
 
 A good rule is:
 
@@ -97,7 +97,7 @@ Avoid publishing:
 - internal customer or incident data;
 - raw output from `.env`, `config.toml` or `.mcp-secrets`.
 
-## What To Customize
+## What to Customize
 
 Customize only values that belong to the learner's environment:
 
@@ -128,7 +128,7 @@ Good operating rules should tell Codex:
 - how to validate work;
 - how to report limits and remaining risk.
 
-## What Not To Share
+## What Not to Share
 
 Do not publish:
 

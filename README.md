@@ -11,8 +11,8 @@ The workbook explains:
 - why the ecosystem exists;
 - how the layers connect;
 - how local Codex configuration works;
-- how hooks, skills, agents, MCPs, Obsidian, Session-Memory, PostgreSQL and `local-le-vault` fit together;
-- how to prepare the local vault backend before enabling `local-le-vault`;
+- how hooks, skills, agents, MCPs, Obsidian, Session-Memory and optional `local-le-vault` fit together;
+- how to prepare the optional local vault backend before enabling PostgreSQL-backed knowledge search;
 - how operational work becomes reusable knowledge;
 - which checkpoints prove the setup is working.
 

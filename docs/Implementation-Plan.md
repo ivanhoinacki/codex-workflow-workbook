@@ -15,9 +15,9 @@ Create a public English playbook that teaches a developer how the Luxury Escapes
 The site uses a progressive learning model:
 
 1. Foundations: explain purpose, layers, main sequence and workflow boundaries.
-2. Environment Preparation: prepare terminal, Codex CLI and the `local-le-vault` prerequisites.
+2. Environment Preparation: prepare terminal, Codex CLI and optional `local-le-vault` prerequisites.
 3. Local Configuration: fill template variables, install configuration files, rules, agents, hooks, MCPs and skills.
-4. Knowledge System: explain token economy, vault memory, PostgreSQL knowledge base and the reuse loop.
+4. Knowledge System: explain token economy, vault memory, optional PostgreSQL knowledge base and the reuse loop.
 5. Guided First Task: validate the environment with a small local task.
 
 Each page must include:
@@ -35,7 +35,7 @@ Each page must include:
 | --- | --- |
 | `00-terminal-and-codex-cli.md` | Terminal and Codex CLI setup |
 | `00-environment-prerequisites.md` | Minimum prerequisites |
-| `00-apps-environment-setup.md` | Local vault environment setup for `local-le-vault` |
+| `00-apps-environment-setup.md` | Optional local vault environment setup for `local-le-vault` |
 | `00-template-variables.md` | User-specific template values |
 | `01-purpose.md` | Why the workflow exists |
 | `02-ecosystem-layers.md` | Runtime, rules, tools and knowledge layers |

@@ -7,7 +7,7 @@ status: draft
 order: 9
 ---
 
-# 09 - MCPs And Connectors
+# 09 - MCPs and Connectors
 
 ## In One Sentence
 
@@ -84,7 +84,7 @@ Copy only the MCP entries you need into `~/.codex/config.toml`.
 
 Do not enable a wrapper until the app behind it is ready. For example:
 
-- `local-le-vault` needs the PostgreSQL knowledge database, Ollama and the vault MCP server script;
+- `local-le-vault` needs the PostgreSQL knowledge database, Ollama and the vault MCP server script only when local indexed knowledge is enabled;
 - `mcp-atlassian` needs an Atlassian MCP command and local credentials;
 - `datadog-mcp` needs its local auth flow or CLI path;
 - GitHub and Slack connectors need app authorization, not a public template token.
@@ -122,7 +122,7 @@ Use the provided MCP templates as shape, not as private configuration:
 5. Verify each MCP independently.
 6. Add authenticated connectors only when the learner needs them.
 
-## Role Of Each MCP
+## Role of Each MCP
 
 | MCP / Connector | Role |
 |---|---|
@@ -140,7 +140,7 @@ Before expecting a tool to work, validate the dependency behind it:
 
 | Integration | Ready when |
 |---|---|
-| `local-le-vault` | PostgreSQL is reachable, Ollama has the embedding model and the wrapper can start the MCP server. |
+| `local-le-vault` | If enabled, PostgreSQL is reachable, Ollama has the embedding model and the wrapper can start the MCP server. |
 | `context7` | The MCP or connector is installed and can fetch current docs. |
 | GitHub | The connector or CLI can read repositories and PR metadata. |
 | Slack | The connector can read the intended workspace and channel. |

@@ -11,15 +11,15 @@ order: 12
 
 ## In One Sentence
 
-The local knowledge base indexes durable documents so Codex can search evidence instead of relying on memory alone.
+The optional local knowledge base indexes durable documents so Codex can search evidence instead of relying on memory alone.
 
 ## What You Will Understand
 
-By the end of this page, you should understand how vault content becomes searchable through PostgreSQL and MCP tooling.
+By the end of this page, you should understand when this optional layer is useful and how vault content becomes searchable through PostgreSQL and MCP tooling.
 
 ## Summary
 
-The vault is the source of curated Markdown knowledge. PostgreSQL can store indexed chunks, metadata and search structures. The MCP layer exposes that knowledge to Codex.
+The vault is the source of curated Markdown knowledge. PostgreSQL can store indexed chunks, metadata and search structures when local indexed retrieval is enabled. The MCP layer exposes that knowledge to Codex.
 
 This turns past work into searchable evidence.
 
@@ -71,7 +71,9 @@ The local knowledge base makes the vault searchable through an MCP. It helps Cod
 
 ## Minimum Local Requirements
 
-The full setup needs:
+This setup is optional. It is needed only for `local-le-vault` with indexed local retrieval.
+
+That path needs:
 
 | Requirement | Purpose |
 |---|---|
@@ -131,7 +133,7 @@ The database is not the source of truth. The source of truth is still the curate
 - Assuming search results are always complete.
 - Forgetting to re-index after major document changes.
 - Using stale knowledge without checking current code.
-- Configuring the MCP wrapper before PostgreSQL and Ollama are running.
+- Configuring the MCP wrapper before PostgreSQL and Ollama are running, when this optional path is enabled.
 - Using a private absolute path from another developer's machine.
 
 ## Checkpoint

@@ -54,7 +54,7 @@ Codex --> User: Structured outcome
 @enduml
 ```
 
-## How To Think About A Skill
+## How to Think About a Skill
 
 Ask:
 
@@ -89,7 +89,7 @@ mkdir -p ~/.codex/skills/example-workflow
 $EDITOR ~/.codex/skills/example-workflow/SKILL.md
 ```
 
-## When To Use
+## When to Use
 
 Use a skill when the same workflow repeats often enough that the steps, evidence and output format should be predictable.
 
@@ -107,7 +107,7 @@ description: Use this skill when a recurring local workflow needs the same steps
 
 # Example Workflow
 
-## When To Use
+## When to Use
 
 Use this skill for a repeated workflow with stable steps.
 
