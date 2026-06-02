@@ -31,7 +31,6 @@ export const PageReader = ({ page }: PageReaderProps) => {
     <article className="reader">
       <header className="reader__header">
         <div>
-          <span className="reader__source">{page.sourcePath}</span>
           <h1>{page.title}</h1>
         </div>
         <div className="reader__tracks">
@@ -51,7 +50,7 @@ export const PageReader = ({ page }: PageReaderProps) => {
           <li>Then read the summary to connect the idea to the full workflow.</li>
           <li>Use the diagram to see who talks to whom.</li>
           <li>Read the examples and commands without copying anything before you understand their role.</li>
-          <li>Check the checkpoint only when you can explain it in your own words.</li>
+          <li>Answer the review question correctly to unlock the next page.</li>
         </ol>
       </section>
 

@@ -12,6 +12,7 @@ export const QuestionGate = ({ page, progress, onAnswer }: QuestionGateProps) =>
     <div className="side-card__header">
       <span>Question</span>
       <strong id="question-title">Understanding review</strong>
+      <p>Choose the correct answer to unlock the next page.</p>
     </div>
 
     {page.questions.map((question) => {
@@ -46,7 +47,9 @@ export const QuestionGate = ({ page, progress, onAnswer }: QuestionGateProps) =>
 
           {answer && (
             <div className={`feedback${answer.correct ? ' feedback--correct' : ' feedback--wrong'}`}>
-              {answer.correct ? question.feedback ?? 'Correct answer.' : 'Incorrect answer. Review this page and try again.'}
+              {answer.correct
+                ? question.feedback ?? 'Correct answer. This page can now be completed.'
+                : 'This answer does not unlock Next. Review the page and choose the option that matches the concept.'}
             </div>
           )}
         </div>

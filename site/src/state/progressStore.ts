@@ -1,4 +1,4 @@
-import type { Checkpoint, Question, WorkbookPage } from '../content/types';
+import type { Question, WorkbookPage } from '../content/types';
 
 const STORAGE_KEY = 'codex-workbook:progress';
 
@@ -42,14 +42,10 @@ export const isAnswerCorrect = (question: Question, value: string) => {
   return normalize(String(question.answer)) === normalize(value);
 };
 
-export const isCheckpointDone = (checkpoint: Checkpoint, progress: ProgressState) =>
-  !checkpoint.required || progress.checkedItems[checkpoint.id] === true;
-
 export const isQuestionDone = (question: Question, progress: ProgressState) =>
   !question.required || progress.answers[question.id]?.correct === true;
 
 export const isPageComplete = (page: WorkbookPage, progress: ProgressState) =>
-  page.checkpoints.every((checkpoint) => isCheckpointDone(checkpoint, progress)) &&
   page.questions.every((question) => isQuestionDone(question, progress));
 
 export const recalculateCompletedPages = (pages: WorkbookPage[], progress: ProgressState): ProgressState => {

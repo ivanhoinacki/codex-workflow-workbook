@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState, type MouseEvent } from 'react';
 import { ChapterNav } from './components/ChapterNav';
-import { CheckpointPanel } from './components/CheckpointPanel';
 import { JourneySidebar } from './components/JourneySidebar';
 import { Layout } from './components/Layout';
 import { PageReader } from './components/PageReader';
@@ -200,16 +199,6 @@ export const App = () => {
             </div>
 
             <aside className="task-panel" aria-label="Page tasks">
-              <CheckpointPanel
-                page={currentPage}
-                progress={progress}
-                onToggle={(checkpointId, checked) =>
-                  updateProgress((current) => ({
-                    ...current,
-                    checkedItems: { ...current.checkedItems, [checkpointId]: checked },
-                  }))
-                }
-              />
               <QuestionGate
                 page={currentPage}
                 progress={progress}
@@ -234,15 +223,16 @@ export const App = () => {
 
               <div className={`completion-card${currentComplete ? ' completion-card--done' : ''}`}>
                 <span>{currentComplete ? 'Ready' : 'Locked'}</span>
-                <strong>
-                  {currentComplete
-                    ? nextPage
-                      ? 'The next page is available'
-                      : 'Workbook complete'
-                    : 'Complete the checkpoint and question'}
-                </strong>
-                {currentComplete && nextPage && (
-                  <button className="completion-card__next" onClick={() => handleNavigate(nextPage)} type="button">
+                {currentComplete && (
+                  <strong>{nextPage ? 'The next page is available' : 'Workbook complete'}</strong>
+                )}
+                {nextPage && (
+                  <button
+                    className="completion-card__next"
+                    disabled={!currentComplete}
+                    onClick={() => handleNavigate(nextPage)}
+                    type="button"
+                  >
                     Next
                   </button>
                 )}
