@@ -168,7 +168,7 @@ git --version
 python3 --version
 ```
 
-Use `rg` and `rg --files` for search, and bounded reads like `sed -n` or `nl -ba` instead of dumping large files.
+Use `rg` and `rg --files` for search, and bounded reads like `sed -n` or `nl -ba` when a command could print noisy output.
 
 ## Step 6 - Optional Shell Setup
 

@@ -2,33 +2,33 @@
 date: 2026-05-29
 type: workbook-module
 project: codex-workflow
-module: agents
+module: subagents
 status: draft
 order: 7
 ---
 
-# 07 - Agents
+# 07 - Subagents
 
 ## In One Sentence
 
-Agents are role definitions used for bounded delegation, not a replacement for the parent agent's judgment.
+Subagents are role definitions used for bounded delegation, not a replacement for the parent Codex session's judgment.
 
 ## What You Will Understand
 
-By the end of this page, you should know when to delegate to an agent and when a simple local read is enough.
+By the end of this page, you should know when to delegate to a subagent and when a simple local read is enough.
 
 ## Summary
 
-Agents help when work can be split into clear, bounded responsibilities.
+Subagents help when work can be split into clear, bounded responsibilities.
 
-Use agents for:
+Use subagents for:
 
 - read-only research slices;
 - independent review lanes;
 - scoped implementation after a plan exists;
 - parallel evidence collection.
 
-Do not use agents for every small question. The parent agent remains responsible for final synthesis, decisions and user communication.
+Do not use subagents for every small question. The parent Codex session remains responsible for final synthesis, decisions and user communication.
 
 ## Flow
 
@@ -39,9 +39,9 @@ skinparam backgroundColor #FEFEFE
 
 actor User
 participant "Parent Codex" as Parent
-participant Researcher
-participant Reviewer
-participant Implementer
+participant "Researcher Subagent" as Researcher
+participant "Reviewer Subagent" as Reviewer
+participant "Implementer Subagent" as Implementer
 participant Validation
 
 User -> Parent: Ask for work
@@ -65,6 +65,8 @@ Validation --> User: Evidence and limits
 4. Use cheaper read-only tiers for research and review.
 5. Use implementer only for scoped local changes.
 
+Codex stores these role files under `~/.codex/agents`, but the behavior is best understood as subagent delegation from the parent session.
+
 - [Download copilot.toml](templates/agents/copilot.toml)
 - [Download researcher.toml](templates/agents/researcher.toml)
 - [Download reviewer.toml](templates/agents/reviewer.toml)
@@ -76,45 +78,45 @@ mkdir -p ~/.codex/agents
 
 ## Why It Works
 
-Delegation works when the task has clear ownership and a small surface area. It fails when agents are asked to make broad decisions without enough context.
+Delegation works when the task has clear ownership and a small surface area. It fails when subagents are asked to make broad decisions without enough context.
 
-## Role In The Ecosystem
+## Role in the Ecosystem
 
-Agents are useful when the work can be split into bounded tasks with clear ownership. They are not a replacement for the main plan.
+Subagents are useful when the work can be split into bounded tasks with clear ownership. They are not a replacement for the main plan.
 
 ## How They Work
 
-A parent session owns the goal. An agent receives a specific job, gathers or changes only the scoped area, and reports back. The parent session decides what to trust and how to synthesize it.
+A parent session owns the goal. A subagent receives a specific job, gathers or changes only the scoped area, and reports back. The parent session decides what to trust and how to synthesize it.
 
 ## When to Use and When to Avoid
 
-Use agents for:
+Use subagents for:
 
 - parallel evidence collection;
 - focused review slices;
 - bounded implementation with clear files;
 - independent checks that do not need shared mutable state.
 
-Avoid agents for:
+Avoid subagents for:
 
 - simple questions;
 - tiny local reads;
 - unclear requirements;
-- work where two agents might edit the same files.
+- work where two subagents might edit the same files.
 
 ## Practical Rules
 
-- Give each agent a concrete scope.
-- Prefer read-only agents for investigation.
+- Give each subagent a concrete scope.
+- Prefer read-only subagents for investigation.
 - Keep final synthesis in the parent session.
-- Do not use agents to bypass approval boundaries.
+- Do not use subagents to bypass approval boundaries.
 
 ## Common Mistakes
 
 - Delegating before understanding the problem.
-- Asking multiple agents to touch the same files.
-- Trusting agent output without parent verification.
-- Using expensive agents for cheap context reads.
+- Asking multiple subagents to touch the same files.
+- Trusting subagent output without parent verification.
+- Using expensive subagents for cheap context reads.
 
 ## Checkpoint
 

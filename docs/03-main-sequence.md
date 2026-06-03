@@ -26,7 +26,7 @@ The expected path is:
 1. understand the request;
 2. load local rules and project context;
 3. query relevant evidence when needed;
-4. select a skill or agent only when useful;
+4. select a skill or subagent only when useful;
 5. act locally within boundaries;
 6. validate the result;
 7. save durable learning only when it is worth reusing.

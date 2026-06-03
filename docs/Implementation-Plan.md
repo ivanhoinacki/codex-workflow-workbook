@@ -16,7 +16,7 @@ The site uses a progressive learning model:
 
 1. Foundations: explain purpose, layers, main sequence and workflow boundaries.
 2. Environment Preparation: prepare terminal, Codex CLI and optional `local-le-vault` prerequisites.
-3. Local Configuration: fill template variables, install configuration files, rules, agents, hooks, MCPs and skills.
+3. Local Configuration: fill template variables, install configuration files, rules, subagents, hooks, MCPs and skills.
 4. Knowledge System: explain token economy, vault memory, optional PostgreSQL knowledge base and the reuse loop.
 5. Guided First Task: validate the environment with a small local task.
 
@@ -44,7 +44,7 @@ Each page must include:
 | `05-config-toml.md` | Main Codex runtime configuration |
 | `05-rules-and-instructions.md` | Global and project instructions |
 | `06-copilot-config.md` | Copilot configuration |
-| `07-agents.md` | Agent roles and delegation |
+| `07-agents.md` | Subagent roles and delegation |
 | `08-hooks.md` | Runtime guardrails and automation hooks |
 | `09-external-apps-and-services.md` | External apps and evidence services |
 | `09-mcp-and-connectors-setup.md` | MCPs and authenticated connectors |

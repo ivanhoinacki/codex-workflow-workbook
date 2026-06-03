@@ -29,9 +29,9 @@ Pages:
 - Main Sequence
 - Workflow Boundaries
 
-### Local Configuration
+### Environment Preparation
 
-Turns the concepts into a local Codex setup.
+Turns the concepts into a local machine and Codex CLI baseline.
 
 Pages:
 
@@ -49,7 +49,7 @@ Pages:
 - config.toml
 - Rules and Instructions
 - copilot.config.toml
-- Agents
+- Subagents
 - Hooks
 - External Apps and Services
 - MCPs and Connectors
@@ -79,3 +79,7 @@ Pages:
 ## Progress Storage
 
 Progress is stored per browser profile in `localStorage`. It is not synchronized across users or devices.
+
+## Maintainer Notes
+
+Some Markdown files in `docs/` are maintainer notes and are not part of the learner journey. The learner-facing map is defined in `site/src/content/journeyMap.ts`.

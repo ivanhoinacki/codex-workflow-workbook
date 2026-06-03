@@ -11,27 +11,29 @@ order: 10
 
 ## In One Sentence
 
-Token Economy means using session context carefully so Codex reads what matters, not everything that exists.
+Token Economy means using context intentionally so Codex keeps the right evidence visible.
 
 ## What You Will Understand
 
-By the end of this page, you should understand why focused commands, on-demand search and durable memory improve answer quality.
+By the end of this page, you should understand when long context helps, when noisy output hurts and how to keep evidence useful across a session.
 
 ## Summary
 
-Token Economy is a set of practices that reduces useless output and preserves context for important reasoning.
+Token Economy is not about being afraid of the context window.
 
-The goal is not cost reduction for its own sake. The goal is to avoid logs, diffs and large files pushing useful context out of the session.
+Codex can work well in long, durable threads. The goal is to make sure the thread is filled with useful context, not accidental noise.
+
+The practical rule is simple: give Codex enough context to reason well, and avoid unbounded output that does not help the task.
 
 ## Core Practices
 
 | Practice | Meaning |
 |---|---|
-| focused search | Use `rg` and scoped paths before broad reads. |
-| bounded output | Prefer `sed -n`, `nl -ba`, `--stat` and JSON filters. |
-| on-demand context | Query vault, docs or MCPs when needed instead of pasting everything. |
-| compact skills | Load references only when relevant. |
-| durable memory | Save reusable learning outside the chat. |
+| Intentional context | Include background, constraints, examples and goals when they help Codex reason. |
+| Focused evidence | Use `rg`, scoped paths and MCPs to find the relevant source quickly. |
+| Bounded output | Prefer `sed -n`, `nl -ba`, `--stat` and JSON filters for noisy commands. |
+| Durable threads | Keep a useful thread going when it is building shared context. |
+| Durable memory | Save reusable learning outside the chat when it should survive this session. |
 
 ## Diagram
 
@@ -42,49 +44,56 @@ skinparam backgroundColor #FEFEFE
 
 actor User
 participant Codex
-participant "Focused Search" as Search
+participant "Intentional Context" as Context
+participant "Focused Evidence" as Search
 participant "Bounded Read" as Read
 participant Vault
 participant Memory
 
 User -> Codex: Ask for work
-Codex -> Search: Find relevant files
+Codex -> Context: Provide goal, constraints and background
+Codex -> Search: Find relevant evidence
 Search -> Read: Read only useful ranges
 Codex -> Vault: Query context on demand
 Codex -> Memory: Save durable learning when useful
-Codex --> User: Answer with less noise
+Codex --> User: Answer with useful context and less noise
 @enduml
 ```
 
 ## Why It Works
 
-The session context is a limited resource. Useful evidence should stay visible; noisy output should stay out.
+The context window is valuable because it lets Codex retain a lot of working knowledge.
+
+The risk is not "too many tokens" by itself. The risk is filling the thread with output that makes the important evidence harder to find.
 
 ## Mechanisms
 
-- Use `rg` and bounded reads instead of dumping large files.
-- Fetch context on demand from MCPs and vault.
-- Save durable learning instead of repeating it in every prompt.
-- Keep skills concise and move long references into separate files.
+- Use long prompts when they carry useful background.
+- Use `rg` and bounded reads for noisy source exploration.
+- Fetch context on demand from MCPs and vault when the answer depends on prior knowledge.
+- Keep a durable thread when the work benefits from accumulated context.
+- Save reusable learning when another session should find it later.
 
 ## Simple Example
 
-Instead of pasting a whole repository into the prompt, ask Codex to find the relevant files:
+Instead of asking for a vague fix, give enough context and ask Codex to find the evidence:
 
 ```text
-Find where this workflow is implemented. Use rg first, read only the smallest relevant files, then explain what evidence you found.
+I am investigating why this validation flow behaves differently in one service. Start by finding the relevant implementation and tests, use focused reads for evidence, then explain the smallest safe validation step.
 ```
+
+This is not shorter. It is better context.
 
 ## Common Mistakes
 
-- Pasting huge files before knowing whether they matter.
-- Running broad recursive reads.
-- Keeping outdated memory in the active prompt.
-- Using agents when a focused local read is enough.
+- Treating token economy as "always be short".
+- Running commands that produce pages of unrelated logs.
+- Keeping stale assumptions in the active thread after evidence changes.
+- Using subagents when a focused local read is enough.
 
 ## Checkpoint
 
-You should be able to explain why `rg`, bounded file reads and vault search are better defaults than dumping entire directories into the session.
+You should be able to explain when more context helps and when bounded reads keep the thread cleaner.
 
 ## Next Module
 

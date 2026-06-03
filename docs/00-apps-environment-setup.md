@@ -21,7 +21,7 @@ By the end of this page, you should know when this setup is needed, which local 
 
 `local-le-vault` is the bridge between Codex and reusable Luxury Escapes knowledge.
 
-This setup is optional. A learner can use Codex, rules, hooks, agents and skills without PostgreSQL.
+This setup is optional. A learner can use Codex, rules, hooks, subagents and skills without PostgreSQL.
 
 Use this step only when the learner wants Codex to search a local indexed knowledge base.
 
@@ -36,7 +36,7 @@ That optional knowledge path works when this chain is complete:
 7. The Codex wrapper starts that server with the correct local environment.
 8. Codex can call `query_vault` before broad source reads.
 
-This page prepares that chain before the learner downloads config files that reference it. If the learner does not need local indexed knowledge yet, they can read this page for context and skip the PostgreSQL/Ollama setup.
+This page prepares only the optional `local-le-vault` chain. If the learner does not need local indexed knowledge yet, they can read this page for context, skip the PostgreSQL/Ollama setup, and continue with the normal configuration templates.
 
 ## Required Pieces
 
@@ -59,7 +59,7 @@ This page prepares that chain before the learner downloads config files that ref
 
 ## Recommended Install Order
 
-If the learner is not enabling `local-le-vault`, they can stop after step 2 and continue to [[00-template-variables]].
+If the learner is not enabling `local-le-vault`, they can stop after step 2 and continue to [[00-template-variables]]. The rest of this page is only for the optional indexed knowledge path.
 
 1. Confirm Codex CLI and Python 3 work.
 2. Create `~/.codex/hooks`.

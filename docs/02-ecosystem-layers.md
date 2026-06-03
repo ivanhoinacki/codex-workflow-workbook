@@ -29,7 +29,7 @@ Each layer has a job:
 | Rules | Human instructions and operating boundaries. |
 | Hooks | Local guardrails and automatic context injection. |
 | Skills | Repeatable workflows. |
-| Agents | Bounded delegation for specific roles. |
+| Subagents | Bounded delegation for specific roles. |
 | MCPs | Access to external or indexed evidence. |
 | Vault | Durable Markdown knowledge. |
 | PostgreSQL KB | Indexed search base for reusable knowledge. |
@@ -48,7 +48,7 @@ participant "config.toml" as Config
 participant Rules
 participant Hooks
 participant Skills
-participant Agents
+participant Subagents
 participant MCPs
 participant Vault
 database "PostgreSQL KB" as DB
@@ -58,7 +58,7 @@ Codex -> Config: Load runtime behavior
 Codex -> Rules: Load instruction contract
 Hooks -> Codex: Inject context and guardrails
 Codex -> Skills: Select workflow when matched
-Codex -> Agents: Delegate bounded work when useful
+Codex -> Subagents: Delegate bounded work when useful
 Codex -> MCPs: Fetch indexed evidence
 MCPs -> Vault: Read operational context
 MCPs -> DB: Query reusable knowledge
@@ -75,7 +75,7 @@ Examples:
 - language and policy live in rules;
 - hooks block or track tool use;
 - skills define procedures;
-- agents define roles;
+- subagents define roles;
 - MCPs retrieve evidence;
 - vault and PostgreSQL preserve knowledge.
 
@@ -88,7 +88,7 @@ Examples:
 | Project rules | Repo-specific commands and boundaries. | project `AGENTS.md` |
 | Hooks | Automatic context, tracking and guardrails. | `PreToolUse`, `SessionStart` |
 | Skills | Repeatable workflows. | `study`, `feature-dev`, `investigation` |
-| Agents | Bounded delegation. | researcher, reviewer, implementer |
+| Subagents | Bounded delegation. | researcher, reviewer, implementer |
 | MCPs | External or indexed evidence. | vault, GitHub, Slack, Datadog |
 | Vault / KB | Durable knowledge. | gotchas, runbooks, Session-Memory |
 
@@ -101,7 +101,7 @@ A request does not hit every layer every time. A simple question might only use 
 - If it is behavior that should always apply, use rules.
 - If it protects tool execution, use a hook.
 - If it repeats a workflow, use a skill.
-- If it needs parallel bounded work, use an agent.
+- If it needs parallel bounded work, use a subagent.
 - If it needs external or indexed evidence, use an MCP.
 - If it should survive the session, save it as memory or durable docs.
 
@@ -110,7 +110,7 @@ A request does not hit every layer every time. A simple question might only use 
 - Putting everything into `config.toml`.
 - Turning project-specific behavior into global behavior.
 - Creating a skill for one-off work.
-- Using agents for simple local reads.
+- Using subagents for simple local reads.
 - Treating MCP output as verified truth without checking context.
 
 ## Checkpoint

@@ -23,7 +23,9 @@ The vault is the source of curated Markdown knowledge. PostgreSQL can store inde
 
 This turns past work into searchable evidence.
 
-This page is the specific setup behind the `local-le-vault` integration introduced in [[09-external-apps-and-services]] and connected in [[09-mcp-and-connectors-setup]].
+This page explains the mental model behind the optional `local-le-vault` integration introduced in [[09-external-apps-and-services]] and connected in [[09-mcp-and-connectors-setup]].
+
+If the learner already completed [[00-apps-environment-setup]], use this page to understand and validate the system. If they skipped that optional setup, read this page conceptually and keep PostgreSQL, pgvector and Ollama disabled until local indexed retrieval is actually needed.
 
 ## Flow
 
@@ -55,7 +57,7 @@ Codex does not need every document in the prompt. It needs the right document at
 
 Do not publish connection strings, usernames, passwords, internal hosts or private wrapper paths. Public templates should use placeholders.
 
-## Role In The Ecosystem
+## Role in the Ecosystem
 
 The local knowledge base makes the vault searchable through an MCP. It helps Codex find prior context without loading the whole vault into the prompt.
 

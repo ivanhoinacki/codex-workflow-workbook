@@ -32,7 +32,7 @@ It governs:
 - memory;
 - terminal behavior.
 
-## Role In The Ecosystem
+## Role in the Ecosystem
 
 `config.toml` is the runtime layer. It should declare behavior that Codex applies automatically. It should not become a narrative document.
 
@@ -129,7 +129,7 @@ It consumes local configuration and human instructions:
 - trusted project paths;
 - plugin and runtime settings.
 
-## Checkpoints
+## Checkpoint
 
 ```bash
 rtk rg -n '^\[mcp_servers|^\[plugins|^\[\[hooks|^\[projects|^\[memories|^\[tui' ~/.codex/config.toml

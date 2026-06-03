@@ -11,7 +11,7 @@ order: 15
 
 ## In One Sentence
 
-The guided first task turns setup into practical evidence: you observe Codex using context, rules, skills, agents, hooks and MCPs on a small request.
+The guided first task turns setup into practical evidence: you observe Codex using context, rules, skills, subagents, hooks and MCPs on a small request.
 
 ## What You Will Understand
 
@@ -50,7 +50,7 @@ participant Codex
 participant Rules
 participant Hooks
 participant Skills
-participant Agents
+participant Subagents
 participant MCPs
 participant "Local Validation" as Validation
 
@@ -59,7 +59,7 @@ Request -> Codex: Provide clear scope
 Codex -> Rules: Apply behavior contract
 Codex -> Hooks: Run guardrails
 Codex -> Skills: Select matching workflow
-Codex -> Agents: Delegate only if useful
+Codex -> Subagents: Delegate only if useful
 Codex -> MCPs: Fetch evidence when needed
 Codex -> Validation: Run safe local checks
 Validation --> User: Explain result and limits
@@ -119,7 +119,7 @@ Does this create reusable learning? If yes, say where it should be saved: Sessio
 You completed the journey when you can answer:
 
 - which files in `~/.codex` control local behavior;
-- which skill or agent fits each type of request;
+- which skill or subagent fits each type of request;
 - which hook protects commands before execution;
 - when to use MCP or vault for evidence;
 - how to validate setup without publishing anything;
@@ -133,7 +133,7 @@ You completed the journey when you can answer:
 - Running validation without knowing the project stack.
 - Confusing a local dependency failure with a Codex failure.
 - Saving secrets in memory, docs or templates.
-- Expecting agents to be used for every simple question.
+- Expecting subagents to be used for every simple question.
 
 ## Closing
 

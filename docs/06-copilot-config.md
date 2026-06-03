@@ -73,7 +73,7 @@ $EDITOR ~/.codex/copilot.config.toml
 
 Not every question needs the same reasoning effort. The profile keeps `model_reasoning_effort = "low"` for daily support and uses `plan_mode_reasoning_effort = "high"` when planning is needed.
 
-## Role In The Ecosystem
+## Role in the Ecosystem
 
 `copilot.config.toml` is auxiliary configuration. It can define cheaper read-only behavior, context collection or helper defaults without replacing the main runtime contract.
 
@@ -95,4 +95,4 @@ You should be able to explain that this is an auxiliary profile, not a bypass ar
 
 ## Next Module
 
-Go to [[07-agents]].
+Go to [[07-agents|Subagents]].

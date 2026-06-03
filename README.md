@@ -11,7 +11,7 @@ The workbook explains:
 - why the ecosystem exists;
 - how the layers connect;
 - how local Codex configuration works;
-- how hooks, skills, agents, MCPs, Obsidian, Session-Memory and optional `local-le-vault` fit together;
+- how hooks, skills, subagents, MCPs, Obsidian, Session-Memory and optional `local-le-vault` fit together;
 - how to prepare the optional local vault backend before enabling PostgreSQL-backed knowledge search;
 - how operational work becomes reusable knowledge;
 - which checkpoints prove the setup is working.
@@ -35,7 +35,7 @@ The first interactive workbook is implemented under `site/` and uses `docs/` as 
 - GitHub Pages base path is configured in Vite;
 - PlantUML diagrams render as SVG with fullscreen support;
 - code blocks include copy buttons;
-- template links download starter files for config, agents, rules, hooks, MCPs and skills;
+- template links download starter files for config, subagents, rules, hooks, MCPs and skills;
 - downloads for skill templates use explicit filenames such as `study-SKILL.md`.
 - the learner journey includes environment preparation before local configuration.
 

@@ -15,7 +15,7 @@ The hands-on step confirms whether the local configuration you copied actually c
 
 ## What You Will Understand
 
-By the end of this page, you should be able to test rules, agents, hooks, MCPs and skills without depending on a large real task.
+By the end of this page, you should be able to test rules, subagents, hooks, MCPs and skills without depending on a large real task.
 
 ## Summary
 
@@ -26,7 +26,7 @@ Test in small blocks before using the setup on real work. That avoids mixing hoo
 The goal is to test five things:
 
 - rules loaded as behavior;
-- agents available as bounded roles;
+- subagents available as bounded roles;
 - hooks registered as local guardrails;
 - MCPs and connectors available as evidence sources;
 - skills usable as reusable workflows.
@@ -42,7 +42,7 @@ actor User
 participant "Local Files" as Files
 participant "Codex Runtime" as Codex
 participant Rules
-participant Agents
+participant Subagents
 participant Hooks
 participant MCPs
 participant Skills
@@ -52,8 +52,8 @@ User -> Files: Create templates
 Files -> Codex: New session loads config
 Codex -> Rules: Apply behavior contract
 Rules --> Codex: Instructions active
-Codex -> Agents: Expose role definitions
-Agents --> Codex: Roles available
+Codex -> Subagents: Expose role definitions
+Subagents --> Codex: Roles available
 Codex -> Hooks: Register local guardrails
 Hooks --> Codex: Guardrails available
 Codex -> MCPs: Expose evidence tools
@@ -96,7 +96,7 @@ Expected result:
 - no mutation attempt;
 - short explanation of what was checked.
 
-## Test 2 - Agents
+## Test 2 - Subagents
 
 Validate files:
 
@@ -110,7 +110,7 @@ rtk sed -n '1,80p' ~/.codex/agents/implementer.toml
 Then ask conceptually:
 
 ```text
-Explain which agent you would use for read-only evidence collection and why.
+Explain which subagent you would use for read-only evidence collection and why.
 ```
 
 ## Test 3 - Hooks
@@ -150,7 +150,7 @@ Then ask a request that matches the description.
 Configuration reflected when:
 
 - rules change behavior without repeating instructions;
-- agents appear as roles with clear limits;
+- subagents appear as roles with clear limits;
 - hooks run or block around tool usage;
 - MCPs and connectors provide evidence without manual context paste;
 - skills load when the request matches the workflow.

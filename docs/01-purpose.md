@@ -28,7 +28,7 @@ The ecosystem solves that gap by giving Codex:
 - the right context before action;
 - guardrails before risky tools;
 - reusable workflows through skills;
-- bounded delegation through agents;
+- bounded delegation through subagents;
 - indexed evidence through MCPs;
 - durable memory for decisions and learnings;
 - local validation before claiming success.
@@ -71,7 +71,7 @@ The workflow separates responsibilities.
 - Rules define expected behavior.
 - Hooks enforce local guardrails.
 - Skills encode repeatable workflows.
-- Agents handle bounded delegation.
+- Subagents handle bounded delegation.
 - MCPs fetch evidence.
 - Vault and PostgreSQL preserve knowledge.
 - Checkpoints prove understanding or setup.
@@ -94,6 +94,14 @@ Help me investigate why this bug happens. First identify the relevant service, r
 
 The second request lets Codex use the environment as a workflow instead of guessing from a vague prompt.
 
+## Pro Tip - Use Dictation
+
+If writing a detailed prompt feels slow, use dictation.
+
+Spoken prompts naturally include more context: what happened, what you already tried, what you are worried about and what kind of help you want. That usually gives Codex a better starting point than a short typed command.
+
+Dictation does not need to be polished. The goal is to give Codex enough context to choose the right workflow.
+
 ## Before You Start
 
 You do not need Codex installed to understand this page. The goal here is the mental model.
@@ -110,7 +118,7 @@ With the ecosystem:
 - project instructions live in project `AGENTS.md`;
 - hooks inject context and block dangerous paths;
 - skills make workflows repeatable;
-- agents allow bounded delegation;
+- subagents allow bounded delegation;
 - Session-Memory preserves continuity;
 - `local-le-vault` retrieves indexed knowledge from PostgreSQL;
 - `rtk` reduces token cost for noisy commands.
@@ -132,7 +140,7 @@ Without workflow, a developer might ask: "help me understand where this error ca
 With workflow, the session follows a better order:
 
 1. read local rules;
-2. decide which skill, agent or tool applies to the request;
+2. decide which skill, subagent or tool applies to the request;
 3. search the vault for the right vertical, service or domain context, such as Experiences, Hotels, Payments or Offers;
 4. edit only what belongs to the scope;
 5. validate;
@@ -163,7 +171,7 @@ Before moving on, confirm that you can explain:
 - why guardrails are separate from skills;
 - why local validation matters;
 - why learnings should become reusable knowledge;
-- why not every task needs an agent.
+- why not every task needs a subagent.
 
 ## Next Module
 

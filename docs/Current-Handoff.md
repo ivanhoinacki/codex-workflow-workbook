@@ -21,7 +21,7 @@ The interactive site is implemented with Vite and React under `site/`. It reads 
 - Markdown rendering from `docs/`.
 - PlantUML diagrams rendered as SVG with fullscreen support.
 - Code blocks with copy buttons.
-- Template downloads for config, rules, agents, hooks, MCPs and skills.
+- Template downloads for config, rules, subagents, hooks, MCPs and skills.
 - Template variables form that personalizes downloads in the browser.
 - Sanitization and documentation validation scripts.
 - GitHub Pages workflow prepared for `playbook-en-us`.

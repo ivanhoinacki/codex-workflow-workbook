@@ -106,7 +106,51 @@ Hooks run close to the tool boundary. That makes them useful for token economy, 
 | `PostCompact` | Register compaction events. |
 | `SessionEnd` | Save final handoff or memory. |
 
-## When A Hook Makes Sense
+## Opinionated Starter Set
+
+If you are starting from zero, do not install every hook at once.
+
+Start with the smallest set that changes day-to-day behavior:
+
+| Priority | Hook | Why it is worth it |
+|---|---|---|
+| 1 | `UserPromptSubmit` | Adds routing hints before work begins, such as when to check rules, vault or project context. |
+| 2 | `PreToolUse` | Protects the local machine from risky commands before they run. |
+| 3 | `PostToolUse` | Creates useful traces of commands, outputs and tool usage. |
+| 4 | `SessionEnd` | Saves a short handoff when the session produced durable context. |
+
+That starter set gets a learner from `0` to `0.5`: the environment starts nudging Codex toward context, safer tools and reusable continuity without becoming hard to debug.
+
+## Boot-up Script From 0 to 0.5
+
+Use this only after reviewing the downloaded hook files.
+
+```bash
+mkdir -p ~/.codex/hooks
+chmod +x ~/.codex/hooks/user_prompt_context.py
+chmod +x ~/.codex/hooks/pre_tool_use_guard.py
+chmod +x ~/.codex/hooks/post_tool_use_tracker.py
+chmod +x ~/.codex/hooks/session_end_save.py
+python3 -m py_compile ~/.codex/hooks/user_prompt_context.py ~/.codex/hooks/pre_tool_use_guard.py ~/.codex/hooks/post_tool_use_tracker.py ~/.codex/hooks/session_end_save.py
+```
+
+Then register only those hooks in `~/.codex/config.toml` and test with read-only commands. Add the remaining hooks later when the learner understands what signal they produce.
+
+## What Usually Works Well
+
+- `PreToolUse` for command guardrails and safe defaults.
+- `UserPromptSubmit` for lightweight context routing.
+- `SessionEnd` for handoffs and Session-Memory.
+- `PostToolUse` for command analytics, especially when output can teach future gotchas.
+
+## What to Avoid Early
+
+- Hooks that call external systems automatically.
+- Hooks that print long context blocks into every request.
+- Hooks that mutate files before the learner understands the workflow.
+- Hooks that duplicate what a skill should decide intentionally.
+
+## When a Hook Makes Sense
 
 A hook makes sense when the behavior must happen automatically and consistently. If the action is optional or requires judgment, a skill or rule may be better.
 

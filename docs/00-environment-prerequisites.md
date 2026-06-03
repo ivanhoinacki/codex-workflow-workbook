@@ -69,7 +69,7 @@ This journey follows a technical onboarding sequence:
 | Foundations | Purpose, layers and boundaries. | Can explain the system before installing everything. |
 | Environment preparation | Terminal, Codex CLI, local directory and local vault backend. | Can open Codex and prepare the `local-le-vault` prerequisites. |
 | Template variables | Local paths and commands applied to downloads. | Can download templates adapted to their machine. |
-| Configuration | Rules, config, hooks, MCPs, agents and skills. | Can copy templates and validate each layer. |
+| Configuration | Rules, config, hooks, MCPs, subagents and skills. | Can copy templates and validate each layer. |
 | Hands-on | Small tests per layer. | Can observe whether configuration affected the workflow. |
 | Knowledge | Vault, memory, PostgreSQL KB and reuse. | Understands how learnings become gotchas and future context. |
 | Guided first task | A safe first workflow. | Can observe the environment on real but low-risk work. |

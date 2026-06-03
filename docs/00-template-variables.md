@@ -30,7 +30,9 @@ When you download a template, the page replaces placeholders with the values fro
 
 ## How to Fill It In
 
-Fill the card above after preparing the local vault environment and before downloading `config.toml`, `copilot.config.toml`, rules, agents, hooks, MCPs or skills.
+Fill the card above before downloading `config.toml`, `copilot.config.toml`, rules, subagents, hooks, MCPs or skills.
+
+If you skipped the optional local vault environment, keep vault, PostgreSQL and MCP server fields as placeholders until you decide to enable `local-le-vault`.
 
 Use values that exist on your machine:
 
@@ -39,7 +41,7 @@ Use values that exist on your machine:
 - `Vault`: Markdown or Obsidian vault directory;
 - `Datadog CLI`, `Vault MCP server` and `Atlassian MCP`: local command paths, when they exist;
 - `PostgreSQL URL`: optional local connection used only by the `local-le-vault` knowledge base MCP;
-- `Name`, `Team`, `Project` and `Stack`: values used in rules and agents;
+- `Name`, `Team`, `Project` and `Stack`: values used in rules and subagents;
 - `Install`, `Test`, `Lint`, `Build` and `Validation` commands: default project commands.
 
 If a field does not exist on your machine yet, keep a generic placeholder and come back before downloading the template that depends on it.
