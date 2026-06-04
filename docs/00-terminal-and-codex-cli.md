@@ -174,6 +174,8 @@ Use `rg` and `rg --files` for search, and bounded reads like `sed -n` or `nl -ba
 
 If you use the shell template later, download it from the configuration pages and review it before applying. Do not blindly replace your shell config.
 
+- [Download zshrc.codex.template](templates/shell/zshrc.codex.template)
+
 ## Step 7 - Local Codex Directory
 
 Create the directory that will hold rules, hooks, skills and MCP wrappers:
@@ -186,6 +188,8 @@ mkdir -p ~/.codex/hooks ~/.codex/skills
 ## Verification Script
 
 The templates include a setup verification script. After downloading it, run:
+
+- [Download verify-codex-setup.sh](templates/scripts/verify-codex-setup.sh)
 
 ```bash
 bash verify-codex-setup.sh

@@ -771,14 +771,15 @@ button:disabled {
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 4px;
+  box-sizing: border-box;
   display: block;
   height: auto;
   margin: 0 auto;
-  max-width: none;
-  min-width: min(920px, 100%);
+  max-width: 100%;
+  min-width: 0;
   object-fit: contain;
   padding: 12px;
-  width: 100%;
+  width: auto;
 }
 
 .plantuml-diagram__fullscreen {
@@ -1446,8 +1447,9 @@ button:disabled {
   }
 
   .plantuml-diagram img {
-    min-width: 720px;
-    width: 720px;
+    max-width: 100%;
+    min-width: 0;
+    width: auto;
   }
 
   .plantuml-diagram__fullscreen {
@@ -1466,7 +1468,7 @@ button:disabled {
 
   .diagram-modal__content img {
     max-width: calc(100vw - 48px);
-    min-width: 720px;
+    min-width: 0;
   }
 
   .chapter-nav {
