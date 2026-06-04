@@ -84,7 +84,7 @@ Copy only the MCP entries you need into `~/.codex/config.toml`.
 
 Do not enable a wrapper until the app behind it is ready. For example:
 
-- `local-le-vault` needs the PostgreSQL knowledge database, Ollama and the vault MCP server script only when local indexed knowledge is enabled;
+- `local-le-vault` needs the PostgreSQL knowledge database, Ollama and the vault MCP server script only when local indexed knowledge is enabled. Today that server script comes from the internal workshop/config source package, not a standalone public repo;
 - `mcp-atlassian` needs an Atlassian MCP command and local credentials;
 - `datadog-mcp` needs its local auth flow or CLI path;
 - GitHub and Slack connectors need app authorization, not a public template token.

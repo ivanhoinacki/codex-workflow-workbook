@@ -24,7 +24,7 @@ export const defaultTemplateConfig: TemplateConfig = {
   workspacePath: '~/workspace/luxury-escapes',
   vaultPath: '~/workspace/obsidian-vault',
   datadogMcpCliPath: '~/bin/datadog_mcp_cli',
-  localLeVaultServerPath: '~/workspace/local-le-vault/vault_mcp_server.py',
+  localLeVaultServerPath: '/path/to/source-package/local-ai/vault/vault_mcp_server.py',
   mcpAtlassianBinPath: '~/bin/mcp-atlassian',
   databaseUrl: 'postgresql://USER:PASSWORD@localhost:PORT/DATABASE',
   userName: 'First Last',

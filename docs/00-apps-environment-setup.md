@@ -38,6 +38,20 @@ That optional knowledge path works when this chain is complete:
 
 This page prepares only the optional `local-le-vault` chain. If the learner does not need local indexed knowledge yet, they can read this page for context, skip the PostgreSQL/Ollama setup, and continue with the normal configuration templates.
 
+## Important Source Note
+
+`vault_mcp_server.py` is not currently published as a standalone public repository.
+
+In the current internal setup, it comes from the older workshop/config material:
+
+```text
+team-exp-claude-config/local-ai/vault/vault_mcp_server.py
+```
+
+Use that file only if you have access to the internal source package. Otherwise, treat this section as the shape of the optional integration and skip `local-le-vault` until the server script is provided as a clearer package.
+
+The base Codex setup does not depend on this file.
+
 ## Required Pieces
 
 | Piece | Purpose | Required for base Codex setup | Required for `local-le-vault` |
@@ -51,7 +65,7 @@ This page prepares only the optional `local-le-vault` chain. If the learner does
 | pgvector | Stores and searches embeddings. | No | Yes |
 | Ollama | Runs the local embedding model. | No | Yes |
 | `nomic-embed-text` | Embedding model used by the search flow. | No | Yes |
-| `vault_mcp_server.py` | Exposes `query_vault` and source discovery. | No | Yes |
+| `vault_mcp_server.py` | Exposes `query_vault` and source discovery. Today this comes from the internal workshop/config source package, not a standalone public repo. | No | Yes |
 | Python executable | Runs the MCP server with the correct dependencies. | No | Yes |
 | MCP wrapper | Starts the server from `~/.codex/hooks`. | No | Yes |
 | `.mcp-secrets` | Holds local database URL and server path. | No | Yes |
@@ -68,7 +82,7 @@ If the learner is not enabling `local-le-vault`, they can stop after step 2 and 
 5. Create the knowledge database used by the vault index.
 6. Install Ollama.
 7. Pull `nomic-embed-text`.
-8. Install or clone the `local-le-vault` MCP server script.
+8. Copy or clone the source package that contains `vault_mcp_server.py`.
 9. Create a Python environment with the server dependencies.
 10. Identify the Python executable or venv that can run the MCP server.
 11. Create `~/.codex/.mcp-secrets`.
@@ -207,6 +221,14 @@ The template expects a local path to the Python server script:
 ```bash
 LOCAL_LE_VAULT_SERVER="/absolute/path/to/vault_mcp_server.py"
 ```
+
+Today, the known internal source location is:
+
+```text
+team-exp-claude-config/local-ai/vault/vault_mcp_server.py
+```
+
+After copying or cloning that source package, set `LOCAL_LE_VAULT_SERVER` to the absolute path on your machine. Do not use another developer's private path.
 
 The server must be able to:
 
@@ -371,6 +393,7 @@ Configure them after the local knowledge flow works.
 | `No module named psycopg2` | Wrong Python environment. | Install dependencies in the venv used by the wrapper. |
 | PostgreSQL connection fails | Database down, wrong port or wrong URL. | Check `pg_isready` and the `DATABASE_URL` in `.mcp-secrets`. |
 | Semantic search fails | Ollama missing or model not pulled. | Start Ollama and run `ollama pull nomic-embed-text`. |
+| `vault_mcp_server.py` cannot be found | The learner does not have the internal source package yet. | Skip `local-le-vault` for now or get the source package that contains `team-exp-claude-config/local-ai/vault/vault_mcp_server.py`. |
 | Old knowledge appears | Stale or superseded rows were not curated. | Update the source note or mark old rows as replaced in the index. |
 | WSL2 path works in terminal but not Codex | Config used Windows paths or mixed `/mnt/c` paths. | Use Linux paths in WSL and update template variables. |
 | WSL2 cannot reach PostgreSQL or Ollama | Service is running outside WSL with different networking. | Test from WSL, then adjust host, port or run the service inside WSL. |

@@ -27,6 +27,18 @@ This page explains the mental model behind the optional `local-le-vault` integra
 
 If the learner already completed [[00-apps-environment-setup]], use this page to understand and validate the system. If they skipped that optional setup, read this page conceptually and keep PostgreSQL, pgvector and Ollama disabled until local indexed retrieval is actually needed.
 
+## Source Package Status
+
+`vault_mcp_server.py` is not currently distributed as a standalone public repo.
+
+In the current internal setup, the file lives in:
+
+```text
+team-exp-claude-config/local-ai/vault/vault_mcp_server.py
+```
+
+This means `local-le-vault` should be treated as an optional advanced path until the learner has that source package and the local PostgreSQL/Ollama prerequisites. The rest of the Codex workflow can run without it.
+
 ## Flow
 
 ```plantuml
@@ -84,7 +96,7 @@ That path needs:
 | pgvector | Stores and searches vector embeddings. |
 | Ollama | Runs the local embedding model. |
 | `nomic-embed-text` | Embedding model used by the knowledge search flow. |
-| `local-le-vault` MCP server script | Exposes `query_vault` and source discovery to Codex. |
+| `local-le-vault` MCP server script | Exposes `query_vault` and source discovery to Codex. Today it comes from the internal workshop/config source package. |
 | MCP wrapper | Starts the server with the correct environment variables. |
 | Local secrets file | Keeps database URLs and tokens out of public templates. |
 
@@ -97,6 +109,7 @@ The learner should fill these values in the template variables step:
 - vault path;
 - PostgreSQL URL;
 - local path to the `local-le-vault` MCP server;
+- access to the source package that contains `vault_mcp_server.py`;
 - local path to the wrapper inside `~/.codex/hooks`;
 - optional service names or filters used by their team.
 

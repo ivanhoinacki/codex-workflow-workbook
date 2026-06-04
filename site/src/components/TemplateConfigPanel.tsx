@@ -45,8 +45,8 @@ const fields: Array<{
   {
     key: 'localLeVaultServerPath',
     label: 'Vault MCP server',
-    hint: 'Python script for local-le-vault.',
-    help: 'Use the local path to the vault MCP server script after cloning or installing it.',
+    hint: 'Optional Python script for local-le-vault.',
+    help: 'Only needed for the optional local indexed knowledge path. Use the path to vault_mcp_server.py after getting the internal source package.',
     section: 'required',
   },
   {
