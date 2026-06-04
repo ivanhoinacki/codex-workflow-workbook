@@ -775,11 +775,11 @@ button:disabled {
   display: block;
   height: auto;
   margin: 0 auto;
-  max-width: 100%;
+  max-width: 960px;
   min-width: 0;
   object-fit: contain;
   padding: 12px;
-  width: auto;
+  width: 100%;
 }
 
 .plantuml-diagram__fullscreen {
@@ -1449,7 +1449,7 @@ button:disabled {
   .plantuml-diagram img {
     max-width: 100%;
     min-width: 0;
-    width: auto;
+    width: 100%;
   }
 
   .plantuml-diagram__fullscreen {

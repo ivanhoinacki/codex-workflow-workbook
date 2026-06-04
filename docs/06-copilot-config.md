@@ -32,15 +32,15 @@ skinparam backgroundColor #FEFEFE
 
 actor User
 participant Codex
-participant "copilot.config.toml" as Config
+participant "Copilot\nConfig" as Config
 participant "Main Runtime" as Runtime
 
-User -> Codex: Ask for orientation
-Codex -> Config: Load auxiliary profile
-Config --> Codex: Low-reasoning support defaults
-Codex -> Runtime: Respect main rules and approvals
-Runtime --> Codex: Boundaries still apply
-Codex --> User: Briefing, plan or context
+User -> Codex: Ask orientation
+Codex -> Config: Load profile
+Config --> Codex: Support defaults
+Codex -> Runtime: Respect rules
+Runtime --> Codex: Boundaries apply
+Codex --> User: Briefing or plan
 @enduml
 ```
 
