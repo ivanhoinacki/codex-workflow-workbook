@@ -41,7 +41,7 @@ Reference paths:
 Rules:
 - Prefer vault/MCP search when available. If the local LE MCP is unavailable, state the gap and use rg against the vault.
 - Use agent-memory as durable preference, gotcha, project, and reference context when the parent request needs continuity or domain-specific prior learning.
-- Treat copied Claude agent-memory as source material adapted to Codex. Codex runtime rules take precedence over legacy Claude-specific entries, especially language, model names, slash commands, tool names, and hook behavior.
+- Treat legacy agent-memory as source material adapted to Codex. Codex runtime rules take precedence over older tool-specific entries, especially language, model names, slash commands, tool names, and hook behavior.
 - Do not modify files, send external messages, mutate Jira/Confluence/GitHub/Slack, or access production data. Return recommended changes for the parent agent to apply.
 - If the user shares context from another instance, summarize what should be recorded in Session-Memory rather than editing directly from this read-only role.
 - At session end requests, produce a Session-Memory update draft with: discussion, decisions, pending items, and relevant PR/Slack/Jira links.

@@ -4,6 +4,8 @@ export type TemplateConfig = {
   vaultPath: string;
   datadogMcpCliPath: string;
   localLeVaultServerPath: string;
+  localLeVaultVenvPath: string;
+  localKnowledgeApiUrl: string;
   mcpAtlassianBinPath: string;
   databaseUrl: string;
   userName: string;
@@ -24,7 +26,9 @@ export const defaultTemplateConfig: TemplateConfig = {
   workspacePath: '~/workspace/luxury-escapes',
   vaultPath: '~/workspace/obsidian-vault',
   datadogMcpCliPath: '~/bin/datadog_mcp_cli',
-  localLeVaultServerPath: '/path/to/source-package/local-ai/vault/vault_mcp_server.py',
+  localLeVaultServerPath: '~/.codex/local-le-vault/vault_mcp_server.py',
+  localLeVaultVenvPath: '~/.local/share/le-vault/venv',
+  localKnowledgeApiUrl: 'http://localhost:8900',
   mcpAtlassianBinPath: '~/bin/mcp-atlassian',
   databaseUrl: 'postgresql://USER:PASSWORD@localhost:PORT/DATABASE',
   userName: 'First Last',
@@ -80,6 +84,8 @@ export const applyTemplateConfig = (source: string, config: TemplateConfig) => {
     [/DATADOG_MCP_CLI_PATH/g, config.datadogMcpCliPath.trim() || defaultTemplateConfig.datadogMcpCliPath],
     [/DATADOG_MCP_CLI="[^"]*"/g, `DATADOG_MCP_CLI="${config.datadogMcpCliPath.trim() || defaultTemplateConfig.datadogMcpCliPath}"`],
     [/LOCAL_LE_VAULT_SERVER="[^"]*"/g, `LOCAL_LE_VAULT_SERVER="${config.localLeVaultServerPath.trim() || defaultTemplateConfig.localLeVaultServerPath}"`],
+    [/LOCAL_LE_VAULT_VENV="[^"]*"/g, `LOCAL_LE_VAULT_VENV="${config.localLeVaultVenvPath.trim() || defaultTemplateConfig.localLeVaultVenvPath}"`],
+    [/RADAR_API_URL="[^"]*"/g, `RADAR_API_URL="${config.localKnowledgeApiUrl.trim() || defaultTemplateConfig.localKnowledgeApiUrl}"`],
     [/MCP_ATLASSIAN_BIN="[^"]*"/g, `MCP_ATLASSIAN_BIN="${config.mcpAtlassianBinPath.trim() || defaultTemplateConfig.mcpAtlassianBinPath}"`],
     [/DATABASE_URL="[^"]*"/g, `DATABASE_URL="${config.databaseUrl.trim() || defaultTemplateConfig.databaseUrl}"`],
   ];

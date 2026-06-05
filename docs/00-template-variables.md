@@ -39,7 +39,7 @@ Use values that exist on your machine:
 - `Codex home`: usually `~/.codex`;
 - `Workspace`: directory where work repositories live;
 - `Vault`: Markdown or Obsidian vault directory;
-- `Datadog CLI`, `Vault MCP server` and `Atlassian MCP`: local command paths, when they exist. The vault MCP server path is only needed if you have the optional source package that contains `vault_mcp_server.py`;
+- `Datadog CLI`, `Vault MCP server`, `Vault MCP venv`, `Knowledge API URL` and `Atlassian MCP`: local paths or URLs, when they exist. The vault fields are only needed if you enable the optional `local-le-vault` server;
 - `PostgreSQL URL`: optional local connection used only by the `local-le-vault` knowledge base MCP;
 - `Name`, `Team`, `Project` and `Stack`: values used in rules and subagents;
 - `Install`, `Test`, `Lint`, `Build` and `Validation` commands: default project commands.

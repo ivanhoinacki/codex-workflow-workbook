@@ -67,6 +67,7 @@ Download and review these models:
 
 - [Download codex-mcp-config.toml](templates/mcp/codex-mcp-config.toml)
 - [Download .mcp-secrets.example](templates/mcp/.mcp-secrets.example)
+- [Download vault_mcp_server.py](templates/mcp/vault_mcp_server.py)
 - [Download mcp-credentials.sh](templates/mcp/mcp-credentials.sh)
 - [Download mcp-atlassian-wrapper.sh](templates/mcp/mcp-atlassian-wrapper.sh)
 - [Download mcp-local-le-vault-wrapper.sh](templates/mcp/mcp-local-le-vault-wrapper.sh)
@@ -84,7 +85,7 @@ Copy only the MCP entries you need into `~/.codex/config.toml`.
 
 Do not enable a wrapper until the app behind it is ready. For example:
 
-- `local-le-vault` needs the PostgreSQL knowledge database, Ollama and the vault MCP server script only when local indexed knowledge is enabled. Today that server script comes from the internal workshop/config source package, not a standalone public repo;
+- `local-le-vault` needs the PostgreSQL knowledge database, Ollama and the optional vault MCP server script only when local indexed knowledge is enabled;
 - `mcp-atlassian` needs an Atlassian MCP command and local credentials;
 - `datadog-mcp` needs its local auth flow or CLI path;
 - GitHub and Slack connectors need app authorization, not a public template token.

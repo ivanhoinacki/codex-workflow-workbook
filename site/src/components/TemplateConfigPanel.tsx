@@ -46,7 +46,21 @@ const fields: Array<{
     key: 'localLeVaultServerPath',
     label: 'Vault MCP server',
     hint: 'Optional Python script for local-le-vault.',
-    help: 'Only needed for the optional local indexed knowledge path. Use the path to vault_mcp_server.py after getting the internal source package.',
+    help: 'Only needed for the optional local indexed knowledge path. Download vault_mcp_server.py from this playbook and point this field to your local copy.',
+    section: 'required',
+  },
+  {
+    key: 'localLeVaultVenvPath',
+    label: 'Vault MCP venv',
+    hint: 'Optional Python venv used by local-le-vault.',
+    help: 'Only needed for the optional local indexed knowledge path. Use the venv that has mcp, requests and psycopg2 installed.',
+    section: 'required',
+  },
+  {
+    key: 'localKnowledgeApiUrl',
+    label: 'Knowledge API URL',
+    hint: 'Optional local search API URL.',
+    help: 'Only needed for the optional local indexed knowledge path. Use the local URL exposed by the knowledge search service.',
     section: 'required',
   },
   {
