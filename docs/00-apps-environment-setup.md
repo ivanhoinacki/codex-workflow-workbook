@@ -267,6 +267,21 @@ The wrapper belongs in `~/.codex/hooks`:
 ~/.codex/hooks/mcp-local-le-vault-wrapper.sh
 ```
 
+Download the local vault wrapper and credentials helper here:
+
+- [Download mcp-local-le-vault-wrapper.sh](templates/mcp/mcp-local-le-vault-wrapper.sh)
+- [Download mcp-credentials.sh](templates/mcp/mcp-credentials.sh)
+- [Download .mcp-secrets.example](templates/mcp/.mcp-secrets.example)
+
+Then copy them into the local Codex directory:
+
+```bash
+mkdir -p ~/.codex/hooks
+cp mcp-local-le-vault-wrapper.sh ~/.codex/hooks/
+cp mcp-credentials.sh ~/.codex/hooks/
+cp .mcp-secrets.example ~/.codex/.mcp-secrets
+```
+
 The wrapper reads secrets from:
 
 ```bash
